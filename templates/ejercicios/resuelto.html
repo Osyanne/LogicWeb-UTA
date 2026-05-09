@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ ejercicio.titulo }}{% endblock %}
+
+{% block contenido %}
+<div class="container" style="padding-top:2rem">
+
+  <!-- Encabezado -->
+  <div class="ejercicio-header">
+    <div class="flex-gap mb-2">
+      <span class="chip chip-resuelto">📘 Ejercicio Resuelto</span>
+      <span class="chip chip-{{ ejercicio.dificultad }}">{{ ejercicio.get_dificultad_display }}</span>
+      <span class="chip chip-unidad">{{ ejercicio.tema }}</span>
+    </div>
+    <h1>{{ ejercicio.titulo }}</h1>
+    <p class="text-suave mt-1">{{ ejercicio.enunciado }}</p>
+  </div>
+
+  <!-- Tabla IPO -->
+  {% if ejercicio.entrada or ejercicio.proceso or ejercicio.salida %}
+  <div class="ipo-grid">
+    <div class="ipo-box" style="border-color:#1565c0">
+      <h4>📥 Entrada</h4>
+      <p>{{ ejercicio.entrada|default:"—" }}</p>
+    </div>
+    <div class="ipo-box" style="border-color:#e65100">
+      <h4>⚙️ Proceso</h4>
+      <p>{{ ejercicio.proceso|default:"—" }}</p>
+    </div>
+    <div class="ipo-box" style="border-color:#2e7d32">
+      <h4>📤 Salida</h4>
+      <p>{{ ejercicio.salida|default:"—" }}</p>
+    </div>
+  </div>
+  {% endif %}
+
+  <!-- Layout código: pseudocódigo + C++ -->
+  <div class="detalle-layout">
+
+    <!-- Pseudocódigo -->
+    {% if ejercicio.pseudocodigo %}
+    <div>
+      <h3 class="section-title" style="font-size:1rem">Pseudocódigo</h3>
+      <div class="bloque-pseudo">
+        <div class="bloque-pseudo-header">
+          <span>📝 Pseudocódigo</span>
+        </div>
+        <pre><code class="nohighlight">{{ ejercicio.pseudocodigo }}</code></pre>
+      </div>
+    </div>
+    {% endif %}
+
+    <!-- Código C++ educativo -->
+    <div>
+      <h3 class="section-title" style="font-size:1rem">Código C++ — Solución</h3>
+      <div class="bloque-cpp">
+        <div class="bloque-cpp-header">
+          <div class="dots">
+            <div class="dot dot-rojo"></div>
+            <div class="dot dot-amarillo"></div>
+            <div class="dot dot-verde"></div>
+          </div>
+          <span class="lang-label">{{ ejercicio.titulo|truncatechars:40 }}.cpp</span>
+          <span class="badge-cpp">C++17</span>
+        </div>
+        <pre><code class="language-cpp">{{ codigo_cpp }}</code></pre>
+      </div>
+      <div class="aviso-cpp mt-1">
+        ⚠️ Este código es contenido educativo. Lee, analiza y comprende el algoritmo.
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Navegación -->
+  <div class="flex-gap mt-4">
+    <a href="{% url 'ejercicios_resueltos' %}" class="btn btn-outline">← Volver a la lista</a>
+    <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-naranja">⚙️ Ir a práctica interactiva</a>
+  </div>
+
+</div>
+{% endblock %}

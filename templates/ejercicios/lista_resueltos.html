@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block titulo %}Ejercicios Resueltos{% endblock %}
+
+{% block contenido %}
+<div class="container" style="padding-top:2rem">
+  <h1 class="section-title">💡 Ejercicios Resueltos — Código C++</h1>
+  <p class="text-suave mb-3">Lee y analiza cada problema resuelto paso a paso con código C++ comentado.</p>
+
+  <!-- Filtro por unidad -->
+  <div class="flex-gap mb-3">
+    <a href="{% url 'ejercicios_resueltos' %}" class="btn btn-sm {% if not unidad_filtro %}btn-primary{% else %}btn-outline{% endif %}">Todos</a>
+    {% for i in "1234" %}
+      <a href="?unidad={{ i }}" class="btn btn-sm {% if unidad_filtro == i %}btn-primary{% else %}btn-outline{% endif %}">U{{ i }}</a>
+    {% endfor %}
+  </div>
+
+  {% if ejercicios %}
+    <div class="ejercicios-grid">
+      {% for ej in ejercicios %}
+        <a href="{% url 'resuelto_detalle' ej.pk %}" class="card-ejercicio" style="text-decoration:none">
+          <div class="titulo-ej">{{ ej.titulo }}</div>
+          <div class="meta">
+            <span class="chip chip-resuelto">📘 Resuelto</span>
+            <span class="chip chip-{{ ej.dificultad }}">{{ ej.get_dificultad_display }}</span>
+            <span class="chip chip-unidad">U{{ ej.tema.unidad }}</span>
+          </div>
+          <p style="font-size:.88rem;color:var(--texto-suave)">{{ ej.enunciado|truncatechars:110 }}</p>
+          <span class="btn btn-primary btn-sm" style="margin-top:.25rem">Ver código C++ →</span>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info">No hay ejercicios resueltos disponibles aún.</div>
+  {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block titulo %}Práctica Interactiva{% endblock %}
+
+{% block contenido %}
+<div class="container" style="padding-top:2rem">
+  <h1 class="section-title">⚙️ Práctica Interactiva — Analiza código y Responde</h1>
+  <p class="text-suave mb-3">Estudia el código de cada ejercicio, responde la pregunta y recibe retroalimentación inmediata.</p>
+
+  {% if not user.is_authenticated %}
+    <div class="alert alert-info">
+      💡 <a href="{% url 'registro' %}">Regístrate</a> o <a href="{% url 'login' %}">inicia sesión</a> para guardar tu progreso.
+    </div>
+  {% endif %}
+
+  <!-- Filtros -->
+  <div style="display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1rem;align-items:center">
+    <!-- Filtro por lenguaje -->
+    <div class="flex-gap" style="gap:.4rem">
+      <a href="?{% if unidad_filtro %}unidad={{ unidad_filtro }}&{% endif %}"
+         class="btn btn-sm {% if not lenguaje_filtro %}btn-primary{% else %}btn-outline{% endif %}">Todos</a>
+      <a href="?lenguaje=cpp{% if unidad_filtro %}&unidad={{ unidad_filtro }}{% endif %}"
+         class="btn btn-sm {% if lenguaje_filtro == 'cpp' %}btn-primary{% else %}btn-outline{% endif %}"
+         style="border-color:#00599C;{% if lenguaje_filtro == 'cpp' %}background:#00599C;color:#fff;{% endif %}">C++</a>
+      <a href="?lenguaje=python{% if unidad_filtro %}&unidad={{ unidad_filtro }}{% endif %}"
+         class="btn btn-sm {% if lenguaje_filtro == 'python' %}btn-primary{% else %}btn-outline{% endif %}"
+         style="border-color:#3572A5;{% if lenguaje_filtro == 'python' %}background:#3572A5;color:#fff;{% endif %}">🐍 Python</a>
+    </div>
+
+    <span style="color:var(--texto-suave);font-size:.85rem;padding:0 .25rem">|</span>
+
+    <!-- Filtro por unidad -->
+    <div class="flex-gap" style="gap:.4rem">
+      {% for i in "1234" %}
+        <a href="?{% if lenguaje_filtro %}lenguaje={{ lenguaje_filtro }}&{% endif %}unidad={{ i }}"
+           class="btn btn-sm {% if unidad_filtro == i %}btn-primary{% else %}btn-outline{% endif %}">U{{ i }}</a>
+      {% endfor %}
+      {% if unidad_filtro %}
+        <a href="?{% if lenguaje_filtro %}lenguaje={{ lenguaje_filtro }}{% endif %}"
+           class="btn btn-sm btn-outline">✕ Unidad</a>
+      {% endif %}
+    </div>
+  </div>
+
+  {% if ejercicios %}
+    <div class="ejercicios-grid">
+      {% for ej in ejercicios %}
+        <a href="{% url 'interactivo_detalle' ej.pk %}" class="card-ejercicio" style="text-decoration:none">
+          <div class="titulo-ej">{{ ej.titulo }}</div>
+          <div class="meta">
+            <span class="chip chip-interactivo">⚙️ Interactivo</span>
+            <span class="chip chip-{{ ej.dificultad }}">{{ ej.get_dificultad_display }}</span>
+            <span class="chip chip-unidad">U{{ ej.tema.unidad }}</span>
+            {% if ej.lenguaje == 'python' %}
+              <span class="chip" style="background:#3572A5;color:#fff">🐍 Python</span>
+            {% else %}
+              <span class="chip" style="background:#00599C;color:#fff">C++</span>
+            {% endif %}
+          </div>
+          <p style="font-size:.88rem;color:var(--texto-suave)">{{ ej.enunciado|truncatechars:110 }}</p>
+          <span class="btn btn-naranja btn-sm" style="margin-top:.25rem">Practicar ahora →</span>
+        </a>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="alert alert-info">No hay ejercicios para los filtros seleccionados.</div>
+  {% endif %}
+</div>
+{% endblock %}

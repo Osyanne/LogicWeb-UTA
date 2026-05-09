@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ ejercicio.titulo }}{% endblock %}
+
+{% block contenido %}
+<div class="container" style="padding-top:2rem">
+
+  <!-- Encabezado -->
+  <div class="ejercicio-header">
+    <div class="flex-gap mb-2">
+      <span class="chip chip-interactivo">⚙️ Ejercicio Interactivo</span>
+      <span class="chip chip-{{ ejercicio.dificultad }}">{{ ejercicio.get_dificultad_display }}</span>
+      <span class="chip chip-unidad">{{ ejercicio.tema }}</span>
+    </div>
+    <h1>{{ ejercicio.titulo }}</h1>
+    <p class="text-suave mt-1">{{ ejercicio.enunciado }}</p>
+  </div>
+
+  <!-- Layout: código izquierda | formulario derecha -->
+  <div class="detalle-layout">
+
+    <!-- Código de referencia -->
+    <div>
+      {% if ejercicio.lenguaje == 'python' %}
+        <h3 class="section-title" style="font-size:1rem">★ Código Python — Estúdialo antes de responder</h3>
+      {% else %}
+        <h3 class="section-title" style="font-size:1rem">★ Código C++ — Estúdialo antes de responder</h3>
+      {% endif %}
+      <div class="bloque-cpp">
+        <div class="bloque-cpp-header">
+          <div class="dots">
+            <div class="dot dot-rojo"></div>
+            <div class="dot dot-amarillo"></div>
+            <div class="dot dot-verde"></div>
+          </div>
+          {% if ejercicio.lenguaje == 'python' %}
+            <span class="lang-label">referencia.py</span>
+            <span class="badge-cpp">Python</span>
+          {% else %}
+            <span class="lang-label">referencia.cpp</span>
+            <span class="badge-cpp">C++17</span>
+          {% endif %}
+        </div>
+        <pre><code class="language-{% if ejercicio.lenguaje == 'python' %}python{% else %}cpp{% endif %}">{{ codigo_cpp }}</code></pre>
+      </div>
+      <div class="aviso-cpp mt-1">
+        💡 Lee y traza el algoritmo antes de responder.
+      </div>
+    </div>
+
+    <!-- Formulario de respuesta -->
+    <div>
+      <h3 class="section-title" style="font-size:1rem">Tu respuesta</h3>
+      <div class="form-card" style="max-width:100%;margin:0">
+        <form method="post" id="form-respuesta">
+          {% csrf_token %}
+          <p style="font-weight:700;color:var(--azul);margin-bottom:1rem;font-size:1rem">
+            Basándote en el código {% if ejercicio.lenguaje == 'python' %}Python{% else %}C++{% endif %}:<br>
+            <span style="color:var(--texto);font-weight:600">{{ ejercicio.enunciado }}</span>
+          </p>
+
+          {% if form.errors %}
+            <div class="alert alert-error">{{ form.errors }}</div>
+          {% endif %}
+
+          <div class="form-group">
+            <label for="id_respuesta">Tu respuesta:</label>
+            {{ form.respuesta }}
+            {% if form.respuesta.errors %}
+              <ul class="errorlist">
+                {% for error in form.respuesta.errors %}<li>{{ error }}</li>{% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+
+          <div class="flex-gap mt-3">
+            <button type="submit" class="btn btn-primary btn-full">
+              ✅ Verificar respuesta
+            </button>
+          </div>
+        </form>
+
+        <div class="mt-3">
+          <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-outline btn-sm">← Lista de ejercicios</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // Validación client-side: no permitir enviar vacío
+  document.getElementById('form-respuesta').addEventListener('submit', function(e) {
+    const campo = document.getElementById('id_respuesta');
+    if (!campo.value.trim()) {
+      e.preventDefault();
+      campo.style.borderColor = 'var(--rojo-err)';
+      campo.focus();
+    }
+  });
+</script>
+{% endblock %}
