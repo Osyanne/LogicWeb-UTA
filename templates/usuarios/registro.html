@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block titulo %}Registrarse{% endblock %}
+
+{% block contenido %}
+<div class="container">
+  <div class="form-card">
+    <h2>📝 Crear mi cuenta</h2>
+    <form method="post">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-group">
+          <label>{{ field.label }}</label>
+          {{ field }}
+          {% if field.errors %}
+            <ul class="errorlist">
+              {% for error in field.errors %}<li>{{ error }}</li>{% endfor %}
+            </ul>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-naranja btn-full mt-2">🚀 Crear mi cuenta</button>
+    </form>
+    <p class="text-center mt-3 text-suave" style="font-size:.9rem">
+      ¿Ya tienes cuenta? <a href="{% url 'login' %}">Inicia sesión</a>
+    </p>
+  </div>
+</div>
+{% endblock %}

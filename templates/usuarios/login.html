@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block titulo %}Iniciar Sesión{% endblock %}
+
+{% block contenido %}
+<div class="container">
+  <div class="form-card">
+    <h2>🔑 Iniciar Sesión</h2>
+    <form method="post">
+      {% csrf_token %}
+      {% if form.errors %}
+        <div class="alert alert-error">Correo o contraseña incorrectos.</div>
+      {% endif %}
+      {% for field in form %}
+        <div class="form-group">
+          <label>{{ field.label }}</label>
+          {{ field }}
+        </div>
+      {% endfor %}
+      <button type="submit" class="btn btn-primary btn-full mt-2">Ingresar al sistema</button>
+    </form>
+    <p class="text-center mt-3 text-suave" style="font-size:.9rem">
+      ¿No tienes cuenta? <a href="{% url 'registro' %}">Regístrate aquí</a>
+    </p>
+  </div>
+</div>
+{% endblock %}
