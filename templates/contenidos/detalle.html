@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% block titulo %}{{ tema.nombre_tema }}{% endblock %}
+
+{% block contenido %}
+<div class="container">
+  <div class="teoria-layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-titulo">📋 Temas</div>
+      <a href="{% url 'contenidos_lista' %}" class="sidebar-item" style="display:block;text-decoration:none;color:var(--naranja);font-weight:700">
+        ← Todas las unidades
+      </a>
+    </aside>
+
+    <!-- Detalle del tema -->
+    <section>
+      <div class="ejercicio-header">
+        <span class="chip chip-unidad">Unidad {{ tema.unidad }}</span>
+        <h1 style="margin-top:.5rem">{{ tema.nombre_tema }}</h1>
+        <p class="mt-2" style="line-height:1.8">{{ tema.descripcion }}</p>
+      </div>
+
+      <!-- Ejercicios del tema -->
+      {% if ejercicios %}
+        <h2 class="section-title">Ejercicios de este tema</h2>
+        <div class="ejercicios-grid">
+          {% for ej in ejercicios %}
+            <div class="card-ejercicio">
+              <div class="titulo-ej">{{ ej.titulo }}</div>
+              <div class="meta">
+                <span class="chip chip-{{ ej.categoria }}">{{ ej.get_categoria_display }}</span>
+                <span class="chip chip-{{ ej.dificultad }}">{{ ej.get_dificultad_display }}</span>
+              </div>
+              <p style="font-size:.88rem;color:var(--texto-suave)">{{ ej.enunciado|truncatechars:100 }}</p>
+              {% if ej.categoria == 'resuelto' %}
+                <a href="{% url 'resuelto_detalle' ej.pk %}" class="btn btn-primary btn-sm">Ver solución C++</a>
+              {% else %}
+                <a href="{% url 'interactivo_detalle' ej.pk %}" class="btn btn-naranja btn-sm">Practicar</a>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="alert alert-info">Aún no hay ejercicios cargados para este tema.</div>
+      {% endif %}
+
+    </section>
+  </div>
+</div>
+{% endblock %}
