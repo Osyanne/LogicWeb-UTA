@@ -1,0 +1,146 @@
+/* ═══════════════════════════════════════════════════════════════
+   codigo.css — LogicWeb UTA
+   Estilos para bloques de código C++ educativo.
+   El código C++ NO se ejecuta — es texto formateado visualmente
+   como un libro de texto interactivo con tema VS Code Dark.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Contenedor del bloque C++ ──────────────────────────────── */
+.bloque-cpp {
+  background: var(--blanco);
+  border-radius: 10px;
+  box-shadow: var(--sombra);
+  overflow: hidden;
+}
+
+/* ── Encabezado del bloque (barra superior estilo editor) ───── */
+.bloque-cpp-header {
+  background: #2d2d2d;
+  padding: .6rem 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+}
+.bloque-cpp-header .dots {
+  display: flex;
+  gap: .4rem;
+}
+.bloque-cpp-header .dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.dot-rojo   { background: #ff5f57; }
+.dot-amarillo { background: #febc2e; }
+.dot-verde  { background: #28c840; }
+.bloque-cpp-header .lang-label {
+  color: rgba(255,255,255,.5);
+  font-size: .78rem;
+  font-family: 'Fira Code', monospace;
+  letter-spacing: .5px;
+}
+.bloque-cpp-header .badge-cpp {
+  background: rgba(244,137,31,.18);
+  color: #f4891f;
+  font-size: .72rem;
+  font-weight: 700;
+  padding: .15rem .55rem;
+  border-radius: 10px;
+  letter-spacing: .4px;
+}
+
+/* ── El <pre><code> que muestra el código C++ ───────────────── */
+.bloque-cpp pre {
+  margin: 0;
+  padding: 1.35rem 1.5rem;
+  background: #1e1e1e;
+  overflow-x: auto;
+}
+
+.bloque-cpp pre code,
+.language-cpp {
+  font-family: 'Fira Code', 'Consolas', 'Courier New', monospace;
+  font-size: .9rem;
+  line-height: 1.7;
+  color: #d4d4d4;
+  background: transparent;
+  white-space: pre;
+  tab-size: 4;
+}
+
+/* ── Coloreado manual de sintaxis C++ con CSS ───────────────── */
+/* (Highlight.js se encarga del coloreado si lo incluyes,
+    pero estas clases funcionan como fallback.) */
+
+/* Palabras clave: int, float, return, if, for, while, etc. */
+.hljs-keyword    { color: #569cd6; font-weight: 500; }
+/* Cadenas y chars: "hola", 'A' */
+.hljs-string     { color: #ce9178; }
+/* Números: 42, 3.14 */
+.hljs-number     { color: #b5cea8; }
+/* Comentarios: // ... */
+.hljs-comment    { color: #6a9955; font-style: italic; }
+/* Funciones: main(), cout, cin */
+.hljs-title      { color: #dcdcaa; }
+/* Directivas: #include, using namespace */
+.hljs-meta       { color: #c586c0; }
+/* Tipos: std::, cout, cin */
+.hljs-built_in   { color: #4ec9b0; }
+
+/* ── Pseudocódigo (fondo diferente al C++) ──────────────────── */
+.bloque-pseudo {
+  background: var(--blanco);
+  border-radius: 10px;
+  box-shadow: var(--sombra);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+.bloque-pseudo-header {
+  background: #1a2744;
+  padding: .6rem 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.bloque-pseudo-header span {
+  color: rgba(255,255,255,.7);
+  font-size: .8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .8px;
+}
+.bloque-pseudo pre {
+  margin: 0;
+  padding: 1.2rem 1.5rem;
+  background: #f8f9fc;
+  overflow-x: auto;
+}
+.bloque-pseudo pre code {
+  font-family: 'Fira Code', monospace;
+  font-size: .88rem;
+  color: #1c2135;
+  line-height: 1.8;
+}
+
+/* ── Aviso educativo bajo el bloque de código ───────────────── */
+.aviso-cpp {
+  background: #fff3e0;
+  border-left: 4px solid #f4891f;
+  padding: .55rem 1rem;
+  font-size: .82rem;
+  color: #5d3900;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: .4rem;
+}
+
+/* ── Responsivo: scroll horizontal en pantallas pequeñas ────── */
+@media (max-width: 600px) {
+  .bloque-cpp pre,
+  .bloque-pseudo pre {
+    padding: .9rem 1rem;
+  }
+  .language-cpp { font-size: .82rem; }
+}

@@ -1,0 +1,154 @@
+/* ═══════════════════════════════════════════════════════
+   reportes.css — Estilos del Módulo de Reportes
+   LogicWeb UTA · CSS3 propio
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Tarjetas de estadísticas globales ───────────────── */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.stat-card {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 1.25rem 1rem;
+  text-align: center;
+  border-top: 4px solid var(--azul);
+  transition: transform .2s;
+}
+.stat-card:hover { transform: translateY(-3px); }
+.stat-card.verde { border-top-color: #2e7d32; }
+.stat-card.rojo  { border-top-color: #c62828; }
+.stat-card.naranja { border-top-color: #e65100; }
+
+.stat-card .numero {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--azul);
+  line-height: 1;
+  margin-bottom: .35rem;
+}
+.stat-card.verde  .numero { color: #2e7d32; }
+.stat-card.rojo   .numero { color: #c62828; }
+.stat-card.naranja .numero { color: #e65100; }
+
+.stat-card .etiqueta {
+  font-size: .8rem;
+  color: var(--texto-suave);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
+/* ── Barra de progreso global ────────────────────────── */
+.progress-bar-wrap {
+  background: #e0e0e0;
+  border-radius: 999px;
+  height: 12px;
+  overflow: hidden;
+}
+.progress-bar-fill {
+  background: linear-gradient(90deg, var(--azul), var(--verde));
+  height: 100%;
+  border-radius: 999px;
+  transition: width .6s ease;
+}
+
+/* ── Sección de progreso por unidad ─────────────────── */
+.progreso-unidades {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.progreso-unidades h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--azul);
+  margin-bottom: 1rem;
+  border-bottom: 2px solid var(--borde);
+  padding-bottom: .5rem;
+}
+
+.unidad-row {
+  display: grid;
+  grid-template-columns: 180px 1fr 60px;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: .75rem;
+}
+
+.unidad-label {
+  font-size: .85rem;
+  font-weight: 600;
+  color: var(--texto);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.unidad-bar-wrap {
+  background: #e0e0e0;
+  border-radius: 999px;
+  height: 10px;
+  overflow: hidden;
+}
+.unidad-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--azul), var(--verde));
+  transition: width .5s ease;
+}
+
+.unidad-pct {
+  font-size: .82rem;
+  font-weight: 700;
+  color: var(--azul);
+  text-align: right;
+}
+
+/* ── Tabla de historial ──────────────────────────────── */
+.tabla-historial {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: .875rem;
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  overflow: hidden;
+}
+.tabla-historial thead {
+  background: var(--azul);
+  color: #fff;
+}
+.tabla-historial th,
+.tabla-historial td {
+  padding: .65rem .9rem;
+  text-align: left;
+  border-bottom: 1px solid var(--borde);
+}
+.tabla-historial tbody tr:hover { background: #f5f7ff; }
+.tabla-historial tbody tr:last-child td { border-bottom: none; }
+
+.badge-correcto {
+  background: #e8f5e9;
+  color: #2e7d32;
+  padding: .2rem .55rem;
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 700;
+}
+.badge-incorrecto {
+  background: #fce4e4;
+  color: #c62828;
+  padding: .2rem .55rem;
+  border-radius: 999px;
+  font-size: .78rem;
+  font-weight: 700;
+}
