@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block titulo %}LogicWeb UTA{% endblock %} | LogicWeb UTA</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/codigo.css' %}">
+  <!-- Highlight.js para coloreado de sintaxis C++ -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/cpp.min.js"></script>
+  {% block head_extra %}{% endblock %}
+</head>
+<body>
+
+  <!-- ── Barra de navegación ── -->
+  <nav class="navbar">
+    <a href="{% url 'inicio' %}" class="navbar-brand">
+      🎓 Logic<span>Web</span> UTA
+    </a>
+
+    <ul class="navbar-links">
+      <li><a href="{% url 'inicio' %}" {% if request.resolver_match.url_name == 'inicio' %}class="active"{% endif %}>Inicio</a></li>
+      <li><a href="{% url 'contenidos_lista' %}" {% if 'contenido' in request.resolver_match.url_name %}class="active"{% endif %}>Teoría</a></li>
+      <li><a href="{% url 'ejercicios_resueltos' %}" {% if 'resuelto' in request.resolver_match.url_name %}class="active"{% endif %}>Ejercicios Resueltos</a></li>
+      <li><a href="{% url 'ejercicios_interactivos' %}" {% if 'interactivo' in request.resolver_match.url_name %}class="active"{% endif %}>Práctica C++</a></li>
+      {% if user.is_authenticated %}
+        <li><a href="{% url 'mi_progreso' %}" {% if 'progreso' in request.resolver_match.url_name %}class="active"{% endif %}>Mi Progreso</a></li>
+      {% endif %}
+    </ul>
+
+    <div class="navbar-user">
+      {% if user.is_authenticated %}
+        👤 {{ user.get_full_name|default:user.username }}
+        &nbsp;|&nbsp;
+        <a href="{% url 'logout' %}">Salir</a>
+      {% else %}
+        <a href="{% url 'login' %}" class="btn btn-sm btn-outline" style="color:#fff;border-color:rgba(255,255,255,.4)">Ingresar</a>
+        <a href="{% url 'registro' %}" class="btn btn-sm btn-naranja">Registrarse</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <!-- ── Contenido principal ── -->
+  <main>
+    {% if messages %}
+      <div class="container mt-2">
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% block contenido %}{% endblock %}
+  </main>
+
+  <!-- ── Footer ── -->
+  <footer>
+    <strong>LogicWeb UTA</strong> — Aprender lógica programando soluciones reales &nbsp;|&nbsp;
+    Carrera de Ingeniería en Software — UTA &nbsp;|&nbsp; 2026
+  </footer>
+
+  <!-- Activar highlight.js para todos los bloques <code class="language-cpp"> -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('pre code').forEach(block => {
+        hljs.highlightElement(block);
+      });
+    });
+  </script>
+  <script src="{% static 'js/main.js' %}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
