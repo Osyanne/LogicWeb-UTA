@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}Mi Progreso{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/reportes.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<div class="container" style="padding-top:2rem">
+
+  <h1 class="section-title">📊 Mi Progreso — LogicWeb UTA</h1>
+
+  <!-- Tarjetas de estadísticas globales -->
+  <div class="stats-grid">
+    <div class="stat-card verde">
+      <div class="numero">{{ correctos }}</div>
+      <div class="etiqueta">✅ Aciertos</div>
+    </div>
+    <div class="stat-card rojo">
+      <div class="numero">{{ incorrectos }}</div>
+      <div class="etiqueta">❌ Errores</div>
+    </div>
+    <div class="stat-card naranja">
+      <div class="numero">{{ codigos_vistos }}</div>
+      <div class="etiqueta">Ejercicios estudiados</div>
+    </div>
+    <div class="stat-card">
+      <div class="numero">{{ porcentaje }}%</div>
+      <div class="etiqueta">Porcentaje de éxito</div>
+    </div>
+  </div>
+
+  <!-- Barra de progreso global -->
+  <div style="background:var(--blanco);border-radius:var(--radio);padding:1.25rem 1.5rem;box-shadow:var(--sombra);margin-bottom:1.5rem">
+    <div style="display:flex;justify-content:space-between;font-weight:700;font-size:.9rem;margin-bottom:.5rem">
+      <span>Progreso general</span>
+      <span>{{ porcentaje }}%</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-fill" style="width:{{ porcentaje }}%"></div>
+    </div>
+  </div>
+
+  <!-- Progreso por unidad (RF09 — desglose por unidad) -->
+  {% if progreso_unidades %}
+  <div class="progreso-unidades">
+    <h2>📚 Progreso por Unidad</h2>
+    {% for u in progreso_unidades %}
+    <div class="unidad-row">
+      <span class="unidad-label" title="{{ u.nombre }}">{{ u.nombre }}</span>
+      <div class="unidad-bar-wrap">
+        <div class="unidad-bar-fill" style="width:{{ u.porcentaje }}%"></div>
+      </div>
+      <span class="unidad-pct">{{ u.porcentaje }}%</span>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <!-- Historial de intentos -->
+  <h2 class="section-title" style="font-size:1.1rem">Historial de ejercicios practicados</h2>
+
+  {% if intentos %}
+  <div style="overflow-x:auto">
+    <table class="tabla-historial">
+      <thead>
+        <tr>
+          <th>Ejercicio</th>
+          <th>Unidad / Tema</th>
+          <th>Tipo</th>
+          <th>Código</th>
+          <th>Resultado</th>
+          <th>Fecha</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for intento in intentos %}
+        <tr>
+          <td><strong>{{ intento.ejercicio.titulo }}</strong></td>
+          <td>
+            <span class="chip chip-unidad">U{{ intento.ejercicio.tema.unidad }}</span>
+            {{ intento.ejercicio.tema.nombre_tema }}
+          </td>
+          <td>
+            {% if intento.ejercicio.categoria == 'resuelto' %}
+              <span class="chip chip-resuelto">Resuelto</span>
+            {% else %}
+              <span class="chip chip-interactivo">Interactivo</span>
+            {% endif %}
+          </td>
+          <td>
+            {% if intento.ejercicio.codigo_cpp %}✅ Visto{% else %}—{% endif %}
+          </td>
+          <td>
+            {% if intento.resultado == 'correcto' %}
+              <span class="badge-correcto">✅ Correcto</span>
+            {% else %}
+              <span class="badge-incorrecto">❌ Incorrecto</span>
+            {% endif %}
+          </td>
+          <td style="font-size:.85rem;color:var(--texto-suave)">{{ intento.fecha|date:"d/m/Y H:i" }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+    <div class="alert alert-info">
+      Aún no has practicado ningún ejercicio.
+      <a href="{% url 'ejercicios_interactivos' %}">¡Empieza ahora!</a>
+    </div>
+  {% endif %}
+
+  <div class="flex-gap mt-3">
+    <a href="{% url 'exportar_csv' %}" class="btn btn-outline">📥 Descargar historial CSV</a>
+    <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-primary">⚙️ Seguir practicando</a>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.progress-bar-fill, .unidad-bar-fill').forEach(function (bar) {
+      var target = bar.style.width;
+      bar.style.width = '0%';
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          bar.style.width = target;
+        });
+      });
+    });
+  });
+</script>
+{% endblock %}
