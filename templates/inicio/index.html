@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block titulo %}Inicio{% endblock %}
+
+{% block contenido %}
+
+<!-- ── Hero ── -->
+<section class="hero">
+  <h1>Bienvenido a <span>LogicWeb UTA</span></h1>
+  <p>Aprende lógica de programación analizando y practicando con ejercicios reales en C++, Python y Java</p>
+  {% if not user.is_authenticated %}
+    <div class="flex-gap" style="justify-content:center">
+      <a href="{% url 'registro' %}" class="btn btn-naranja">🚀 Crear mi cuenta</a>
+      <a href="{% url 'login' %}" class="btn btn-outline" style="border-color:#fff;color:#fff">Ingresar</a>
+    </div>
+  {% else %}
+    <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-naranja">⚙️ Practicar ahora</a>
+  {% endif %}
+</section>
+
+<!-- ── Unidades disponibles ── -->
+<div class="unidades-strip">
+  {% for u in unidades %}
+    <a href="{% url 'contenidos_lista' %}?unidad={{ u.unidad }}" class="badge-unidad">
+      U{{ u.unidad }}
+    </a>
+  {% endfor %}
+</div>
+
+<!-- ── Accesos rápidos ── -->
+<div class="container">
+  <h2 class="section-title">¿Qué quieres hacer hoy?</h2>
+  <div class="accesos-grid">
+    <a href="{% url 'contenidos_lista' %}" class="card-acceso">
+      <span class="icono">📚</span>
+      <h3>Teoría</h3>
+      <p>Estudia lógica, algoritmos, pseudocódigo, POO y estructuras de datos por unidad.</p>
+    </a>
+    <a href="{% url 'ejercicios_resueltos' %}" class="card-acceso">
+      <span class="icono">💡</span>
+      <h3>Ejercicios Resueltos</h3>
+      <p>Lee y analiza problemas resueltos paso a paso con código explicado en C++, Python o Java.</p>
+    </a>
+    <a href="{% url 'ejercicios_interactivos' %}" class="card-acceso">
+      <span class="icono">⚙️</span>
+      <h3>Práctica Interactiva</h3>
+      <p>Analiza código y responde ejercicios interactivos con retroalimentación inmediata.</p>
+    </a>
+    {% if user.is_authenticated %}
+    <a href="{% url 'mi_progreso' %}" class="card-acceso">
+      <span class="icono">📊</span>
+      <h3>Mi Progreso</h3>
+      <p>Revisa tus aciertos, errores y los ejercicios que has practicado.</p>
+    </a>
+    {% else %}
+    <a href="{% url 'registro' %}" class="card-acceso">
+      <span class="icono">📊</span>
+      <h3>Mi Progreso</h3>
+      <p>Regístrate para guardar tu historial de práctica y ver tu avance por unidad.</p>
+    </a>
+    {% endif %}
+  </div>
+
+  <!-- ── Resumen del sistema ── -->
+  <div class="flex-gap mt-4 mb-3" style="justify-content:center;text-align:center">
+    <div class="stat-card" style="min-width:160px">
+      <div class="numero">{{ total_ejercicios }}</div>
+      <div class="etiqueta">Ejercicios disponibles</div>
+    </div>
+    <div class="stat-card naranja" style="min-width:160px">
+      <div class="numero">4</div>
+      <div class="etiqueta">Unidades temáticas</div>
+    </div>
+    <div class="stat-card verde" style="min-width:160px">
+      <div class="numero">3</div>
+      <div class="etiqueta">Lenguajes: C++, Python y Java</div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
