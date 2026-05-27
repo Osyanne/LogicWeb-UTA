@@ -22,6 +22,8 @@
     <div>
       {% if ejercicio.lenguaje == 'python' %}
         <h3 class="section-title" style="font-size:1rem">★ Código Python — Estúdialo antes de responder</h3>
+      {% elif ejercicio.lenguaje == 'java' %}
+        <h3 class="section-title" style="font-size:1rem">★ Código Java — Estúdialo antes de responder</h3>
       {% else %}
         <h3 class="section-title" style="font-size:1rem">★ Código C++ — Estúdialo antes de responder</h3>
       {% endif %}
@@ -35,12 +37,15 @@
           {% if ejercicio.lenguaje == 'python' %}
             <span class="lang-label">referencia.py</span>
             <span class="badge-cpp">Python</span>
+          {% elif ejercicio.lenguaje == 'java' %}
+            <span class="lang-label">referencia.java</span>
+            <span class="badge-cpp">Java 11</span>
           {% else %}
             <span class="lang-label">referencia.cpp</span>
             <span class="badge-cpp">C++17</span>
           {% endif %}
         </div>
-        <pre><code class="language-{% if ejercicio.lenguaje == 'python' %}python{% else %}cpp{% endif %}">{{ codigo_cpp }}</code></pre>
+        <pre><code class="language-{% if ejercicio.lenguaje == 'python' %}python{% elif ejercicio.lenguaje == 'java' %}java{% else %}cpp{% endif %}">{{ codigo_cpp }}</code></pre>
       </div>
       <div class="aviso-cpp mt-1">
         💡 Lee y traza el algoritmo antes de responder.
@@ -54,7 +59,7 @@
         <form method="post" id="form-respuesta">
           {% csrf_token %}
           <p style="font-weight:700;color:var(--azul);margin-bottom:1rem;font-size:1rem">
-            Basándote en el código {% if ejercicio.lenguaje == 'python' %}Python{% else %}C++{% endif %}:<br>
+            Basándote en el código {% if ejercicio.lenguaje == 'python' %}Python{% elif ejercicio.lenguaje == 'java' %}Java{% else %}C++{% endif %}:<br>
             <span style="color:var(--texto);font-weight:600">{{ ejercicio.enunciado }}</span>
           </p>
 

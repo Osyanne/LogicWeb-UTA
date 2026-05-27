@@ -49,9 +49,13 @@
     </div>
     {% endif %}
 
-    <!-- Código C++ educativo -->
+    <!-- Código educativo -->
     <div>
-      <h3 class="section-title" style="font-size:1rem">Código C++ — Solución</h3>
+      <h3 class="section-title" style="font-size:1rem">
+        {% if ejercicio.lenguaje == 'python' %}Código Python — Solución
+        {% elif ejercicio.lenguaje == 'java' %}Código Java — Solución
+        {% else %}Código C++ — Solución{% endif %}
+      </h3>
       <div class="bloque-cpp">
         <div class="bloque-cpp-header">
           <div class="dots">
@@ -59,10 +63,18 @@
             <div class="dot dot-amarillo"></div>
             <div class="dot dot-verde"></div>
           </div>
-          <span class="lang-label">{{ ejercicio.titulo|truncatechars:40 }}.cpp</span>
-          <span class="badge-cpp">C++17</span>
+          {% if ejercicio.lenguaje == 'python' %}
+            <span class="lang-label">{{ ejercicio.titulo|truncatechars:40 }}.py</span>
+            <span class="badge-cpp">Python</span>
+          {% elif ejercicio.lenguaje == 'java' %}
+            <span class="lang-label">{{ ejercicio.titulo|truncatechars:40 }}.java</span>
+            <span class="badge-cpp">Java 11</span>
+          {% else %}
+            <span class="lang-label">{{ ejercicio.titulo|truncatechars:40 }}.cpp</span>
+            <span class="badge-cpp">C++17</span>
+          {% endif %}
         </div>
-        <pre><code class="language-cpp">{{ codigo_cpp }}</code></pre>
+        <pre><code class="language-{% if ejercicio.lenguaje == 'python' %}python{% elif ejercicio.lenguaje == 'java' %}java{% else %}cpp{% endif %}">{{ codigo_cpp }}</code></pre>
       </div>
       <div class="aviso-cpp mt-1">
         ⚠️ Este código es contenido educativo. Lee, analiza y comprende el algoritmo.
