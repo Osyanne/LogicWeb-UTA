@@ -23,12 +23,16 @@ def inicio(request):
 def ejercicios_resueltos(request):
     ejercicios = Ejercicio.objects.filter(categoria='resuelto', activo=True).select_related('tema')
     temas = Tema.objects.filter(ejercicios__categoria='resuelto').distinct()
-    unidad_filtro = request.GET.get('unidad')
+    lenguaje_filtro = request.GET.get('lenguaje')
+    unidad_filtro   = request.GET.get('unidad')
+    if lenguaje_filtro:
+        ejercicios = ejercicios.filter(lenguaje=lenguaje_filtro)
     if unidad_filtro:
         ejercicios = ejercicios.filter(tema__unidad=unidad_filtro)
     return render(request, 'ejercicios/lista_resueltos.html', {
         'ejercicios': ejercicios,
         'temas': temas,
+        'lenguaje_filtro': lenguaje_filtro,
         'unidad_filtro': unidad_filtro,
     })
 
