@@ -1,0 +1,1147 @@
+[
+  {
+    "model": "ejercicios.tema",
+    "pk": 1,
+    "fields": {
+      "nombre_tema": "Lógica, Algoritmos y Pseudocódigo",
+      "descripcion": "La lógica de programación permite analizar problemas y plantear soluciones ordenadas. Un algoritmo es una secuencia finita de pasos para resolver un problema. El pseudocódigo expresa ese algoritmo en lenguaje estructurado antes de codificarlo.",
+      "unidad": 1,
+      "orden": 1
+    }
+  },
+  {
+    "model": "ejercicios.tema",
+    "pk": 2,
+    "fields": {
+      "nombre_tema": "Variables, Operadores y Estructuras de Control",
+      "descripcion": "Las variables almacenan datos en memoria. Los operadores permiten realizar cálculos y comparaciones. Las estructuras condicionales (if/else) y repetitivas (for, while) controlan el flujo de ejecución del programa.",
+      "unidad": 2,
+      "orden": 1
+    }
+  },
+  {
+    "model": "ejercicios.tema",
+    "pk": 3,
+    "fields": {
+      "nombre_tema": "Programación Orientada a Objetos",
+      "descripcion": "La POO organiza el software en clases y objetos. Los principios fundamentales son: abstracción, encapsulación, herencia y polimorfismo. Una clase define atributos y métodos; un objeto es una instancia de esa clase.",
+      "unidad": 3,
+      "orden": 1
+    }
+  },
+  {
+    "model": "ejercicios.tema",
+    "pk": 4,
+    "fields": {
+      "nombre_tema": "Arreglos, Vectores y Estructuras de Datos",
+      "descripcion": "Los arreglos almacenan colecciones de datos del mismo tipo con acceso por índice. Los vectores en C++ (std::vector) son arreglos dinámicos. Las estructuras de datos organizan la información para un acceso y procesamiento eficiente.",
+      "unidad": 4,
+      "orden": 1
+    }
+  },
+
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 1,
+    "fields": {
+      "titulo": "Promedio de tres notas",
+      "enunciado": "Un estudiante tiene tres notas: n1, n2 y n3. ¿Cuál es el resultado de calcular el promedio si las notas son 8, 6 y 7?",
+      "categoria": "interactivo",
+      "dificultad": "basico",
+      "tema": 2,
+      "orden": 1,
+      "activo": true,
+      "entrada": "n1=8, n2=6, n3=7 (float)",
+      "proceso": "prom = (n1 + n2 + n3) / 3.0",
+      "salida": "prom (float)",
+      "pseudocodigo": "INICIO\n  LEER n1, n2, n3\n  prom <- (n1 + n2 + n3) / 3\n  ESCRIBIR prom\nFIN",
+      "codigo_cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    float n1, n2, n3, prom;\n\n    // Ingresar las tres notas\n    cout << \"Nota 1: \"; cin >> n1;\n    cout << \"Nota 2: \"; cin >> n2;\n    cout << \"Nota 3: \"; cin >> n3;\n\n    // Calcular el promedio\n    prom = (n1 + n2 + n3) / 3.0;\n\n    cout << \"Promedio: \" << prom << endl;\n\n    return 0;\n}",
+      "solucion_esperada": "7",
+      "tipo_respuesta": "decimal"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 2,
+    "fields": {
+      "titulo": "Factorial de un número",
+      "enunciado": "Analiza la función factorial recursiva en C++. ¿Cuál es el resultado de llamar factorial(5)?",
+      "categoria": "interactivo",
+      "dificultad": "medio",
+      "tema": 2,
+      "orden": 2,
+      "activo": true,
+      "entrada": "n = 5 (int)",
+      "proceso": "factorial(n) = n * factorial(n-1), caso base: factorial(1) = 1",
+      "salida": "resultado (int)",
+      "pseudocodigo": "FUNCION factorial(n)\n  SI n <= 1 ENTONCES\n    RETORNAR 1\n  SINO\n    RETORNAR n * factorial(n-1)\n  FIN SI\nFIN FUNCION",
+      "codigo_cpp": "#include <iostream>\nusing namespace std;\n\n// Función recursiva para calcular el factorial\nint factorial(int n) {\n    // Caso base\n    if (n <= 1) return 1;\n\n    // Llamada recursiva\n    return n * factorial(n - 1);\n}\n\nint main() {\n    int numero;\n    cout << \"Ingresa un número: \"; \n    cin >> numero;\n\n    cout << \"factorial(\" << numero << \") = \"\n         << factorial(numero) << endl;\n\n    // Traza para n=5:\n    // factorial(5) = 5 * factorial(4)\n    //              = 5 * 4 * factorial(3)\n    //              = 5 * 4 * 3 * factorial(2)\n    //              = 5 * 4 * 3 * 2 * factorial(1)\n    //              = 5 * 4 * 3 * 2 * 1 = 120\n\n    return 0;\n}",
+      "solucion_esperada": "120",
+      "tipo_respuesta": "entero"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 3,
+    "fields": {
+      "titulo": "Mayor de tres números",
+      "enunciado": "Analiza el código C++ que encuentra el mayor de tres números. Si a=15, b=42, c=27, ¿qué valor imprime el programa?",
+      "categoria": "interactivo",
+      "dificultad": "basico",
+      "tema": 2,
+      "orden": 3,
+      "activo": true,
+      "entrada": "a=15, b=42, c=27 (int)",
+      "proceso": "Comparar a, b y c con estructuras if/else anidadas",
+      "salida": "mayor (int)",
+      "pseudocodigo": "INICIO\n  LEER a, b, c\n  SI a > b Y a > c ENTONCES\n    mayor <- a\n  SINO SI b > c ENTONCES\n    mayor <- b\n  SINO\n    mayor <- c\n  FIN SI\n  ESCRIBIR mayor\nFIN",
+      "codigo_cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a, b, c, mayor;\n\n    cout << \"Ingresa tres números: \";\n    cin >> a >> b >> c;\n\n    // Comparar los tres valores\n    if (a > b && a > c) {\n        mayor = a;\n    } else if (b > c) {\n        mayor = b;\n    } else {\n        mayor = c;\n    }\n\n    cout << \"El mayor es: \" << mayor << endl;\n\n    return 0;\n}",
+      "solucion_esperada": "42",
+      "tipo_respuesta": "entero"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 4,
+    "fields": {
+      "titulo": "Suma de números del 1 al N con ciclo for",
+      "enunciado": "El código C++ calcula la suma de todos los números enteros del 1 al N. Si N=10, ¿cuál es el resultado de la suma?",
+      "categoria": "interactivo",
+      "dificultad": "basico",
+      "tema": 2,
+      "orden": 4,
+      "activo": true,
+      "entrada": "N = 10 (int)",
+      "proceso": "Acumular suma = suma + i para i de 1 a N",
+      "salida": "suma (int)",
+      "pseudocodigo": "INICIO\n  LEER N\n  suma <- 0\n  PARA i <- 1 HASTA N HACER\n    suma <- suma + i\n  FIN PARA\n  ESCRIBIR suma\nFIN",
+      "codigo_cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int N, suma = 0;\n\n    cout << \"Ingresa N: \";\n    cin >> N;\n\n    // Acumulador con ciclo for\n    for (int i = 1; i <= N; i++) {\n        suma += i;  // equivalente a: suma = suma + i\n    }\n\n    cout << \"Suma del 1 al \" << N << \" = \" << suma << endl;\n\n    // Para N=10:\n    // 1+2+3+4+5+6+7+8+9+10 = 55\n\n    return 0;\n}",
+      "solucion_esperada": "55",
+      "tipo_respuesta": "entero"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 5,
+    "fields": {
+      "titulo": "Cálculo de sueldo con horas extras",
+      "enunciado": "Un empleado trabaja 45 horas a $4.50 la hora. Las primeras 40 horas son normales; las horas extras se pagan al doble. ¿Cuál es el sueldo total?",
+      "categoria": "interactivo",
+      "dificultad": "medio",
+      "tema": 2,
+      "orden": 5,
+      "activo": true,
+      "entrada": "horas=45, tarifa=4.50 (float)",
+      "proceso": "Si horas > 40: sueldo = 40*tarifa + (horas-40)*tarifa*2",
+      "salida": "sueldo (float)",
+      "pseudocodigo": "INICIO\n  LEER horas, tarifa\n  SI horas > 40 ENTONCES\n    extras <- horas - 40\n    sueldo <- 40 * tarifa + extras * tarifa * 2\n  SINO\n    sueldo <- horas * tarifa\n  FIN SI\n  ESCRIBIR sueldo\nFIN",
+      "codigo_cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    float horas, tarifa, sueldo;\n\n    cout << \"Horas trabajadas: \"; cin >> horas;\n    cout << \"Tarifa por hora:  \"; cin >> tarifa;\n\n    if (horas > 40) {\n        float extras = horas - 40;\n        // Horas normales + horas extras al doble\n        sueldo = (40 * tarifa) + (extras * tarifa * 2);\n    } else {\n        sueldo = horas * tarifa;\n    }\n\n    cout << \"Sueldo total: $\" << sueldo << endl;\n\n    // horas=45, tarifa=4.50\n    // extras = 45 - 40 = 5\n    // sueldo = (40 * 4.50) + (5 * 4.50 * 2)\n    //        = 180.00 + 45.00 = 225.00\n\n    return 0;\n}",
+      "solucion_esperada": "225",
+      "tipo_respuesta": "decimal"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 6,
+    "fields": {
+      "titulo": "Clase Estudiante — POO básica",
+      "enunciado": "Analiza la clase Estudiante en C++. Si se crea un objeto con nombre='Ana', nota1=9, nota2=7, nota3=8 y se llama calcularPromedio(), ¿qué valor retorna el método?",
+      "categoria": "interactivo",
+      "dificultad": "medio",
+      "tema": 3,
+      "orden": 1,
+      "activo": true,
+      "entrada": "nombre='Ana', nota1=9, nota2=7, nota3=8",
+      "proceso": "promedio = (nota1 + nota2 + nota3) / 3.0",
+      "salida": "promedio (float)",
+      "pseudocodigo": "CLASE Estudiante\n  ATRIBUTOS: nombre, nota1, nota2, nota3\n  METODO calcularPromedio()\n    RETORNAR (nota1+nota2+nota3)/3\n  FIN METODO\nFIN CLASE",
+      "codigo_cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\n// Definición de la clase Estudiante\nclass Estudiante {\nprivate:\n    string nombre;\n    float nota1, nota2, nota3;\n\npublic:\n    // Constructor\n    Estudiante(string n, float n1, float n2, float n3) {\n        nombre = n;\n        nota1 = n1;\n        nota2 = n2;\n        nota3 = n3;\n    }\n\n    // Método para calcular el promedio\n    float calcularPromedio() {\n        return (nota1 + nota2 + nota3) / 3.0;\n    }\n\n    // Método para mostrar información\n    void mostrar() {\n        cout << \"Estudiante: \" << nombre << endl;\n        cout << \"Promedio:   \" << calcularPromedio() << endl;\n    }\n};\n\nint main() {\n    // Crear objeto de tipo Estudiante\n    Estudiante est(\"Ana\", 9, 7, 8);\n    est.mostrar();\n\n    // calcularPromedio() = (9 + 7 + 8) / 3.0 = ?\n\n    return 0;\n}",
+      "solucion_esperada": "8",
+      "tipo_respuesta": "decimal"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 7,
+    "fields": {
+      "titulo": "Ordenamiento burbuja con vectores",
+      "enunciado": "El código ordena un vector de 5 enteros con burbuja. Si el vector inicial es {5, 2, 8, 1, 4}, ¿cuál es el primer elemento del vector después de ordenarlo de menor a mayor?",
+      "categoria": "interactivo",
+      "dificultad": "avanzado",
+      "tema": 4,
+      "orden": 1,
+      "activo": true,
+      "entrada": "vector = {5, 2, 8, 1, 4}",
+      "proceso": "Algoritmo burbuja: comparar pares adyacentes e intercambiar si están fuera de orden",
+      "salida": "vector ordenado, primer elemento",
+      "pseudocodigo": "PARA i <- 0 HASTA n-2 HACER\n  PARA j <- 0 HASTA n-2-i HACER\n    SI v[j] > v[j+1] ENTONCES\n      INTERCAMBIAR v[j] y v[j+1]\n    FIN SI\n  FIN PARA\nFIN PARA",
+      "codigo_cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\n// Algoritmo de ordenamiento burbuja\nvoid burbuja(vector<int>& v) {\n    int n = v.size();\n    for (int i = 0; i < n - 1; i++) {\n        for (int j = 0; j < n - 1 - i; j++) {\n            if (v[j] > v[j + 1]) {\n                // Intercambiar elementos\n                int temp = v[j];\n                v[j]     = v[j + 1];\n                v[j + 1] = temp;\n            }\n        }\n    }\n}\n\nint main() {\n    vector<int> numeros = {5, 2, 8, 1, 4};\n\n    cout << \"Antes: \";\n    for (int x : numeros) cout << x << \" \";\n    cout << endl;\n\n    burbuja(numeros);\n\n    cout << \"Después: \";\n    for (int x : numeros) cout << x << \" \";\n    cout << endl;\n\n    // Resultado esperado: 1 2 4 5 8\n    // Primer elemento: ?\n\n    return 0;\n}",
+      "solucion_esperada": "1",
+      "tipo_respuesta": "entero"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 8,
+    "fields": {
+      "titulo": "Promedio de notas — Ejercicio resuelto paso a paso",
+      "enunciado": "Calcula el promedio de tres notas ingresadas por el usuario. Se muestra el análisis IPO completo y la solución en C++.",
+      "categoria": "resuelto",
+      "dificultad": "basico",
+      "tema": 2,
+      "orden": 10,
+      "activo": true,
+      "entrada": "n1, n2, n3 : float (tres notas del estudiante)",
+      "proceso": "prom = (n1 + n2 + n3) / 3.0",
+      "salida": "prom : float (promedio de las tres notas)",
+      "pseudocodigo": "INICIO\n  ESCRIBIR 'Ingresa nota 1:'\n  LEER n1\n  ESCRIBIR 'Ingresa nota 2:'\n  LEER n2\n  ESCRIBIR 'Ingresa nota 3:'\n  LEER n3\n  prom <- (n1 + n2 + n3) / 3\n  ESCRIBIR 'Promedio:', prom\nFIN",
+      "codigo_cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    float n1, n2, n3, prom;\n\n    // --- ENTRADA ---\n    cout << \"Ingresa nota 1: \"; cin >> n1;\n    cout << \"Ingresa nota 2: \"; cin >> n2;\n    cout << \"Ingresa nota 3: \"; cin >> n3;\n\n    // --- PROCESO ---\n    // Dividimos entre 3.0 (float) para obtener decimal\n    prom = (n1 + n2 + n3) / 3.0;\n\n    // --- SALIDA ---\n    cout << \"Promedio: \" << prom << endl;\n\n    return 0;\n}",
+      "solucion_esperada": "N/A",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 9,
+    "fields": {
+      "titulo": "Clasificación por edades — Ejercicio resuelto",
+      "enunciado": "Dado un número de edad, el programa lo clasifica en: Niño (< 12), Adolescente (12-17), Adulto (18-64) o Adulto mayor (>= 65).",
+      "categoria": "resuelto",
+      "dificultad": "basico",
+      "tema": 2,
+      "orden": 11,
+      "activo": true,
+      "entrada": "edad : int",
+      "proceso": "Estructura if/else if anidada para evaluar rangos de edad",
+      "salida": "categoría : string",
+      "pseudocodigo": "INICIO\n  LEER edad\n  SI edad < 12 ENTONCES\n    ESCRIBIR 'Niño'\n  SINO SI edad <= 17 ENTONCES\n    ESCRIBIR 'Adolescente'\n  SINO SI edad <= 64 ENTONCES\n    ESCRIBIR 'Adulto'\n  SINO\n    ESCRIBIR 'Adulto mayor'\n  FIN SI\nFIN",
+      "codigo_cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int edad;\n\n    cout << \"Ingresa la edad: \";\n    cin >> edad;\n\n    // Clasificación por rangos\n    if (edad < 12) {\n        cout << \"Categoría: Niño\" << endl;\n    } else if (edad <= 17) {\n        cout << \"Categoría: Adolescente\" << endl;\n    } else if (edad <= 64) {\n        cout << \"Categoría: Adulto\" << endl;\n    } else {\n        cout << \"Categoría: Adulto mayor\" << endl;\n    }\n\n    return 0;\n}",
+      "solucion_esperada": "N/A",
+      "tipo_respuesta": "texto"
+    }
+  },
+
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 1,
+    "fields": {
+      "ejercicio": 1,
+      "mensaje_correcto": "¡Excelente! Calculaste correctamente el promedio. Recuerda que al dividir entre 3.0 (float) el resultado conserva los decimales.",
+      "mensaje_error": "Revisa el cálculo. Suma las tres notas (8+6+7=21) y divide entre 3. El resultado es un número decimal.",
+      "recomendacion": "Repasa el tema U2: Variables y operadores aritméticos."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 2,
+    "fields": {
+      "ejercicio": 2,
+      "mensaje_correcto": "¡Perfecto! Trazaste correctamente la recursión: 5*4*3*2*1 = 120.",
+      "mensaje_error": "Traza la función paso a paso: factorial(5)=5*factorial(4), factorial(4)=4*factorial(3)... hasta llegar al caso base factorial(1)=1.",
+      "recomendacion": "Repasa recursividad y el concepto de caso base en funciones."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 3,
+    "fields": {
+      "ejercicio": 3,
+      "mensaje_correcto": "¡Correcto! b=42 es el mayor porque 42 > 15 y 42 > 27.",
+      "mensaje_error": "Compara mentalmente: a=15, b=42, c=27. ¿Cuál es el más grande?",
+      "recomendacion": "Repasa estructuras condicionales if/else anidadas en U2."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 4,
+    "fields": {
+      "ejercicio": 4,
+      "mensaje_correcto": "¡Bien hecho! La suma de 1 a 10 es 55. También se puede calcular con la fórmula N*(N+1)/2.",
+      "mensaje_error": "Acumula manualmente: 1+2+3+4+5+6+7+8+9+10. O usa la fórmula N*(N+1)/2 = 10*11/2.",
+      "recomendacion": "Repasa ciclos for y el uso de contadores y acumuladores en U2."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 5,
+    "fields": {
+      "ejercicio": 5,
+      "mensaje_correcto": "¡Excelente! 40 horas normales * $4.50 = $180. 5 horas extras * $9.00 = $45. Total: $225.",
+      "mensaje_error": "Recuerda: las primeras 40 horas son normales ($4.50 c/u), las 5 restantes se pagan al doble ($9.00 c/u).",
+      "recomendacion": "Practica ejercicios de sueldo con condicionales en U2."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 6,
+    "fields": {
+      "ejercicio": 6,
+      "mensaje_correcto": "¡Correcto! (9+7+8)/3.0 = 24/3.0 = 8.0. Comprendiste bien la POO y el método calcularPromedio().",
+      "mensaje_error": "El método calcularPromedio() suma nota1+nota2+nota3 y divide entre 3.0. Con 9, 7 y 8: (9+7+8)/3.0.",
+      "recomendacion": "Repasa clases, objetos y métodos en U3: POO."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 7,
+    "fields": {
+      "ejercicio": 7,
+      "mensaje_correcto": "¡Perfecto! El algoritmo burbuja ordena {5,2,8,1,4} a {1,2,4,5,8}. El primer elemento es 1.",
+      "mensaje_error": "El algoritmo burbuja deja el vector ordenado de menor a mayor: {1, 2, 4, 5, 8}. El primer elemento es el menor.",
+      "recomendacion": "Traza el algoritmo burbuja manualmente con el vector dado. Repasa U4: Arreglos."
+    }
+  },
+
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 10,
+    "fields": {
+      "titulo": "Suma acumulada con for — Python",
+      "enunciado": "El código Python calcula la suma de todos los enteros del 1 al N usando un ciclo for. Si N=10, ¿qué valor imprime el programa?",
+      "categoria": "interactivo",
+      "dificultad": "basico",
+      "tema": 1,
+      "orden": 10,
+      "activo": true,
+      "lenguaje": "python",
+      "entrada": "N = 10 (int)",
+      "proceso": "suma += i para i en range(1, N+1)",
+      "salida": "suma (int)",
+      "pseudocodigo": "INICIO\n  N <- 10\n  suma <- 0\n  PARA i <- 1 HASTA N HACER\n    suma <- suma + i\n  FIN PARA\n  ESCRIBIR suma\nFIN",
+      "codigo_cpp": "def suma_serie(n):\n    suma = 0\n    for i in range(1, n + 1):\n        suma += i   # acumulador\n    return suma\n\nN = 10\nresultado = suma_serie(N)\nprint(resultado)\n\n# Para N=10:\n# range(1, 11) -> 1, 2, 3, ..., 10\n# suma = 1+2+3+4+5+6+7+8+9+10 = ?",
+      "solucion_esperada": "55",
+      "tipo_respuesta": "entero"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 11,
+    "fields": {
+      "titulo": "Mayor de una lista — Python",
+      "enunciado": "El código Python busca el valor máximo de una lista recorriéndola con un ciclo. Si lista = [3, 7, 2, 9, 5], ¿qué valor imprime el programa?",
+      "categoria": "interactivo",
+      "dificultad": "basico",
+      "tema": 1,
+      "orden": 11,
+      "activo": true,
+      "lenguaje": "python",
+      "entrada": "lista = [3, 7, 2, 9, 5]",
+      "proceso": "Comparar cada elemento con el máximo actual y actualizar si es mayor",
+      "salida": "maximo (int)",
+      "pseudocodigo": "INICIO\n  lista <- [3, 7, 2, 9, 5]\n  maximo <- lista[0]\n  PARA num EN lista HACER\n    SI num > maximo ENTONCES\n      maximo <- num\n    FIN SI\n  FIN PARA\n  ESCRIBIR maximo\nFIN",
+      "codigo_cpp": "lista = [3, 7, 2, 9, 5]\n\nmaximo = lista[0]          # asumimos que el primero es el mayor\nfor num in lista:\n    if num > maximo:       # si encontramos uno mayor lo actualizamos\n        maximo = num\n\nprint(maximo)\n\n# Traza:\n# inicio: maximo=3\n# num=7  -> 7 > 3  -> maximo=7\n# num=2  -> 2 > 7? no\n# num=9  -> 9 > 7  -> maximo=9\n# num=5  -> 5 > 9? no\n# resultado: ?",
+      "solucion_esperada": "9",
+      "tipo_respuesta": "entero"
+    }
+  },
+
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 12,
+    "fields": {
+      "titulo": "Operador módulo — Python",
+      "enunciado": "Analiza el código Python con el operador módulo (%). Si a=17 y b=5, ¿qué valor imprime resultado?",
+      "categoria": "interactivo",
+      "dificultad": "basico",
+      "tema": 2,
+      "orden": 6,
+      "activo": true,
+      "lenguaje": "python",
+      "entrada": "a=17, b=5 (int)",
+      "proceso": "resultado = a % b  (resto de la división entera)",
+      "salida": "resultado (int)",
+      "pseudocodigo": "INICIO\n  a <- 17\n  b <- 5\n  resultado <- a MOD b\n  ESCRIBIR resultado\nFIN",
+      "codigo_cpp": "a = 17\nb = 5\n\n# El operador % devuelve el RESTO de la división entera\nresultado = a % b\n\nprint(resultado)\n\n# División entera: 17 // 5 = 3  (cociente)\n# Resto:          17 %  5 = ?   (sobra después de 3*5=15)",
+      "solucion_esperada": "2",
+      "tipo_respuesta": "entero"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 13,
+    "fields": {
+      "titulo": "Contador de pares — Python",
+      "enunciado": "El código Python cuenta cuántos números pares hay entre 1 y 10 (inclusive). ¿Qué número imprime al finalizar el ciclo?",
+      "categoria": "interactivo",
+      "dificultad": "medio",
+      "tema": 2,
+      "orden": 7,
+      "activo": true,
+      "lenguaje": "python",
+      "entrada": "rango: 1 a 10 inclusive",
+      "proceso": "Si n % 2 == 0 entonces es par, incrementar contador",
+      "salida": "contador (int)",
+      "pseudocodigo": "INICIO\n  contador <- 0\n  PARA n <- 1 HASTA 10 HACER\n    SI n MOD 2 == 0 ENTONCES\n      contador <- contador + 1\n    FIN SI\n  FIN PARA\n  ESCRIBIR contador\nFIN",
+      "codigo_cpp": "contador = 0\n\nfor n in range(1, 11):   # range(1,11) = 1,2,3,...,10\n    if n % 2 == 0:       # n es par si el resto entre 2 es 0\n        contador += 1\n\nprint(contador)\n\n# Números pares del 1 al 10: 2, 4, 6, 8, 10\n# ¿Cuántos son?",
+      "solucion_esperada": "5",
+      "tipo_respuesta": "entero"
+    }
+  },
+
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 14,
+    "fields": {
+      "titulo": "Clase Rectángulo — Python",
+      "enunciado": "Analiza la clase Rectángulo en Python. Si se crea rect = Rectangulo(4, 6) y se llama rect.area(), ¿qué valor retorna el método?",
+      "categoria": "interactivo",
+      "dificultad": "medio",
+      "tema": 3,
+      "orden": 2,
+      "activo": true,
+      "lenguaje": "python",
+      "entrada": "ancho=4, alto=6 (int)",
+      "proceso": "area = self.ancho * self.alto",
+      "salida": "area (int)",
+      "pseudocodigo": "CLASE Rectangulo\n  ATRIBUTOS: ancho, alto\n  METODO area()\n    RETORNAR ancho * alto\n  FIN METODO\nFIN CLASE",
+      "codigo_cpp": "class Rectangulo:\n    def __init__(self, ancho, alto):\n        self.ancho = ancho\n        self.alto  = alto\n\n    def area(self):\n        return self.ancho * self.alto\n\n    def perimetro(self):\n        return 2 * (self.ancho + self.alto)\n\n# Crear un objeto de tipo Rectangulo\nrect = Rectangulo(4, 6)\nprint(rect.area())\n\n# area() = ancho * alto = 4 * 6 = ?",
+      "solucion_esperada": "24",
+      "tipo_respuesta": "entero"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 15,
+    "fields": {
+      "titulo": "Herencia y polimorfismo — Python",
+      "enunciado": "Analiza la clase Animal y su subclase Perro. Si se crea p = Perro() y se llama p.hablar(), ¿qué texto exacto imprime el programa?",
+      "categoria": "interactivo",
+      "dificultad": "medio",
+      "tema": 3,
+      "orden": 3,
+      "activo": true,
+      "lenguaje": "python",
+      "entrada": "Objeto Perro sin parámetros",
+      "proceso": "Perro.hablar() sobreescribe Animal.hablar() — polimorfismo",
+      "salida": "string impreso",
+      "pseudocodigo": "CLASE Animal\n  METODO hablar()\n    RETORNAR '...'\n  FIN METODO\nFIN CLASE\n\nCLASE Perro HEREDA Animal\n  METODO hablar()\n    RETORNAR 'guau'\n  FIN METODO\nFIN CLASE",
+      "codigo_cpp": "class Animal:\n    def hablar(self):\n        return \"...\"\n\nclass Perro(Animal):         # Perro hereda de Animal\n    def hablar(self):        # sobreescribe el método\n        return \"guau\"\n\nclass Gato(Animal):\n    def hablar(self):\n        return \"miau\"\n\np = Perro()\nprint(p.hablar())\n\n# ¿Qué método se ejecuta: el de Animal o el de Perro?",
+      "solucion_esperada": "guau",
+      "tipo_respuesta": "texto"
+    }
+  },
+
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 16,
+    "fields": {
+      "titulo": "Ordenar lista con sort() — Python",
+      "enunciado": "Python ordena la lista en su lugar con sort(). Si lista = [5, 2, 8, 1, 4], ¿qué valor imprime lista[0] después de ordenar de menor a mayor?",
+      "categoria": "interactivo",
+      "dificultad": "basico",
+      "tema": 4,
+      "orden": 2,
+      "activo": true,
+      "lenguaje": "python",
+      "entrada": "lista = [5, 2, 8, 1, 4]",
+      "proceso": "lista.sort() ordena de menor a mayor en el mismo objeto",
+      "salida": "lista[0] (int) — primer elemento tras ordenar",
+      "pseudocodigo": "INICIO\n  lista <- [5, 2, 8, 1, 4]\n  ORDENAR lista (ascendente)\n  ESCRIBIR lista[0]\nFIN",
+      "codigo_cpp": "lista = [5, 2, 8, 1, 4]\n\nprint(\"Antes: \", lista)\n\nlista.sort()               # ordena de menor a mayor en el mismo objeto\n\nprint(\"Después:\", lista)\nprint(lista[0])            # primer elemento de la lista ordenada\n\n# Resultado del sort:\n# [5, 2, 8, 1, 4]  ->  [1, 2, 4, 5, 8]\n# lista[0] = ?",
+      "solucion_esperada": "1",
+      "tipo_respuesta": "entero"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 17,
+    "fields": {
+      "titulo": "Suma de valores en diccionario — Python",
+      "enunciado": "El código Python suma todos los valores de un diccionario. ¿Qué valor imprime total?",
+      "categoria": "interactivo",
+      "dificultad": "medio",
+      "tema": 4,
+      "orden": 3,
+      "activo": true,
+      "lenguaje": "python",
+      "entrada": "calificaciones = {'matematicas':85, 'fisica':90, 'programacion':95}",
+      "proceso": "total = sum(diccionario.values())",
+      "salida": "total (int)",
+      "pseudocodigo": "INICIO\n  calificaciones <- {matematicas:85, fisica:90, programacion:95}\n  total <- 0\n  PARA CADA valor EN calificaciones.values() HACER\n    total <- total + valor\n  FIN PARA\n  ESCRIBIR total\nFIN",
+      "codigo_cpp": "calificaciones = {\n    \"matematicas\":  85,\n    \"fisica\":        90,\n    \"programacion\": 95\n}\n\n# .values() devuelve solo los valores del diccionario\n# sum() los suma todos\ntotal = sum(calificaciones.values())\n\nprint(total)\n\n# 85 + 90 + 95 = ?",
+      "solucion_esperada": "270",
+      "tipo_respuesta": "entero"
+    }
+  },
+
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 18,
+    "fields": {
+      "titulo": "Intercambio de variables — C++",
+      "enunciado": "El código C++ intercambia el valor de dos variables usando una variable temporal. Si a=5 y b=10, ¿qué valor tiene 'a' después del intercambio?",
+      "categoria": "interactivo",
+      "dificultad": "basico",
+      "tema": 1,
+      "orden": 1,
+      "activo": true,
+      "lenguaje": "cpp",
+      "entrada": "a=5, b=10 (int)",
+      "proceso": "temp=a, a=b, b=temp (intercambio con variable auxiliar)",
+      "salida": "a, b con valores intercambiados",
+      "pseudocodigo": "INICIO\n  a <- 5\n  b <- 10\n  temp <- a\n  a <- b\n  b <- temp\n  ESCRIBIR a, b\nFIN",
+      "codigo_cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int a = 5, b = 10;\n\n    cout << \"Antes: a=\" << a << \", b=\" << b << endl;\n\n    // Intercambio usando variable temporal\n    int temp = a;   // temp=5, a=5,  b=10\n    a = b;          // temp=5, a=10, b=10\n    b = temp;       // temp=5, a=10, b=5\n\n    cout << \"Después: a=\" << a << \", b=\" << b << endl;\n\n    // ¿Cuánto vale 'a' al final?\n\n    return 0;\n}",
+      "solucion_esperada": "10",
+      "tipo_respuesta": "entero"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 19,
+    "fields": {
+      "titulo": "Conversión Celsius a Fahrenheit — C++",
+      "enunciado": "El programa aplica la fórmula de conversión de temperatura. Si la temperatura en Celsius es 25°C, ¿cuál es el resultado en Fahrenheit?",
+      "categoria": "interactivo",
+      "dificultad": "basico",
+      "tema": 1,
+      "orden": 2,
+      "activo": true,
+      "lenguaje": "cpp",
+      "entrada": "celsius = 25 (float)",
+      "proceso": "fahrenheit = celsius * 9.0 / 5.0 + 32",
+      "salida": "fahrenheit (float)",
+      "pseudocodigo": "INICIO\n  LEER celsius\n  fahrenheit <- celsius * 9 / 5 + 32\n  ESCRIBIR fahrenheit\nFIN",
+      "codigo_cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    float celsius, fahrenheit;\n\n    cout << \"Temperatura en Celsius: \";\n    cin >> celsius;\n\n    // Fórmula de conversión\n    fahrenheit = celsius * 9.0 / 5.0 + 32;\n\n    cout << celsius << \"°C = \" << fahrenheit << \"°F\" << endl;\n\n    // Para celsius = 25:\n    // fahrenheit = 25 * 9.0 / 5.0 + 32\n    //            = 45.0 + 32\n    //            = ?\n\n    return 0;\n}",
+      "solucion_esperada": "77",
+      "tipo_respuesta": "entero"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 20,
+    "fields": {
+      "titulo": "Ciclo while con contador — C++",
+      "enunciado": "Analiza el ciclo while. Si el programa arranca con n=1 y el límite es 5, ¿cuántas veces imprime 'Iteración' antes de detenerse?",
+      "categoria": "interactivo",
+      "dificultad": "medio",
+      "tema": 1,
+      "orden": 3,
+      "activo": true,
+      "lenguaje": "cpp",
+      "entrada": "n=1, limite=5 (int)",
+      "proceso": "Mientras n <= limite: imprimir, incrementar n y contador",
+      "salida": "número de iteraciones (int)",
+      "pseudocodigo": "INICIO\n  n <- 1\n  limite <- 5\n  contador <- 0\n  MIENTRAS n <= limite HACER\n    ESCRIBIR 'Iteración:', n\n    n <- n + 1\n    contador <- contador + 1\n  FIN MIENTRAS\n  ESCRIBIR contador\nFIN",
+      "codigo_cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n = 1;\n    int limite = 5;\n    int contador = 0;\n\n    while (n <= limite) {\n        cout << \"Iteración: \" << n << endl;\n        n++;\n        contador++;\n    }\n\n    // Traza:\n    // n=1: 1<=5 → imprime, n=2, contador=1\n    // n=2: 2<=5 → imprime, n=3, contador=2\n    // n=3: 3<=5 → imprime, n=4, contador=3\n    // n=4: 4<=5 → imprime, n=5, contador=4\n    // n=5: 5<=5 → imprime, n=6, contador=5\n    // n=6: 6<=5 → falso, sale\n    // ¿Cuántas iteraciones?\n\n    return 0;\n}",
+      "solucion_esperada": "5",
+      "tipo_respuesta": "entero"
+    }
+  },
+
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 16,
+    "fields": {
+      "ejercicio": 18,
+      "mensaje_correcto": "¡Correcto! La traza muestra: temp=5, a=b=10, b=temp=5. Al final, a vale 10.",
+      "mensaje_error": "Traza paso a paso: primero temp=a=5, luego a=b=10, por último b=temp=5. ¿Qué vale 'a'?",
+      "recomendacion": "Repasa el concepto de variable auxiliar para intercambio — Unidad 1."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 17,
+    "fields": {
+      "ejercicio": 19,
+      "mensaje_correcto": "¡Exacto! 25 × 9/5 + 32 = 45 + 32 = 77°F.",
+      "mensaje_error": "Aplica la fórmula: F = C × 9/5 + 32. Con C=25: F = 25 × 1.8 + 32 = 45 + 32.",
+      "recomendacion": "Practica ejercicios de fórmulas con variables float — Unidad 1."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 18,
+    "fields": {
+      "ejercicio": 20,
+      "mensaje_correcto": "¡Perfecto! El ciclo se ejecuta para n=1,2,3,4,5 — exactamente 5 veces.",
+      "mensaje_error": "Traza el ciclo: arranca en n=1 y termina cuando n=6 (6>5). Cuenta cuántas veces entra al while.",
+      "recomendacion": "Practica trazas de ciclos while con condición — Unidad 1."
+    }
+  },
+
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 8,
+    "fields": {
+      "ejercicio": 10,
+      "mensaje_correcto": "¡Excelente! range(1, 11) genera los números del 1 al 10 y el acumulador los suma: 1+2+...+10 = 55.",
+      "mensaje_error": "Recuerda que range(1, 11) genera 1, 2, 3, ..., 10 (el 11 no está incluido). Suma todos esos valores.",
+      "recomendacion": "Repasa funciones range() y acumuladores en Python — Unidad 1."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 9,
+    "fields": {
+      "ejercicio": 11,
+      "mensaje_correcto": "¡Correcto! La traza muestra que maximo se actualiza a 7, luego a 9. El valor final es 9.",
+      "mensaje_error": "Traza el ciclo: empieza con maximo=3, luego compara cada elemento. Cuando llega al 9 (mayor que 7), lo actualiza.",
+      "recomendacion": "Practica trazas de ciclos for con listas en Python — Unidad 1."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 10,
+    "fields": {
+      "ejercicio": 12,
+      "mensaje_correcto": "¡Bien! 17 % 5 = 2 porque 17 = 3×5 + 2. El operador módulo devuelve el resto de la división.",
+      "mensaje_error": "El operador % calcula el RESTO: 3×5=15, sobran 2. Por eso 17 % 5 = 2.",
+      "recomendacion": "Repasa operadores aritméticos de Python: //, %, ** — Unidad 2."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 11,
+    "fields": {
+      "ejercicio": 13,
+      "mensaje_correcto": "¡Perfecto! Los pares entre 1 y 10 son: 2, 4, 6, 8, 10 — exactamente 5 números.",
+      "mensaje_error": "Recorre el rango 1–10 y aplica n % 2 == 0 a cada número. Solo los pares suman al contador.",
+      "recomendacion": "Practica ciclos for y condicionales con el operador módulo — Unidad 2."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 12,
+    "fields": {
+      "ejercicio": 14,
+      "mensaje_correcto": "¡Correcto! El método area() retorna self.ancho * self.alto = 4 * 6 = 24.",
+      "mensaje_error": "El constructor guarda ancho=4, alto=6. El método area() retorna su producto: 4 × 6.",
+      "recomendacion": "Repasa clases, __init__ y métodos en Python — Unidad 3."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 13,
+    "fields": {
+      "ejercicio": 15,
+      "mensaje_correcto": "¡Muy bien! Perro sobreescribe hablar() de Animal, por eso imprime 'guau' y no '...'.",
+      "mensaje_error": "Python ejecuta el método de la clase más específica (Perro), no el de la clase padre (Animal). Eso se llama polimorfismo.",
+      "recomendacion": "Repasa herencia y sobreescritura de métodos en Python — Unidad 3."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 14,
+    "fields": {
+      "ejercicio": 16,
+      "mensaje_correcto": "¡Exacto! sort() ordena la lista de menor a mayor: [1, 2, 4, 5, 8]. El primer elemento es 1.",
+      "mensaje_error": "sort() reorganiza la lista en su lugar de menor a mayor. El índice [0] siempre será el menor.",
+      "recomendacion": "Practica métodos de listas: sort(), sorted(), reverse() — Unidad 4."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 15,
+    "fields": {
+      "ejercicio": 17,
+      "mensaje_correcto": "¡Perfecto! 85 + 90 + 95 = 270. sum() junto a .values() suma todos los valores del diccionario.",
+      "mensaje_error": "Usa .values() para obtener los valores del diccionario y luego súmalos: 85 + 90 + 95.",
+      "recomendacion": "Repasa diccionarios y métodos .keys(), .values(), .items() en Python — Unidad 4."
+    }
+  },
+
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 21,
+    "fields": {
+      "titulo": "Número par o impar — Ejercicio resuelto",
+      "enunciado": "Dado un entero n, el programa determina si es par o impar usando el operador módulo. Incluye análisis IPO completo y código C++ comentado.",
+      "categoria": "resuelto",
+      "dificultad": "basico",
+      "tema": 1,
+      "orden": 20,
+      "activo": true,
+      "lenguaje": "cpp",
+      "entrada": "n : int (número entero ingresado por el usuario)",
+      "proceso": "Si n % 2 == 0 → par; si no → impar",
+      "salida": "'Par' o 'Impar' : string",
+      "pseudocodigo": "INICIO\n  LEER n\n  SI n MOD 2 = 0 ENTONCES\n    ESCRIBIR 'Par'\n  SINO\n    ESCRIBIR 'Impar'\n  FIN SI\nFIN",
+      "codigo_cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    int n;\n\n    // --- ENTRADA ---\n    cout << \"Ingresa un número entero: \";\n    cin >> n;\n\n    // --- PROCESO ---\n    // El operador % devuelve el RESTO de la división\n    // Si n es divisible por 2 (resto == 0) → es par\n    if (n % 2 == 0) {\n        // --- SALIDA ---\n        cout << n << \" es Par\" << endl;\n    } else {\n        cout << n << \" es Impar\" << endl;\n    }\n\n    return 0;\n}",
+      "solucion_esperada": "N/A",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 22,
+    "fields": {
+      "titulo": "Índice de Masa Corporal (IMC) — Ejercicio resuelto",
+      "enunciado": "Calcula el IMC de una persona a partir de su peso y estatura, luego lo clasifica en cuatro categorías según los rangos de la OMS.",
+      "categoria": "resuelto",
+      "dificultad": "medio",
+      "tema": 1,
+      "orden": 21,
+      "activo": true,
+      "lenguaje": "cpp",
+      "entrada": "peso : float (kg), estatura : float (m)",
+      "proceso": "imc = peso / (estatura * estatura); clasificar según rangos OMS",
+      "salida": "imc (float) y clasificación (string)",
+      "pseudocodigo": "INICIO\n  LEER peso, estatura\n  imc <- peso / (estatura * estatura)\n  SI imc < 18.5 ENTONCES\n    ESCRIBIR 'Bajo peso'\n  SINO SI imc < 25.0 ENTONCES\n    ESCRIBIR 'Normal'\n  SINO SI imc < 30.0 ENTONCES\n    ESCRIBIR 'Sobrepeso'\n  SINO\n    ESCRIBIR 'Obesidad'\n  FIN SI\nFIN",
+      "codigo_cpp": "#include <iostream>\nusing namespace std;\n\nint main() {\n    float peso, estatura, imc;\n\n    // --- ENTRADA ---\n    cout << \"Peso (kg):    \"; cin >> peso;\n    cout << \"Estatura (m): \"; cin >> estatura;\n\n    // --- PROCESO ---\n    // Fórmula OMS: IMC = peso / estatura²\n    imc = peso / (estatura * estatura);\n\n    // --- SALIDA ---\n    cout << \"IMC: \" << imc << endl;\n\n    if (imc < 18.5) {\n        cout << \"Clasificación: Bajo peso\" << endl;\n    } else if (imc < 25.0) {\n        cout << \"Clasificación: Normal\" << endl;\n    } else if (imc < 30.0) {\n        cout << \"Clasificación: Sobrepeso\" << endl;\n    } else {\n        cout << \"Clasificación: Obesidad\" << endl;\n    }\n\n    return 0;\n}",
+      "solucion_esperada": "N/A",
+      "tipo_respuesta": "texto"
+    }
+  },
+
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 23,
+    "fields": {
+      "titulo": "Clase Círculo — POO en C++",
+      "enunciado": "Implementación de la clase Circulo con atributos privados y métodos públicos para calcular área y perímetro. Ejemplo completo de encapsulación.",
+      "categoria": "resuelto",
+      "dificultad": "basico",
+      "tema": 3,
+      "orden": 10,
+      "activo": true,
+      "lenguaje": "cpp",
+      "entrada": "radio : float",
+      "proceso": "area = PI * radio²; perimetro = 2 * PI * radio",
+      "salida": "area (float), perimetro (float)",
+      "pseudocodigo": "CLASE Circulo\n  ATRIBUTOS (privados): radio\n  METODO area()\n    RETORNAR PI * radio * radio\n  FIN METODO\n  METODO perimetro()\n    RETORNAR 2 * PI * radio\n  FIN METODO\nFIN CLASE",
+      "codigo_cpp": "#include <iostream>\n#define PI 3.14159\nusing namespace std;\n\nclass Circulo {\nprivate:\n    float radio;   // atributo encapsulado\n\npublic:\n    // Constructor\n    Circulo(float r) {\n        radio = r;\n    }\n\n    // Getter\n    float getRadio() { return radio; }\n\n    // Métodos de cálculo\n    float area() {\n        return PI * radio * radio;\n    }\n\n    float perimetro() {\n        return 2 * PI * radio;\n    }\n\n    void mostrar() {\n        cout << \"Radio:     \" << radio << endl;\n        cout << \"Área:      \" << area() << endl;\n        cout << \"Perímetro: \" << perimetro() << endl;\n    }\n};\n\nint main() {\n    Circulo c(5.0);\n    c.mostrar();\n\n    return 0;\n}",
+      "solucion_esperada": "N/A",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 24,
+    "fields": {
+      "titulo": "Herencia: Vehículo → Auto — C++",
+      "enunciado": "Ejemplo completo de herencia en C++. La clase Auto extiende Vehiculo, reutiliza sus atributos y métodos, y agrega comportamiento propio.",
+      "categoria": "resuelto",
+      "dificultad": "medio",
+      "tema": 3,
+      "orden": 11,
+      "activo": true,
+      "lenguaje": "cpp",
+      "entrada": "marca (string), velocidadMax (int), numPuertas (int)",
+      "proceso": "Crear objeto Auto; mostrar datos heredados de Vehiculo y propios de Auto",
+      "salida": "datos del vehículo mostrados por pantalla",
+      "pseudocodigo": "CLASE Vehiculo\n  ATRIBUTOS: marca, velocidadMax\n  METODO mostrar()\n    ESCRIBIR marca, velocidadMax\n  FIN METODO\nFIN CLASE\n\nCLASE Auto HEREDA Vehiculo\n  ATRIBUTO: numPuertas\n  METODO mostrar()\n    LLAMAR Vehiculo.mostrar()\n    ESCRIBIR numPuertas\n  FIN METODO\nFIN CLASE",
+      "codigo_cpp": "#include <iostream>\n#include <string>\nusing namespace std;\n\n// Clase base\nclass Vehiculo {\nprotected:\n    string marca;\n    int velocidadMax;\n\npublic:\n    Vehiculo(string m, int v) : marca(m), velocidadMax(v) {}\n\n    void mostrar() {\n        cout << \"Marca:           \" << marca << endl;\n        cout << \"Velocidad máx:   \" << velocidadMax << \" km/h\" << endl;\n    }\n};\n\n// Clase derivada — hereda de Vehiculo\nclass Auto : public Vehiculo {\nprivate:\n    int numPuertas;\n\npublic:\n    // La lista de inicialización llama al constructor de la base\n    Auto(string m, int v, int p) : Vehiculo(m, v), numPuertas(p) {}\n\n    void mostrar() {\n        Vehiculo::mostrar();   // reutiliza el método del padre\n        cout << \"Núm. puertas:    \" << numPuertas << endl;\n    }\n};\n\nint main() {\n    Auto miAuto(\"Toyota\", 180, 4);\n    miAuto.mostrar();\n\n    return 0;\n}",
+      "solucion_esperada": "N/A",
+      "tipo_respuesta": "texto"
+    }
+  },
+
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 25,
+    "fields": {
+      "titulo": "Suma y promedio de un vector — C++",
+      "enunciado": "Programa que llena un vector de 5 enteros ingresados por el usuario, calcula la suma y el promedio usando ciclos for y for basado en rango (C++11).",
+      "categoria": "resuelto",
+      "dificultad": "basico",
+      "tema": 4,
+      "orden": 10,
+      "activo": true,
+      "lenguaje": "cpp",
+      "entrada": "5 números enteros ingresados por el usuario",
+      "proceso": "suma = acumular todos los elementos; promedio = suma / n",
+      "salida": "suma (int), promedio (float)",
+      "pseudocodigo": "INICIO\n  n <- 5\n  v <- arreglo[n]\n  PARA i <- 0 HASTA n-1 HACER\n    LEER v[i]\n  FIN PARA\n  suma <- 0\n  PARA CADA num EN v HACER\n    suma <- suma + num\n  FIN PARA\n  promedio <- suma / n\n  ESCRIBIR suma, promedio\nFIN",
+      "codigo_cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    const int N = 5;\n    vector<int> numeros(N);\n\n    // --- ENTRADA ---\n    cout << \"Ingresa \" << N << \" números:\" << endl;\n    for (int i = 0; i < N; i++) {\n        cout << \"  Número [\" << i << \"]: \";\n        cin >> numeros[i];\n    }\n\n    // --- PROCESO ---\n    int suma = 0;\n    for (int num : numeros) {   // for basado en rango (C++11)\n        suma += num;\n    }\n    float promedio = static_cast<float>(suma) / N;\n\n    // --- SALIDA ---\n    cout << \"Suma:     \" << suma << endl;\n    cout << \"Promedio: \" << promedio << endl;\n\n    return 0;\n}",
+      "solucion_esperada": "N/A",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 26,
+    "fields": {
+      "titulo": "Búsqueda lineal en arreglo — C++",
+      "enunciado": "Algoritmo de búsqueda lineal que recorre el arreglo comparando cada elemento con el valor buscado. Devuelve el índice si lo encuentra, o -1 si no existe.",
+      "categoria": "resuelto",
+      "dificultad": "basico",
+      "tema": 4,
+      "orden": 11,
+      "activo": true,
+      "lenguaje": "cpp",
+      "entrada": "vector de enteros, clave : int (valor a buscar)",
+      "proceso": "Recorrer el vector comparando v[i] con la clave; retornar i al encontrar",
+      "salida": "índice donde se encontró la clave, o -1 si no existe",
+      "pseudocodigo": "FUNCION busquedaLineal(v, clave)\n  PARA i <- 0 HASTA tamano(v)-1 HACER\n    SI v[i] = clave ENTONCES\n      RETORNAR i\n    FIN SI\n  FIN PARA\n  RETORNAR -1\nFIN FUNCION",
+      "codigo_cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\n// Retorna el índice donde se encuentra la clave, o -1 si no existe\nint busquedaLineal(const vector<int>& v, int clave) {\n    for (int i = 0; i < (int)v.size(); i++) {\n        if (v[i] == clave) {\n            return i;    // encontrado en posición i\n        }\n    }\n    return -1;           // no encontrado\n}\n\nint main() {\n    vector<int> datos = {15, 3, 9, 42, 7, 18, 5};\n\n    cout << \"Vector: \";\n    for (int x : datos) cout << x << \" \";\n    cout << endl;\n\n    int clave;\n    cout << \"Buscar: \";\n    cin >> clave;\n\n    int pos = busquedaLineal(datos, clave);\n\n    if (pos != -1) {\n        cout << \"Encontrado en posición: \" << pos << endl;\n    } else {\n        cout << \"Elemento no encontrado.\" << endl;\n    }\n\n    return 0;\n}",
+      "solucion_esperada": "N/A",
+      "tipo_respuesta": "texto"
+    }
+  },
+
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 27,
+    "fields": {
+      "titulo": "Saludo con Scanner — Java",
+      "enunciado": "El programa lee un nombre desde teclado con Scanner y lo saluda. Si el usuario ingresa 'Ana', ¿qué texto exacto imprime el programa?",
+      "categoria": "interactivo",
+      "dificultad": "basico",
+      "tema": 1,
+      "orden": 30,
+      "activo": true,
+      "lenguaje": "java",
+      "entrada": "nombre : String (leído por Scanner)",
+      "proceso": "Concatenar 'Hola, ' + nombre + '!'",
+      "salida": "saludo : String",
+      "pseudocodigo": "INICIO\n  LEER nombre\n  ESCRIBIR 'Hola, ' + nombre + '!'\nFIN",
+      "codigo_cpp": "import java.util.Scanner;\n\npublic class Saludo {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n\n        // --- ENTRADA ---\n        System.out.print(\"Ingresa tu nombre: \");\n        String nombre = sc.nextLine();\n\n        // --- PROCESO + SALIDA ---\n        System.out.println(\"Hola, \" + nombre + \"!\");\n\n        sc.close();\n    }\n}",
+      "solucion_esperada": "Hola, Ana!",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 28,
+    "fields": {
+      "titulo": "Suma de dos enteros — Java",
+      "enunciado": "El código Java lee dos enteros con Scanner y muestra su suma. Si a=12 y b=8, ¿qué valor imprime suma?",
+      "categoria": "interactivo",
+      "dificultad": "basico",
+      "tema": 2,
+      "orden": 30,
+      "activo": true,
+      "lenguaje": "java",
+      "entrada": "a=12, b=8 (int)",
+      "proceso": "suma = a + b",
+      "salida": "suma (int)",
+      "pseudocodigo": "INICIO\n  LEER a, b\n  suma <- a + b\n  ESCRIBIR suma\nFIN",
+      "codigo_cpp": "import java.util.Scanner;\n\npublic class Suma {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n\n        System.out.print(\"Primer número: \");\n        int a = sc.nextInt();\n        System.out.print(\"Segundo número: \");\n        int b = sc.nextInt();\n\n        int suma = a + b;\n        System.out.println(\"Suma: \" + suma);\n\n        // Para a=12, b=8 -> suma = ?\n\n        sc.close();\n    }\n}",
+      "solucion_esperada": "20",
+      "tipo_respuesta": "entero"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 29,
+    "fields": {
+      "titulo": "Promedio de tres notas — Java",
+      "enunciado": "El programa pide tres notas con Scanner y muestra el promedio. Si n1=8, n2=6, n3=7, ¿cuál es el promedio?",
+      "categoria": "interactivo",
+      "dificultad": "basico",
+      "tema": 2,
+      "orden": 31,
+      "activo": true,
+      "lenguaje": "java",
+      "entrada": "n1, n2, n3 : double",
+      "proceso": "prom = (n1 + n2 + n3) / 3.0",
+      "salida": "prom : double",
+      "pseudocodigo": "INICIO\n  LEER n1, n2, n3\n  prom <- (n1 + n2 + n3) / 3\n  ESCRIBIR prom\nFIN",
+      "codigo_cpp": "import java.util.Scanner;\n\npublic class Promedio {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n\n        System.out.print(\"Nota 1: \"); double n1 = sc.nextDouble();\n        System.out.print(\"Nota 2: \"); double n2 = sc.nextDouble();\n        System.out.print(\"Nota 3: \"); double n3 = sc.nextDouble();\n\n        // Dividir entre 3.0 (double) preserva los decimales\n        double prom = (n1 + n2 + n3) / 3.0;\n        System.out.println(\"Promedio: \" + prom);\n\n        // n1=8, n2=6, n3=7 -> prom = ?\n\n        sc.close();\n    }\n}",
+      "solucion_esperada": "7",
+      "tipo_respuesta": "decimal"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 30,
+    "fields": {
+      "titulo": "Mayor de tres números — Java",
+      "enunciado": "Analiza el código Java que encuentra el mayor de tres números usando if/else if. Si a=15, b=42, c=27, ¿qué valor imprime mayor?",
+      "categoria": "interactivo",
+      "dificultad": "basico",
+      "tema": 2,
+      "orden": 32,
+      "activo": true,
+      "lenguaje": "java",
+      "entrada": "a=15, b=42, c=27 (int)",
+      "proceso": "Comparar a, b, c con estructuras if/else if anidadas",
+      "salida": "mayor (int)",
+      "pseudocodigo": "INICIO\n  LEER a, b, c\n  SI a > b Y a > c ENTONCES\n    mayor <- a\n  SINO SI b > c ENTONCES\n    mayor <- b\n  SINO\n    mayor <- c\n  FIN SI\n  ESCRIBIR mayor\nFIN",
+      "codigo_cpp": "import java.util.Scanner;\n\npublic class Mayor {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n\n        System.out.print(\"a: \"); int a = sc.nextInt();\n        System.out.print(\"b: \"); int b = sc.nextInt();\n        System.out.print(\"c: \"); int c = sc.nextInt();\n\n        int mayor;\n        if (a > b && a > c) {\n            mayor = a;\n        } else if (b > c) {\n            mayor = b;\n        } else {\n            mayor = c;\n        }\n\n        System.out.println(\"El mayor es: \" + mayor);\n\n        // a=15, b=42, c=27 -> mayor = ?\n\n        sc.close();\n    }\n}",
+      "solucion_esperada": "42",
+      "tipo_respuesta": "entero"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 31,
+    "fields": {
+      "titulo": "Factorial con while — Java",
+      "enunciado": "El código Java calcula el factorial de un número con un ciclo while. Si n=6, ¿qué valor imprime resultado?",
+      "categoria": "interactivo",
+      "dificultad": "medio",
+      "tema": 2,
+      "orden": 33,
+      "activo": true,
+      "lenguaje": "java",
+      "entrada": "n = 6 (int)",
+      "proceso": "Acumular resultado *= i para i de 1 a n",
+      "salida": "resultado (long)",
+      "pseudocodigo": "INICIO\n  LEER n\n  resultado <- 1\n  i <- 1\n  MIENTRAS i <= n HACER\n    resultado <- resultado * i\n    i <- i + 1\n  FIN MIENTRAS\n  ESCRIBIR resultado\nFIN",
+      "codigo_cpp": "import java.util.Scanner;\n\npublic class Factorial {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        System.out.print(\"Ingresa n: \");\n        int n = sc.nextInt();\n\n        long resultado = 1;\n        int i = 1;\n        while (i <= n) {\n            resultado *= i;   // equivalente a resultado = resultado * i\n            i++;\n        }\n\n        System.out.println(\"factorial(\" + n + \") = \" + resultado);\n\n        // n=6: 1, 2, 6, 24, 120, ?\n\n        sc.close();\n    }\n}",
+      "solucion_esperada": "720",
+      "tipo_respuesta": "entero"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 32,
+    "fields": {
+      "titulo": "Fibonacci recursivo — Java",
+      "enunciado": "El método fib(n) calcula el n-ésimo término de la serie de Fibonacci con recursión. La serie es 0, 1, 1, 2, 3, 5, 8, 13, ... ¿Qué valor imprime fib(7)?",
+      "categoria": "interactivo",
+      "dificultad": "avanzado",
+      "tema": 2,
+      "orden": 34,
+      "activo": true,
+      "lenguaje": "java",
+      "entrada": "n = 7 (int)",
+      "proceso": "fib(n) = fib(n-1) + fib(n-2); casos base: fib(0)=0, fib(1)=1",
+      "salida": "fib(n) (int)",
+      "pseudocodigo": "FUNCION fib(n)\n  SI n <= 1 ENTONCES\n    RETORNAR n\n  SINO\n    RETORNAR fib(n-1) + fib(n-2)\n  FIN SI\nFIN FUNCION",
+      "codigo_cpp": "public class Fibonacci {\n    // Función recursiva: fib(n) = fib(n-1) + fib(n-2)\n    public static int fib(int n) {\n        if (n <= 1) return n;       // casos base: fib(0)=0, fib(1)=1\n        return fib(n - 1) + fib(n - 2);\n    }\n\n    public static void main(String[] args) {\n        int n = 7;\n        System.out.println(\"fib(\" + n + \") = \" + fib(n));\n\n        // Serie: 0, 1, 1, 2, 3, 5, 8, 13, ...\n        // Índices: 0  1  2  3  4  5  6  7\n        // fib(7) = ?\n    }\n}",
+      "solucion_esperada": "13",
+      "tipo_respuesta": "entero"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 33,
+    "fields": {
+      "titulo": "Clase Estudiante (POO) — Java",
+      "enunciado": "Analiza la clase Estudiante en Java. Si se crea new Estudiante(\"Luis\", 10, 8, 9) y se llama calcularPromedio(), ¿qué valor retorna el método?",
+      "categoria": "interactivo",
+      "dificultad": "medio",
+      "tema": 3,
+      "orden": 30,
+      "activo": true,
+      "lenguaje": "java",
+      "entrada": "nombre='Luis', n1=10, n2=8, n3=9",
+      "proceso": "promedio = (n1 + n2 + n3) / 3.0",
+      "salida": "promedio (double)",
+      "pseudocodigo": "CLASE Estudiante\n  ATRIBUTOS: nombre, nota1, nota2, nota3\n  METODO calcularPromedio()\n    RETORNAR (nota1 + nota2 + nota3) / 3.0\n  FIN METODO\nFIN CLASE",
+      "codigo_cpp": "public class Estudiante {\n    private String nombre;\n    private double nota1, nota2, nota3;\n\n    // Constructor\n    public Estudiante(String nombre, double n1, double n2, double n3) {\n        this.nombre = nombre;\n        this.nota1  = n1;\n        this.nota2  = n2;\n        this.nota3  = n3;\n    }\n\n    // Método de cálculo\n    public double calcularPromedio() {\n        return (nota1 + nota2 + nota3) / 3.0;\n    }\n\n    public void mostrar() {\n        System.out.println(\"Estudiante: \" + nombre);\n        System.out.println(\"Promedio:   \" + calcularPromedio());\n    }\n\n    public static void main(String[] args) {\n        Estudiante est = new Estudiante(\"Luis\", 10, 8, 9);\n        est.mostrar();\n\n        // calcularPromedio() = (10 + 8 + 9) / 3.0 = ?\n    }\n}",
+      "solucion_esperada": "9",
+      "tipo_respuesta": "decimal"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 34,
+    "fields": {
+      "titulo": "Herencia y polimorfismo: Animal/Perro — Java",
+      "enunciado": "Analiza la clase Animal y su subclase Perro. Si Animal a = new Perro() y se invoca a.hablar(), ¿qué texto exacto imprime el programa?",
+      "categoria": "interactivo",
+      "dificultad": "avanzado",
+      "tema": 3,
+      "orden": 31,
+      "activo": true,
+      "lenguaje": "java",
+      "entrada": "Animal a = new Perro()",
+      "proceso": "Polimorfismo: Java ejecuta el método de la subclase real (Perro), no el de la referencia (Animal)",
+      "salida": "String impreso",
+      "pseudocodigo": "CLASE Animal\n  METODO hablar()\n    RETORNAR 'sonido genérico'\n  FIN METODO\nFIN CLASE\n\nCLASE Perro HEREDA Animal\n  METODO hablar()  // sobreescribe\n    RETORNAR 'guau guau'\n  FIN METODO\nFIN CLASE",
+      "codigo_cpp": "class Animal {\n    public String hablar() {\n        return \"sonido genérico\";\n    }\n}\n\nclass Perro extends Animal {\n    @Override\n    public String hablar() {       // sobreescribe el método del padre\n        return \"guau guau\";\n    }\n}\n\npublic class Herencia {\n    public static void main(String[] args) {\n        Animal a = new Perro();    // referencia Animal, objeto real Perro\n        System.out.println(a.hablar());\n\n        // Polimorfismo: Java decide el método según el OBJETO,\n        // no según la referencia. ¿Qué texto exacto se imprime?\n    }\n}",
+      "solucion_esperada": "guau guau",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 35,
+    "fields": {
+      "titulo": "Suma de elementos de un arreglo — Java",
+      "enunciado": "El código Java recorre un arreglo con for-each y acumula la suma. Si el arreglo es {4, 7, 2, 9, 3}, ¿qué valor imprime suma?",
+      "categoria": "interactivo",
+      "dificultad": "medio",
+      "tema": 4,
+      "orden": 30,
+      "activo": true,
+      "lenguaje": "java",
+      "entrada": "numeros = {4, 7, 2, 9, 3} (int[])",
+      "proceso": "Acumular suma += n para cada n del arreglo",
+      "salida": "suma (int)",
+      "pseudocodigo": "INICIO\n  numeros <- {4, 7, 2, 9, 3}\n  suma <- 0\n  PARA CADA n EN numeros HACER\n    suma <- suma + n\n  FIN PARA\n  ESCRIBIR suma\nFIN",
+      "codigo_cpp": "public class SumaArreglo {\n    public static void main(String[] args) {\n        int[] numeros = {4, 7, 2, 9, 3};\n\n        int suma = 0;\n        // for-each (forEach) recorre todos los elementos del arreglo\n        for (int n : numeros) {\n            suma += n;\n        }\n\n        System.out.println(\"Suma: \" + suma);\n\n        // 4 + 7 + 2 + 9 + 3 = ?\n    }\n}",
+      "solucion_esperada": "25",
+      "tipo_respuesta": "entero"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 36,
+    "fields": {
+      "titulo": "Ordenamiento burbuja — Java",
+      "enunciado": "El método ordenar() aplica el algoritmo burbuja al arreglo. Si el arreglo inicial es {7, 3, 9, 1, 5}, ¿qué valor tiene numeros[0] después de ordenarlo de menor a mayor?",
+      "categoria": "interactivo",
+      "dificultad": "avanzado",
+      "tema": 4,
+      "orden": 31,
+      "activo": true,
+      "lenguaje": "java",
+      "entrada": "numeros = {7, 3, 9, 1, 5} (int[])",
+      "proceso": "Burbuja: comparar pares adyacentes e intercambiar si están fuera de orden",
+      "salida": "numeros[0] tras ordenar (int)",
+      "pseudocodigo": "PARA i <- 0 HASTA n-2 HACER\n  PARA j <- 0 HASTA n-2-i HACER\n    SI v[j] > v[j+1] ENTONCES\n      INTERCAMBIAR v[j] y v[j+1]\n    FIN SI\n  FIN PARA\nFIN PARA",
+      "codigo_cpp": "public class Burbuja {\n    public static void ordenar(int[] v) {\n        int n = v.length;\n        for (int i = 0; i < n - 1; i++) {\n            for (int j = 0; j < n - 1 - i; j++) {\n                if (v[j] > v[j + 1]) {\n                    // Intercambio\n                    int temp = v[j];\n                    v[j]     = v[j + 1];\n                    v[j + 1] = temp;\n                }\n            }\n        }\n    }\n\n    public static void main(String[] args) {\n        int[] numeros = {7, 3, 9, 1, 5};\n\n        ordenar(numeros);\n\n        // Después de ordenar: {1, 3, 5, 7, 9}\n        // ¿Qué valor tiene numeros[0]?\n        System.out.println(numeros[0]);\n    }\n}",
+      "solucion_esperada": "1",
+      "tipo_respuesta": "entero"
+    }
+  },
+
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 37,
+    "fields": {
+      "titulo": "Estructura básica de un programa Java",
+      "enunciado": "Aprende los elementos mínimos de un programa Java: clase pública, método main y la sentencia System.out.println. Incluye análisis IPO y código comentado paso a paso.",
+      "categoria": "resuelto",
+      "dificultad": "basico",
+      "tema": 1,
+      "orden": 40,
+      "activo": true,
+      "lenguaje": "java",
+      "entrada": "(ninguna — el programa no lee del usuario)",
+      "proceso": "Imprimir literal por consola con System.out.println",
+      "salida": "Cadena literal 'Hola, mundo!'",
+      "pseudocodigo": "INICIO\n  ESCRIBIR 'Hola, mundo!'\nFIN",
+      "codigo_cpp": "// ╭───────────────────────────────────────╮\n// │  Estructura mínima de un programa Java │\n// ╰───────────────────────────────────────╯\n//\n// Todo programa Java requiere:\n//   1) Una clase pública con el mismo nombre del archivo (Hola.java)\n//   2) Un método main como punto de entrada\n//   3) Sentencias dentro del main para hacer algo\n\npublic class Hola {\n    // El método main es el punto de inicio del programa\n    public static void main(String[] args) {\n        // System.out.println imprime una línea en la consola\n        System.out.println(\"Hola, mundo!\");\n    }\n}",
+      "solucion_esperada": "N/A",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 38,
+    "fields": {
+      "titulo": "POO en Java: clase Persona con encapsulación",
+      "enunciado": "Implementación completa de la clase Persona con atributos privados, constructor, getters/setters, validación en setter y método de negocio. Ejemplo canónico de encapsulación en Java.",
+      "categoria": "resuelto",
+      "dificultad": "medio",
+      "tema": 3,
+      "orden": 40,
+      "activo": true,
+      "lenguaje": "java",
+      "entrada": "nombre : String, edad : int",
+      "proceso": "Crear objeto, leer atributos con getters, evaluar esMayorDeEdad()",
+      "salida": "Datos de la persona y si es mayor de edad",
+      "pseudocodigo": "CLASE Persona\n  ATRIBUTOS PRIVADOS: nombre, edad\n  CONSTRUCTOR(nombre, edad)\n  METODO getNombre()\n  METODO getEdad()\n  METODO setEdad(edad) (valida edad >= 0)\n  METODO esMayorDeEdad()\n    RETORNAR edad >= 18\n  FIN METODO\nFIN CLASE",
+      "codigo_cpp": "// ╭──────────────────────────────────────────╮\n// │  Encapsulación con clase Persona en Java │\n// ╰──────────────────────────────────────────╯\n\npublic class Persona {\n    // Atributos privados (encapsulación)\n    private String nombre;\n    private int edad;\n\n    // Constructor: recibe los datos iniciales del objeto\n    public Persona(String nombre, int edad) {\n        this.nombre = nombre;   // 'this' diferencia el atributo del parámetro\n        this.edad   = edad;\n    }\n\n    // Getters: permiten leer atributos privados\n    public String getNombre() { return nombre; }\n    public int    getEdad()   { return edad; }\n\n    // Setter: permite modificar la edad con validación\n    public void setEdad(int edad) {\n        if (edad >= 0) {        // protege el atributo de valores inválidos\n            this.edad = edad;\n        }\n    }\n\n    // Método de negocio\n    public boolean esMayorDeEdad() {\n        return edad >= 18;\n    }\n\n    // Punto de entrada del programa\n    public static void main(String[] args) {\n        Persona p = new Persona(\"María\", 21);\n\n        System.out.println(\"Nombre:    \" + p.getNombre());\n        System.out.println(\"Edad:      \" + p.getEdad());\n        System.out.println(\"¿Mayor?:   \" + p.esMayorDeEdad());\n    }\n}",
+      "solucion_esperada": "N/A",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 39,
+    "fields": {
+      "titulo": "Búsqueda binaria con ArrayList — Java",
+      "enunciado": "Algoritmo eficiente para buscar un elemento en una lista ordenada. Divide el rango a la mitad en cada paso, alcanzando complejidad O(log n).",
+      "categoria": "resuelto",
+      "dificultad": "avanzado",
+      "tema": 4,
+      "orden": 40,
+      "activo": true,
+      "lenguaje": "java",
+      "entrada": "ArrayList<Integer> ordenado, int clave",
+      "proceso": "Mantener inicio/fin; en cada iteración tomar el medio y descartar la mitad que no contiene la clave",
+      "salida": "índice de la clave, o -1 si no existe",
+      "pseudocodigo": "FUNCION buscar(lista, clave)\n  inicio <- 0\n  fin <- tamano(lista) - 1\n  MIENTRAS inicio <= fin HACER\n    medio <- (inicio + fin) / 2\n    SI lista[medio] = clave ENTONCES\n      RETORNAR medio\n    SINO SI lista[medio] < clave ENTONCES\n      inicio <- medio + 1\n    SINO\n      fin <- medio - 1\n    FIN SI\n  FIN MIENTRAS\n  RETORNAR -1\nFIN FUNCION",
+      "codigo_cpp": "// ╭───────────────────────────────────────────────────╮\n// │  Búsqueda binaria sobre una lista ordenada (Java) │\n// ╰───────────────────────────────────────────────────╯\n//\n// Pre-condición: la lista DEBE estar ordenada de menor a mayor.\n// La búsqueda binaria divide el rango a la mitad en cada paso.\n// Complejidad: O(log n), mucho mejor que la lineal O(n).\n\nimport java.util.ArrayList;\nimport java.util.Arrays;\n\npublic class BusquedaBinaria {\n\n    // Retorna el índice del elemento o -1 si no existe\n    public static int buscar(ArrayList<Integer> lista, int clave) {\n        int inicio = 0;\n        int fin    = lista.size() - 1;\n\n        while (inicio <= fin) {\n            int medio = (inicio + fin) / 2;\n            int valor = lista.get(medio);\n\n            if (valor == clave) {\n                return medio;            // encontrado\n            } else if (valor < clave) {\n                inicio = medio + 1;      // buscar en la mitad superior\n            } else {\n                fin    = medio - 1;      // buscar en la mitad inferior\n            }\n        }\n        return -1;                       // no encontrado\n    }\n\n    public static void main(String[] args) {\n        ArrayList<Integer> datos = new ArrayList<>(\n            Arrays.asList(2, 5, 8, 12, 16, 23, 38, 56, 72, 91)\n        );\n\n        int clave = 23;\n        int pos   = buscar(datos, clave);\n\n        if (pos != -1) {\n            System.out.println(\"Encontrado en índice: \" + pos);\n        } else {\n            System.out.println(\"No encontrado.\");\n        }\n    }\n}",
+      "solucion_esperada": "N/A",
+      "tipo_respuesta": "texto"
+    }
+  },
+
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 19,
+    "fields": {
+      "ejercicio": 27,
+      "mensaje_correcto": "¡Excelente! El programa concatena 'Hola, ' + nombre + '!' produciendo 'Hola, Ana!'.",
+      "mensaje_error": "Recuerda que la respuesta debe coincidir exactamente: 'Hola, Ana!' con la coma, el espacio y el signo de admiración.",
+      "recomendacion": "Repasa entrada por Scanner y concatenación de Strings en Java — Unidad 1."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 20,
+    "fields": {
+      "ejercicio": 28,
+      "mensaje_correcto": "¡Bien hecho! 12 + 8 = 20. El operador + funciona con int como en cualquier lenguaje.",
+      "mensaje_error": "Suma los dos valores ingresados: 12 + 8 = ?",
+      "recomendacion": "Repasa variables int y operadores aritméticos en Java — Unidad 2."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 21,
+    "fields": {
+      "ejercicio": 29,
+      "mensaje_correcto": "¡Excelente! (8 + 6 + 7) / 3.0 = 21 / 3.0 = 7.0. Al usar double y dividir entre 3.0 conservas decimales.",
+      "mensaje_error": "Suma las tres notas (8+6+7=21) y divide entre 3. El resultado es 7.0.",
+      "recomendacion": "Repasa el tipo double y la división con punto flotante en Java — Unidad 2."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 22,
+    "fields": {
+      "ejercicio": 30,
+      "mensaje_correcto": "¡Correcto! b=42 es el mayor: 42 > 15 y 42 > 27.",
+      "mensaje_error": "Compara a=15, b=42, c=27. ¿Cuál es el más grande de los tres?",
+      "recomendacion": "Repasa estructuras condicionales if/else if anidadas en Java — Unidad 2."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 23,
+    "fields": {
+      "ejercicio": 31,
+      "mensaje_correcto": "¡Perfecto! 6! = 1·2·3·4·5·6 = 720. El while multiplica resultado por i hasta i = n.",
+      "mensaje_error": "Multiplica acumulativamente: 1·2=2, ·3=6, ·4=24, ·5=120, ·6=?",
+      "recomendacion": "Practica ciclos while y acumuladores en Java — Unidad 2."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 24,
+    "fields": {
+      "ejercicio": 32,
+      "mensaje_correcto": "¡Muy bien! fib(7) = fib(6) + fib(5) = 8 + 5 = 13. La serie es 0,1,1,2,3,5,8,13.",
+      "mensaje_error": "Construye la serie: 0, 1, 1, 2, 3, 5, 8, 13. Los índices empiezan en 0, así que fib(7) es el octavo término.",
+      "recomendacion": "Repasa recursividad, caso base y la serie de Fibonacci — Unidad 2."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 25,
+    "fields": {
+      "ejercicio": 33,
+      "mensaje_correcto": "¡Correcto! calcularPromedio() retorna (10 + 8 + 9) / 3.0 = 27 / 3.0 = 9.0.",
+      "mensaje_error": "El método suma las tres notas y divide entre 3.0. Con 10, 8 y 9: (10+8+9)/3.0 = ?",
+      "recomendacion": "Repasa clases, constructor con 'this' y métodos en Java — Unidad 3."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 26,
+    "fields": {
+      "ejercicio": 34,
+      "mensaje_correcto": "¡Muy bien! Aunque la referencia es Animal, el objeto real es Perro, así que se ejecuta hablar() de Perro. Eso es polimorfismo.",
+      "mensaje_error": "En Java, la JVM elige el método según el tipo REAL del objeto, no según la referencia. El objeto es Perro, así que se llama Perro.hablar().",
+      "recomendacion": "Repasa herencia, @Override y polimorfismo en Java — Unidad 3."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 27,
+    "fields": {
+      "ejercicio": 35,
+      "mensaje_correcto": "¡Exacto! 4 + 7 + 2 + 9 + 3 = 25. El for-each recorre todos los elementos sin necesidad de índice.",
+      "mensaje_error": "Suma manualmente: 4 + 7 + 2 + 9 + 3 = ?",
+      "recomendacion": "Repasa arreglos y ciclos for-each en Java — Unidad 4."
+    }
+  },
+  {
+    "model": "ejercicios.retroalimentacion",
+    "pk": 28,
+    "fields": {
+      "ejercicio": 36,
+      "mensaje_correcto": "¡Perfecto! El algoritmo burbuja deja el arreglo {1, 3, 5, 7, 9}. numeros[0] = 1 es el menor.",
+      "mensaje_error": "El ordenamiento burbuja deja el arreglo ordenado de menor a mayor: {1, 3, 5, 7, 9}. numeros[0] siempre será el menor.",
+      "recomendacion": "Traza el burbuja manualmente con el arreglo dado. Repasa U4: Arreglos."
+    }
+  }
+]
