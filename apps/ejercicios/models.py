@@ -44,7 +44,7 @@ class Ejercicio(models.Model):
     CATEGORIAS   = [('resuelto', 'Ejercicio Resuelto'), ('interactivo', 'Ejercicio Interactivo')]
     DIFICULTADES = [('basico', 'Básico'), ('medio', 'Medio'), ('avanzado', 'Avanzado')]
     TIPOS_RESP   = [('entero', 'Número entero'), ('decimal', 'Número decimal'), ('texto', 'Texto')]
-    LENGUAJES    = [('cpp', 'C++'), ('python', 'Python')]
+    LENGUAJES    = [('cpp', 'C++'), ('python', 'Python'), ('java', 'Java')]
 
     titulo             = models.CharField(max_length=200)
     enunciado          = models.TextField()
