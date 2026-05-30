@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% block titulo %}Resultado{% endblock %}
+
+{% block contenido %}
+<div class="container" style="padding-top:2.5rem;max-width:780px">
+
+  {# ── Feedback principal: OK o ERROR ────────────────────────── #}
+  {% if es_correcto %}
+    <div class="feedback-box feedback-ok">
+      <h2>🎉 ¡Correcto!</h2>
+      <p>
+        {% if retro %}{{ retro.mensaje_correcto }}
+        {% else %}Excelente. Analizaste correctamente el código del ejercicio.{% endif %}
+      </p>
+    </div>
+  {% else %}
+    <div class="feedback-box feedback-err">
+      <h2>✗ Incorrecto</h2>
+      <p>
+        {% if retro %}{{ retro.mensaje_error }}
+        {% else %}Vuelve a leer el código del ejercicio y traza el flujo del algoritmo.{% endif %}
+      </p>
+      <p class="mt-2"><strong>Tu respuesta:</strong> {{ intento.respuesta_usuario }}</p>
+    </div>
+  {% endif %}
+
+  {# ── Recomendación opcional ─────────────────────────────────── #}
+  {% if retro and retro.recomendacion %}
+    <div class="alert alert-info mt-2">
+      💡 <strong>Recomendación:</strong> {{ retro.recomendacion }}
+    </div>
+  {% endif %}
+
+  {# ── Código de referencia del ejercicio (C++ / Python / Java) ─ #}
+  {% if codigo_cpp %}
+    <h3 class="section-title mt-3" style="font-size:1rem">
+      {% if ejercicio.lenguaje == 'python' %}Código Python del ejercicio
+      {% elif ejercicio.lenguaje == 'java' %}Código Java del ejercicio
+      {% else %}Código C++ del ejercicio{% endif %}
+    </h3>
+    <div class="bloque-cpp">
+      <div class="bloque-cpp-header">
+        <div class="dots">
+          <div class="dot dot-rojo"></div>
+          <div class="dot dot-amarillo"></div>
+          <div class="dot dot-verde"></div>
+        </div>
+        {% if ejercicio.lenguaje == 'python' %}
+          <span class="lang-label">{{ ejercicio.titulo|truncatechars:40 }}.py</span>
+          <span class="badge-cpp">Python</span>
+        {% elif ejercicio.lenguaje == 'java' %}
+          <span class="lang-label">{{ ejercicio.titulo|truncatechars:40 }}.java</span>
+          <span class="badge-cpp">Java 11</span>
+        {% else %}
+          <span class="lang-label">{{ ejercicio.titulo|truncatechars:40 }}.cpp</span>
+          <span class="badge-cpp">C++17</span>
+        {% endif %}
+      </div>
+      <pre><code class="language-{% if ejercicio.lenguaje == 'python' %}python{% elif ejercicio.lenguaje == 'java' %}java{% else %}cpp{% endif %}">{{ codigo_cpp }}</code></pre>
+    </div>
+  {% endif %}
+
+  {# ── Botones de acción ──────────────────────────────────────── #}
+  <div class="flex-gap mt-4">
+    {% if not es_correcto %}
+      <a href="{% url 'interactivo_detalle' ejercicio.pk %}" class="btn btn-primary">↺ Intentar de nuevo</a>
+    {% endif %}
+    <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-outline">📋 Ver todos los ejercicios</a>
+    {% if user.is_authenticated %}
+      <a href="{% url 'mi_progreso' %}" class="btn btn-naranja">📊 Ver mi progreso</a>
+    {% endif %}
+  </div>
+
+</div>
+{% endblock %}
