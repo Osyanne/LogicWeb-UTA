@@ -1,6 +1,20 @@
 {% extends 'base.html' %}
 {% block titulo %}{{ ejercicio.titulo }}{% endblock %}
 
+{% block head_extra %}
+<style>
+  .pistas-box { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px dashed var(--borde); }
+  .pistas-titulo { font-size: .85rem; color: var(--texto-suave); font-weight: 700; margin-bottom: .6rem; }
+  .pista { background: #fff8e1; border-left: 4px solid var(--naranja); border-radius: 8px;
+           padding: .65rem .9rem; margin-bottom: .55rem; animation: pista-in .25s ease; }
+  .pista-num { font-size: .7rem; font-weight: 800; color: var(--naranja);
+               text-transform: uppercase; letter-spacing: .04em; }
+  .pista p { margin: .25rem 0 0; font-size: .9rem; color: var(--texto); line-height: 1.5; }
+  #btn-pista:disabled { opacity: .55; cursor: default; }
+  @keyframes pista-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+{% endblock %}
+
 {% block contenido %}
 <div class="container" style="padding-top:2rem">
 
@@ -84,6 +98,21 @@
           </div>
         </form>
 
+        {% if pistas %}
+        <div class="pistas-box">
+          <div class="pistas-titulo">¿Atascado? Pide una pista 👇</div>
+          <div id="pistas-cont">
+            {% for p in pistas %}
+            <div class="pista" hidden>
+              <span class="pista-num">Pista {{ forloop.counter }} de {{ pistas|length }}</span>
+              <p>{{ p.texto }}</p>
+            </div>
+            {% endfor %}
+          </div>
+          <button type="button" id="btn-pista" class="btn btn-naranja btn-sm">💡 Pedir una pista</button>
+        </div>
+        {% endif %}
+
         <div class="mt-3">
           <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-outline btn-sm">← Lista de ejercicios</a>
         </div>
@@ -97,7 +126,7 @@
 {% block scripts %}
 <script>
   // Validación client-side: no permitir enviar vacío
-  document.getElementById('form-respuesta').addEventListener('submit', function(e) {
+  document.getElementById('form-respuesta').addEventListener('submit', function (e) {
     const campo = document.getElementById('id_respuesta');
     if (!campo.value.trim()) {
       e.preventDefault();
@@ -105,5 +134,22 @@
       campo.focus();
     }
   });
+
+  // Pistas progresivas: revelar de a una
+  const btnPista = document.getElementById('btn-pista');
+  if (btnPista) {
+    const pistas = document.querySelectorAll('#pistas-cont .pista');
+    let reveladas = 0;
+    btnPista.addEventListener('click', function () {
+      if (reveladas < pistas.length) {
+        pistas[reveladas].hidden = false;
+        reveladas++;
+      }
+      if (reveladas >= pistas.length) {
+        btnPista.disabled = true;
+        btnPista.textContent = '✓ No hay más pistas';
+      }
+    });
+  }
 </script>
 {% endblock %}

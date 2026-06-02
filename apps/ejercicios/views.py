@@ -101,4 +101,5 @@ def ejercicio_interactivo_detalle(request, pk):
         'ejercicio': ejercicio,
         'codigo_cpp': ejercicio.codigo_cpp,
         'form': form,
+        'pistas': ejercicio.pistas.order_by('orden'),
     })

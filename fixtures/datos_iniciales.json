@@ -1500,5 +1500,158 @@
       "solucion_esperada": "",
       "tipo_respuesta": "texto"
     }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 1,
+    "fields": {
+      "ejercicio": 19,
+      "orden": 1,
+      "texto": "La fórmula de conversión es: F = C × 9/5 + 32."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 2,
+    "fields": {
+      "ejercicio": 19,
+      "orden": 2,
+      "texto": "Reemplaza C por la temperatura del enunciado y resuelve primero la multiplicación, luego la suma."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 3,
+    "fields": {
+      "ejercicio": 19,
+      "orden": 3,
+      "texto": "25 × 9 ÷ 5 = 45 grados; ahora súmale los 32 de la fórmula."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 4,
+    "fields": {
+      "ejercicio": 2,
+      "orden": 1,
+      "texto": "El factorial n! es el producto de todos los enteros desde n hasta 1."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 5,
+    "fields": {
+      "ejercicio": 2,
+      "orden": 2,
+      "texto": "Para factorial(5): 5 × 4 × 3 × 2 × 1."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 6,
+    "fields": {
+      "ejercicio": 2,
+      "orden": 3,
+      "texto": "Multiplica paso a paso: 5×4=20, luego ×3=60, luego ×2… ya casi."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 7,
+    "fields": {
+      "ejercicio": 12,
+      "orden": 1,
+      "texto": "El operador % (módulo) devuelve el RESTO de una división entera, no el cociente."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 8,
+    "fields": {
+      "ejercicio": 12,
+      "orden": 2,
+      "texto": "Calcula cuántas veces cabe 5 dentro de 17 y cuánto sobra."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 9,
+    "fields": {
+      "ejercicio": 12,
+      "orden": 3,
+      "texto": "5 cabe 3 veces (15); el resto es lo que falta para llegar a 17."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 10,
+    "fields": {
+      "ejercicio": 14,
+      "orden": 1,
+      "texto": "El método de área de un rectángulo devuelve base × altura."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 11,
+    "fields": {
+      "ejercicio": 14,
+      "orden": 2,
+      "texto": "El objeto se crea con base 4 y altura 6 (mira los argumentos de Rectangulo(...))."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 12,
+    "fields": {
+      "ejercicio": 14,
+      "orden": 3,
+      "texto": "Multiplica esos dos valores entre sí."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 13,
+    "fields": {
+      "ejercicio": 30,
+      "orden": 1,
+      "texto": "Compara los números de a pares con if / else if para quedarte con el más grande."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 14,
+    "fields": {
+      "ejercicio": 30,
+      "orden": 2,
+      "texto": "Entre 15, 42 y 27, identifica cuál supera a los otros dos."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 15,
+    "fields": {
+      "ejercicio": 35,
+      "orden": 1,
+      "texto": "Usa un acumulador (suma = 0) y recorre el arreglo con for-each sumando cada elemento."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 16,
+    "fields": {
+      "ejercicio": 35,
+      "orden": 2,
+      "texto": "El resultado es la suma de TODOS los valores del arreglo del enunciado."
+    }
+  },
+  {
+    "model": "ejercicios.pista",
+    "pk": 17,
+    "fields": {
+      "ejercicio": 35,
+      "orden": 3,
+      "texto": "Ve sumándolos uno por uno hasta recorrer el arreglo completo."
+    }
   }
 ]

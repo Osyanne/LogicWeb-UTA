@@ -176,3 +176,22 @@ class ProgresoEstudiante(models.Model):
 
     def __str__(self):
         return f"{self.usuario.username} — U{self.unidad}: {self.correctos}/{self.total}"
+
+
+# ─────────────────────────────────────────
+#  PISTA  (pistas progresivas por ejercicio interactivo)
+# ─────────────────────────────────────────
+class Pista(models.Model):
+    ejercicio = models.ForeignKey(
+        Ejercicio, on_delete=models.CASCADE, related_name='pistas'
+    )
+    orden = models.IntegerField(default=1, help_text='Orden de revelación (1, 2, 3...)')
+    texto = models.TextField(verbose_name='Texto de la pista')
+
+    class Meta:
+        ordering = ['ejercicio', 'orden']
+        verbose_name = 'Pista'
+        verbose_name_plural = 'Pistas'
+
+    def __str__(self):
+        return f"Pista {self.orden} de {self.ejercicio.titulo}"
