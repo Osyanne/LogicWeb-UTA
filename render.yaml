@@ -1,0 +1,31 @@
+# Blueprint de Render para LogicWeb UTA.
+# En Render: New + -> Blueprint -> conectar este repo -> Apply.
+# Render crea automaticamente el servicio web + la base de datos + las variables.
+
+databases:
+  - name: logicweb-db
+    plan: free
+    databaseName: logicweb
+    user: logicweb
+
+services:
+  - type: web
+    name: logicweb-uta
+    runtime: python
+    plan: free
+    branch: main
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn config.wsgi:application"
+    envVars:
+      # La cadena de conexion de la base de datos se enlaza sola.
+      - key: DATABASE_URL
+        fromDatabase:
+          name: logicweb-db
+          property: connectionString
+      # Clave secreta generada automaticamente por Render (no se expone).
+      - key: DJANGO_SECRET_KEY
+        generateValue: true
+      - key: DJANGO_DEBUG
+        value: "False"
+      - key: PYTHON_VERSION
+        value: "3.13.4"
