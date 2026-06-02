@@ -1,0 +1,102 @@
+/* ═══════════════════════════════════════════════════════
+   contenidos.css — Teoría "Ruta de Aprendizaje"
+   LogicWeb UTA · CSS3 propio
+   ═══════════════════════════════════════════════════════ */
+
+/* ── Hero ── */
+.teoria-hero { text-align: center; padding: 2.5rem 1rem 1.75rem; }
+.teoria-hero h1 { font-size: 2rem; font-weight: 800; color: var(--azul); margin-bottom: .4rem; }
+.teoria-hero p { color: var(--texto-suave); }
+
+/* ── Ruta vertical numerada ── */
+.ruta { max-width: 820px; margin: 0 auto 3rem; }
+.ruta-step { position: relative; padding-left: 4rem; padding-bottom: 1.5rem; }
+/* línea vertical que conecta los pasos */
+.ruta-step::before {
+  content: ""; position: absolute; left: 1.25rem; top: 0; bottom: 0;
+  width: 3px; background: var(--borde); transform: translateX(-50%);
+}
+.ruta-step:last-child::before { bottom: auto; height: 1.6rem; }
+/* círculo numerado */
+.ruta-step .num {
+  position: absolute; left: 0; top: 0;
+  width: 2.5rem; height: 2.5rem; border-radius: 50%;
+  background: var(--accent, var(--azul)); color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 1.05rem; z-index: 2;
+  border: 3px solid var(--blanco); box-shadow: 0 2px 8px rgba(0,0,0,.2);
+}
+/* tarjeta de la unidad */
+.ruta-card {
+  display: block; text-decoration: none;
+  background: var(--blanco); border-radius: var(--radio); box-shadow: var(--sombra);
+  padding: 1.2rem 1.4rem; border-left: 5px solid var(--accent, var(--azul));
+  transition: var(--transicion);
+}
+.ruta-card:hover { transform: translateX(4px); box-shadow: 0 6px 20px rgba(0,0,0,.12); }
+.ruta-card .unidad-tag {
+  font-size: .72rem; font-weight: 800; letter-spacing: .08em;
+  color: var(--accent, var(--azul)); text-transform: uppercase;
+}
+.ruta-card h3 {
+  font-size: 1.18rem; font-weight: 800; color: var(--azul);
+  margin: .15rem 0 .45rem; display: flex; align-items: center; gap: .5rem;
+}
+.ruta-card .resumen { color: var(--texto-suave); font-size: .9rem; line-height: 1.6; }
+.ruta-card .pie {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: .9rem; font-size: .85rem;
+}
+.ruta-card .pie .conteo { color: var(--texto-suave); font-weight: 600; }
+.ruta-card .pie .cta { color: var(--accent, var(--azul)); font-weight: 700; }
+
+/* colores de acento por unidad (de la paleta del sitio) */
+.u1 { --accent: #3a5998; }   /* azul   */
+.u2 { --accent: #f4891f; }   /* naranja */
+.u3 { --accent: #2e7d32; }   /* verde   */
+.u4 { --accent: #ad1457; }   /* magenta */
+
+/* ── Detalle de unidad (lectura) ── */
+.tema-detalle { max-width: 820px; margin: 0 auto; }
+.volver-ruta { color: var(--naranja); font-weight: 700; text-decoration: none; font-size: .9rem; }
+.tema-encabezado {
+  background: var(--blanco); border-radius: var(--radio); box-shadow: var(--sombra);
+  padding: 1.6rem 1.75rem; border-top: 5px solid var(--accent, var(--azul));
+  margin: .75rem 0 1.5rem;
+}
+.tema-encabezado .badge-unidad {
+  display: inline-block; background: var(--accent, var(--azul)); color: #fff;
+  font-size: .72rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+  padding: .25rem .7rem; border-radius: 999px;
+}
+.tema-encabezado h1 {
+  font-size: 1.65rem; font-weight: 800; color: var(--azul);
+  margin: .6rem 0 0; display: flex; align-items: center; gap: .6rem;
+}
+.teoria-callout {
+  background: var(--blanco); border-radius: var(--radio); box-shadow: var(--sombra);
+  border-left: 5px solid var(--accent, var(--azul));
+  padding: 1.4rem 1.75rem; margin-bottom: 2rem;
+}
+.teoria-callout .callout-titulo {
+  font-weight: 800; color: var(--accent, var(--azul)); font-size: .92rem;
+  margin-bottom: .6rem; display: flex; align-items: center; gap: .4rem;
+}
+.teoria-callout p { line-height: 1.9; font-size: 1.02rem; color: var(--texto); margin: 0; }
+
+/* navegación prev/next entre unidades */
+.tema-nav { display: flex; justify-content: space-between; gap: 1rem; margin-top: 2.5rem; }
+.tema-nav a {
+  flex: 1; background: var(--blanco); border-radius: var(--radio); box-shadow: var(--sombra);
+  padding: .85rem 1.1rem; text-decoration: none; border: 1px solid var(--borde);
+  transition: var(--transicion);
+}
+.tema-nav a:hover { border-color: var(--azul-claro); transform: translateY(-2px); }
+.tema-nav .dir { font-size: .72rem; color: var(--texto-suave); font-weight: 700; text-transform: uppercase; }
+.tema-nav .nombre { color: var(--azul); font-weight: 700; font-size: .9rem; }
+.tema-nav .siguiente { text-align: right; }
+.tema-nav .placeholder { flex: 1; }
+
+@media (max-width: 640px) {
+  .tema-nav { flex-direction: column; }
+}

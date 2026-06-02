@@ -26,4 +26,9 @@ class TemaDetailView(DetailView):
         ctx['ejercicios'] = Ejercicio.objects.filter(
             tema=self.object, activo=True
         ).order_by('orden')
+        # Navegación anterior/siguiente entre unidades (ruta de aprendizaje)
+        temas = list(Tema.objects.order_by('unidad', 'orden'))
+        idx = temas.index(self.object)
+        ctx['tema_anterior'] = temas[idx - 1] if idx > 0 else None
+        ctx['tema_siguiente'] = temas[idx + 1] if idx + 1 < len(temas) else None
         return ctx

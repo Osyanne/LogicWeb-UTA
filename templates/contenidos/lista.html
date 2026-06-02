@@ -1,50 +1,38 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block titulo %}Teoría{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/contenidos.css' %}">
+{% endblock %}
 
 {% block contenido %}
 <div class="container">
-  <div class="teoria-layout">
 
-    <!-- Sidebar de unidades -->
-    <aside class="sidebar">
-      <div class="sidebar-titulo">📋 Unidades</div>
-      {% regroup temas by unidad as temas_por_unidad %}
-      {% for grupo in temas_por_unidad %}
-        <div class="sidebar-item" style="background:var(--azul);color:rgba(255,255,255,.7);font-size:.8rem;padding:.5rem 1.25rem;font-weight:800;letter-spacing:.5px">
-          UNIDAD {{ grupo.grouper }}
-        </div>
-        {% for tema in grupo.list %}
-          <a href="{% url 'contenido_detalle' tema.pk %}" class="sidebar-item" style="display:block;text-decoration:none">
-            {{ tema.nombre_tema }}
-            <small>U{{ tema.unidad }}</small>
-          </a>
-        {% endfor %}
-      {% endfor %}
-    </aside>
-
-    <!-- Contenido principal -->
-    <section>
-      <h1 class="section-title">Contenidos por Unidad</h1>
-      {% regroup temas by unidad as temas_por_unidad %}
-      {% for grupo in temas_por_unidad %}
-        <h2 style="color:var(--azul);font-size:1.1rem;margin:1.5rem 0 .75rem;font-weight:800">
-          📂 Unidad {{ grupo.grouper }}
-        </h2>
-        <div class="ejercicios-grid">
-          {% for tema in grupo.list %}
-            <a href="{% url 'contenido_detalle' tema.pk %}" class="card-ejercicio" style="text-decoration:none">
-              <div class="titulo-ej">{{ tema.nombre_tema }}</div>
-              <p style="font-size:.88rem;color:var(--texto-suave)">{{ tema.descripcion|truncatechars:120 }}</p>
-              <div class="meta">
-                <span class="chip chip-unidad">U{{ tema.unidad }}</span>
-                <span style="font-size:.82rem;color:var(--texto-suave)">{{ tema.ejercicios.count }} ejercicio(s)</span>
-              </div>
-            </a>
-          {% endfor %}
-        </div>
-      {% endfor %}
-    </section>
-
+  <div class="teoria-hero">
+    <h1>🛤️ Ruta de Aprendizaje</h1>
+    <p>Recorre las 4 unidades en orden. Cada una explica la teoría y enlaza sus ejercicios.</p>
   </div>
+
+  <div class="ruta">
+    {% for tema in temas %}
+    <div class="ruta-step u{{ tema.unidad }}">
+      <div class="num">{{ tema.unidad }}</div>
+      <a href="{% url 'contenido_detalle' tema.pk %}" class="ruta-card">
+        <div class="unidad-tag">Unidad {{ tema.unidad }}</div>
+        <h3>
+          {% if tema.unidad == 1 %}🧠{% elif tema.unidad == 2 %}⚙️{% elif tema.unidad == 3 %}🧩{% else %}📦{% endif %}
+          {{ tema.nombre_tema }}
+        </h3>
+        <p class="resumen">{{ tema.descripcion|truncatechars:170 }}</p>
+        <div class="pie">
+          <span class="conteo">📝 {{ tema.ejercicios.count }} ejercicio(s)</span>
+          <span class="cta">Ver unidad →</span>
+        </div>
+      </a>
+    </div>
+    {% endfor %}
+  </div>
+
 </div>
 {% endblock %}

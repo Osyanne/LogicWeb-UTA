@@ -1,51 +1,69 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block titulo %}{{ tema.nombre_tema }}{% endblock %}
 
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/contenidos.css' %}">
+{% endblock %}
+
 {% block contenido %}
-<div class="container">
-  <div class="teoria-layout">
+<div class="container" style="padding-top:1.5rem">
+  <div class="tema-detalle u{{ tema.unidad }}">
 
-    <!-- Sidebar -->
-    <aside class="sidebar">
-      <div class="sidebar-titulo">📋 Temas</div>
-      <a href="{% url 'contenidos_lista' %}" class="sidebar-item" style="display:block;text-decoration:none;color:var(--naranja);font-weight:700">
-        ← Todas las unidades
-      </a>
-    </aside>
+    <a href="{% url 'contenidos_lista' %}" class="volver-ruta">← Volver a la ruta</a>
 
-    <!-- Detalle del tema -->
-    <section>
-      <div class="ejercicio-header">
-        <span class="chip chip-unidad">Unidad {{ tema.unidad }}</span>
-        <h1 style="margin-top:.5rem">{{ tema.nombre_tema }}</h1>
-        <p class="mt-2" style="line-height:1.8">{{ tema.descripcion }}</p>
-      </div>
+    <div class="tema-encabezado">
+      <span class="badge-unidad">Unidad {{ tema.unidad }}</span>
+      <h1>
+        {% if tema.unidad == 1 %}🧠{% elif tema.unidad == 2 %}⚙️{% elif tema.unidad == 3 %}🧩{% else %}📦{% endif %}
+        {{ tema.nombre_tema }}
+      </h1>
+    </div>
 
-      <!-- Ejercicios del tema -->
-      {% if ejercicios %}
-        <h2 class="section-title">Ejercicios de este tema</h2>
-        <div class="ejercicios-grid">
-          {% for ej in ejercicios %}
-            <div class="card-ejercicio">
-              <div class="titulo-ej">{{ ej.titulo }}</div>
-              <div class="meta">
-                <span class="chip chip-{{ ej.categoria }}">{{ ej.get_categoria_display }}</span>
-                <span class="chip chip-{{ ej.dificultad }}">{{ ej.get_dificultad_display }}</span>
-              </div>
-              <p style="font-size:.88rem;color:var(--texto-suave)">{{ ej.enunciado|truncatechars:100 }}</p>
-              {% if ej.categoria == 'resuelto' %}
-                <a href="{% url 'resuelto_detalle' ej.pk %}" class="btn btn-primary btn-sm">Ver solución C++</a>
-              {% else %}
-                <a href="{% url 'interactivo_detalle' ej.pk %}" class="btn btn-naranja btn-sm">Practicar</a>
-              {% endif %}
-            </div>
-          {% endfor %}
+    <div class="teoria-callout">
+      <div class="callout-titulo">📖 Teoría de la unidad</div>
+      <p>{{ tema.descripcion }}</p>
+    </div>
+
+    {% if ejercicios %}
+      <h2 class="section-title" style="font-size:1.1rem">Ejercicios de esta unidad</h2>
+      <div class="ejercicios-grid">
+        {% for ej in ejercicios %}
+        <div class="card-ejercicio">
+          <div class="titulo-ej">{{ ej.titulo }}</div>
+          <div class="meta">
+            <span class="chip chip-{{ ej.categoria }}">{{ ej.get_categoria_display }}</span>
+            <span class="chip chip-{{ ej.dificultad }}">{{ ej.get_dificultad_display }}</span>
+          </div>
+          <p style="font-size:.88rem;color:var(--texto-suave)">{{ ej.enunciado|truncatechars:100 }}</p>
+          {% if ej.categoria == 'resuelto' %}
+            <a href="{% url 'resuelto_detalle' ej.pk %}" class="btn btn-primary btn-sm">Ver solución</a>
+          {% else %}
+            <a href="{% url 'interactivo_detalle' ej.pk %}" class="btn btn-naranja btn-sm">Practicar</a>
+          {% endif %}
         </div>
-      {% else %}
-        <div class="alert alert-info">Aún no hay ejercicios cargados para este tema.</div>
-      {% endif %}
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="alert alert-info">Aún no hay ejercicios cargados para esta unidad.</div>
+    {% endif %}
 
-    </section>
+    <!-- Navegación entre unidades -->
+    <div class="tema-nav">
+      {% if tema_anterior %}
+        <a href="{% url 'contenido_detalle' tema_anterior.pk %}">
+          <div class="dir">← Unidad anterior</div>
+          <div class="nombre">U{{ tema_anterior.unidad }} · {{ tema_anterior.nombre_tema|truncatechars:32 }}</div>
+        </a>
+      {% else %}<div class="placeholder"></div>{% endif %}
+      {% if tema_siguiente %}
+        <a href="{% url 'contenido_detalle' tema_siguiente.pk %}" class="siguiente">
+          <div class="dir">Unidad siguiente →</div>
+          <div class="nombre">U{{ tema_siguiente.unidad }} · {{ tema_siguiente.nombre_tema|truncatechars:32 }}</div>
+        </a>
+      {% else %}<div class="placeholder"></div>{% endif %}
+    </div>
+
   </div>
 </div>
 {% endblock %}
