@@ -12,9 +12,9 @@
 }
 
 .stat-card {
-  background: var(--blanco);
+  background: var(--surface);
   border-radius: var(--radio);
-  box-shadow: var(--sombra);
+  box-shadow: var(--shadow);
   padding: 1.25rem 1rem;
   text-align: center;
   border-top: 4px solid var(--azul);
@@ -38,7 +38,7 @@
 
 .stat-card .etiqueta {
   font-size: .8rem;
-  color: var(--texto-suave);
+  color: var(--text-muted);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: .04em;
@@ -60,9 +60,9 @@
 
 /* ── Sección de progreso por unidad ─────────────────── */
 .progreso-unidades {
-  background: var(--blanco);
+  background: var(--surface);
   border-radius: var(--radio);
-  box-shadow: var(--sombra);
+  box-shadow: var(--shadow);
   padding: 1.25rem 1.5rem;
   margin-bottom: 1.5rem;
 }
@@ -72,7 +72,7 @@
   font-weight: 700;
   color: var(--azul);
   margin-bottom: 1rem;
-  border-bottom: 2px solid var(--borde);
+  border-bottom: 2px solid var(--border);
   padding-bottom: .5rem;
 }
 
@@ -87,7 +87,7 @@
 .unidad-label {
   font-size: .85rem;
   font-weight: 600;
-  color: var(--texto);
+  color: var(--text);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -118,9 +118,9 @@
   width: 100%;
   border-collapse: collapse;
   font-size: .875rem;
-  background: var(--blanco);
+  background: var(--surface);
   border-radius: var(--radio);
-  box-shadow: var(--sombra);
+  box-shadow: var(--shadow);
   overflow: hidden;
 }
 .tabla-historial thead {
@@ -131,7 +131,7 @@
 .tabla-historial td {
   padding: .65rem .9rem;
   text-align: left;
-  border-bottom: 1px solid var(--borde);
+  border-bottom: 1px solid var(--border);
 }
 .tabla-historial tbody tr:hover { background: #f5f7ff; }
 .tabla-historial tbody tr:last-child td { border-bottom: none; }
@@ -152,3 +152,13 @@
   font-size: .78rem;
   font-weight: 700;
 }
+
+/* ── Modo oscuro: barras, tabla y badges ────────────────────── */
+html[data-theme="dark"] .progress-bar-wrap,
+html[data-theme="dark"] .unidad-bar-wrap { background: var(--surface-2); }
+html[data-theme="dark"] .tabla-historial tbody tr:hover { background: rgba(255,255,255,.05); }
+html[data-theme="dark"] .stat-card .numero,
+html[data-theme="dark"] .unidad-pct,
+html[data-theme="dark"] .progreso-unidades h2 { color: #7da0d4; }
+html[data-theme="dark"] .badge-correcto   { background: rgba(46,160,67,.16); color: #6ee7a0; }
+html[data-theme="dark"] .badge-incorrecto { background: rgba(239,68,68,.16); color: #ff8a8a; }
