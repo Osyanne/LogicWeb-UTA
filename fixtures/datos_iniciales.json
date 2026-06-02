@@ -1311,5 +1311,194 @@
       "solucion_esperada": "",
       "tipo_respuesta": "texto"
     }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 48,
+    "fields": {
+      "titulo": "Conversión de Celsius a Fahrenheit — Java",
+      "enunciado": "Convierte una temperatura de grados Celsius a Fahrenheit aplicando la fórmula F = C * 9/5 + 32. Incluye análisis IPO, pseudocódigo y código Java comentado. Ejemplo: 25 °C equivalen a 77 °F.",
+      "categoria": "resuelto",
+      "dificultad": "basico",
+      "tema": 1,
+      "orden": 70,
+      "activo": true,
+      "entrada": "celsius : double (temperatura en grados Celsius)",
+      "proceso": "fahrenheit = celsius * 9 / 5 + 32",
+      "salida": "fahrenheit : double (temperatura convertida)",
+      "pseudocodigo": "INICIO\n  LEER celsius\n  fahrenheit <- celsius * 9 / 5 + 32\n  ESCRIBIR fahrenheit\nFIN",
+      "lenguaje": "java",
+      "codigo_cpp": "import java.util.Scanner;\n\npublic class ConversionTemperatura {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n\n        // ENTRADA: leer la temperatura en Celsius\n        System.out.print(\"Temperatura en C: \");\n        double celsius = sc.nextDouble();\n\n        // PROCESO: aplicar la formula de conversion\n        double fahrenheit = celsius * 9 / 5 + 32;\n\n        // SALIDA\n        System.out.printf(\"%.1f C = %.1f F%n\", celsius, fahrenheit);\n\n        sc.close();\n        // Comprobacion: 25 C -> 25 * 9/5 + 32 = 77 F\n    }\n}",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 49,
+    "fields": {
+      "titulo": "Mayor de tres números con if/else — Java",
+      "enunciado": "Determina el mayor de tres números enteros usando estructuras if/else anidadas. Incluye análisis IPO, pseudocódigo y código Java comentado. Ejemplo: con 15, 42 y 27, el mayor es 42.",
+      "categoria": "resuelto",
+      "dificultad": "basico",
+      "tema": 2,
+      "orden": 71,
+      "activo": true,
+      "entrada": "a, b, c : int (tres números enteros)",
+      "proceso": "Comparar a, b y c con estructuras if / else if / else",
+      "salida": "mayor : int (el mayor de los tres)",
+      "pseudocodigo": "INICIO\n  LEER a, b, c\n  SI a >= b Y a >= c ENTONCES\n    mayor <- a\n  SINO SI b >= a Y b >= c ENTONCES\n    mayor <- b\n  SINO\n    mayor <- c\n  FIN SI\n  ESCRIBIR mayor\nFIN",
+      "lenguaje": "java",
+      "codigo_cpp": "import java.util.Scanner;\n\npublic class MayorDeTres {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n\n        // ENTRADA\n        System.out.print(\"a: \"); int a = sc.nextInt();\n        System.out.print(\"b: \"); int b = sc.nextInt();\n        System.out.print(\"c: \"); int c = sc.nextInt();\n\n        // PROCESO: comparar con if / else if / else\n        int mayor;\n        if (a >= b && a >= c) {\n            mayor = a;\n        } else if (b >= a && b >= c) {\n            mayor = b;\n        } else {\n            mayor = c;\n        }\n\n        // SALIDA\n        System.out.println(\"El mayor es: \" + mayor);\n\n        sc.close();\n    }\n}",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 50,
+    "fields": {
+      "titulo": "Factorial con while — Java",
+      "enunciado": "Calcula el factorial de un número (n!) usando un ciclo while con un acumulador. Incluye análisis IPO, pseudocódigo y código Java comentado. Ejemplo: 5! = 120.",
+      "categoria": "resuelto",
+      "dificultad": "medio",
+      "tema": 2,
+      "orden": 72,
+      "activo": true,
+      "entrada": "n : int (número al que se calcula el factorial)",
+      "proceso": "factorial = 1; multiplicar factorial por i mientras i > 1, decrementando i",
+      "salida": "factorial : long (n!)",
+      "pseudocodigo": "INICIO\n  LEER n\n  factorial <- 1\n  i <- n\n  MIENTRAS i > 1 HACER\n    factorial <- factorial * i\n    i <- i - 1\n  FIN MIENTRAS\n  ESCRIBIR factorial\nFIN",
+      "lenguaje": "java",
+      "codigo_cpp": "import java.util.Scanner;\n\npublic class FactorialWhile {\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n\n        // ENTRADA\n        System.out.print(\"Ingresa un numero: \");\n        int n = sc.nextInt();\n\n        // PROCESO: multiplicar acumulando con un ciclo while\n        long factorial = 1;\n        int i = n;\n        while (i > 1) {\n            factorial = factorial * i;\n            i = i - 1;\n        }\n\n        // SALIDA\n        System.out.println(n + \"! = \" + factorial);\n\n        sc.close();\n        // Traza para n=5: 5*4*3*2 = 120\n    }\n}",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 51,
+    "fields": {
+      "titulo": "Herencia y polimorfismo: Figura → Círculo — Java",
+      "enunciado": "Define una clase base Figura con un método area() y subclases (Circulo, Rectangulo) que lo sobrescriben. El mismo método area() se comporta distinto según el objeto: eso es polimorfismo. Incluye análisis IPO, pseudocódigo y código Java comentado.",
+      "categoria": "resuelto",
+      "dificultad": "medio",
+      "tema": 3,
+      "orden": 73,
+      "activo": true,
+      "entrada": "— (los objetos y sus medidas se crean en el código)",
+      "proceso": "Circulo y Rectangulo heredan de Figura y redefinen area()",
+      "salida": "El área calculada según el tipo de cada figura (polimorfismo)",
+      "pseudocodigo": "CLASE Figura\n  METODO area() -> 0\nCLASE Circulo HEREDA Figura\n  METODO area() -> PI * radio * radio   // sobrescribe\nCLASE Rectangulo HEREDA Figura\n  METODO area() -> base * altura        // sobrescribe\nFIN",
+      "lenguaje": "java",
+      "codigo_cpp": "// Herencia y polimorfismo en Java\n\nclass Figura {\n    public double area() {\n        return 0;   // la figura generica no define area\n    }\n}\n\nclass Circulo extends Figura {          // Circulo HEREDA de Figura\n    private double radio;\n    public Circulo(double radio) { this.radio = radio; }\n\n    @Override\n    public double area() {              // POLIMORFISMO: sobrescribe area()\n        return Math.PI * radio * radio;\n    }\n}\n\nclass Rectangulo extends Figura {\n    private double base, altura;\n    public Rectangulo(double base, double altura) {\n        this.base = base;\n        this.altura = altura;\n    }\n\n    @Override\n    public double area() {\n        return base * altura;\n    }\n}\n\npublic class Figuras {\n    public static void main(String[] args) {\n        // Mismo metodo area(), comportamiento distinto segun el objeto\n        Figura[] figuras = { new Circulo(5), new Rectangulo(4, 6) };\n        for (Figura f : figuras) {\n            System.out.printf(\"Area: %.2f%n\", f.area());\n        }\n        // Salida:  Area: 78.54   /   Area: 24.00\n    }\n}",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 52,
+    "fields": {
+      "titulo": "Ordenamiento burbuja (Bubble Sort) — Java",
+      "enunciado": "Ordena un arreglo de enteros de menor a mayor con el algoritmo de la burbuja: compara pares adyacentes e intercambia si están desordenados, repitiendo pasadas hasta ordenar todo. Incluye análisis IPO, pseudocódigo y código Java comentado.",
+      "categoria": "resuelto",
+      "dificultad": "avanzado",
+      "tema": 4,
+      "orden": 74,
+      "activo": true,
+      "entrada": "numeros : int[] (arreglo de enteros a ordenar)",
+      "proceso": "Dos ciclos anidados: si numeros[j] > numeros[j+1] se intercambian",
+      "salida": "El arreglo ordenado de menor a mayor",
+      "pseudocodigo": "INICIO\n  PARA i DESDE 0 HASTA n-2 HACER\n    PARA j DESDE 0 HASTA n-2-i HACER\n      SI numeros[j] > numeros[j+1] ENTONCES\n        intercambiar(numeros[j], numeros[j+1])\n      FIN SI\n    FIN PARA\n  FIN PARA\n  ESCRIBIR numeros\nFIN",
+      "lenguaje": "java",
+      "codigo_cpp": "import java.util.Arrays;\n\npublic class BubbleSort {\n    public static void main(String[] args) {\n        int[] numeros = {5, 2, 9, 1, 7};\n        int n = numeros.length;\n\n        // PROCESO: ordenamiento burbuja (dos ciclos anidados)\n        for (int i = 0; i < n - 1; i++) {\n            for (int j = 0; j < n - 1 - i; j++) {\n                // Si el par adyacente esta desordenado, intercambiar\n                if (numeros[j] > numeros[j + 1]) {\n                    int temp = numeros[j];\n                    numeros[j] = numeros[j + 1];\n                    numeros[j + 1] = temp;\n                }\n            }\n            // Tras la pasada i, el mayor \"burbujea\" hasta el final\n        }\n\n        // SALIDA\n        System.out.println(\"Ordenado: \" + Arrays.toString(numeros));\n        // Resultado: [1, 2, 5, 7, 9]\n    }\n}",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 53,
+    "fields": {
+      "titulo": "Recursividad: Torres de Hanói — C++",
+      "enunciado": "Resuelve el clásico problema de las Torres de Hanói con recursividad: mover N discos de una torre origen a una destino usando una auxiliar, sin colocar nunca un disco grande sobre uno más pequeño. Incluye análisis IPO, pseudocódigo y código C++ comentado. Con N discos se requieren 2^N - 1 movimientos.",
+      "categoria": "resuelto",
+      "dificultad": "avanzado",
+      "tema": 2,
+      "orden": 75,
+      "activo": true,
+      "entrada": "n : int (número de discos)",
+      "proceso": "hanoi(n): mover n-1 a la auxiliar, mover el disco n al destino, mover n-1 de la auxiliar al destino",
+      "salida": "La secuencia de movimientos para resolver el rompecabezas",
+      "pseudocodigo": "FUNCION hanoi(n, origen, destino, aux)\n  SI n = 0 ENTONCES RETORNAR\n  hanoi(n-1, origen, aux, destino)\n  ESCRIBIR \"Mover disco\", n, \"de\", origen, \"a\", destino\n  hanoi(n-1, aux, destino, origen)\nFIN FUNCION",
+      "lenguaje": "cpp",
+      "codigo_cpp": "#include <iostream>\nusing namespace std;\n\n// Funcion recursiva: mueve n discos de 'origen' a 'destino' usando 'aux'\nvoid hanoi(int n, char origen, char destino, char aux) {\n    // Caso base: 0 discos -> no hay nada que mover\n    if (n == 0) return;\n\n    // 1) Mover n-1 discos de origen a la auxiliar\n    hanoi(n - 1, origen, aux, destino);\n\n    // 2) Mover el disco n de origen a destino\n    cout << \"Mover disco \" << n << \" de \" << origen << \" a \" << destino << endl;\n\n    // 3) Mover n-1 discos de la auxiliar al destino\n    hanoi(n - 1, aux, destino, origen);\n}\n\nint main() {\n    int n = 3;\n    hanoi(n, 'A', 'C', 'B');   // origen=A, destino=C, auxiliar=B\n    // Con n discos se requieren 2^n - 1 movimientos (n=3 -> 7)\n    return 0;\n}",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 54,
+    "fields": {
+      "titulo": "Ordenamiento burbuja de un vector — C++",
+      "enunciado": "Ordena un vector de enteros de menor a mayor con el algoritmo de la burbuja (Bubble Sort): compara pares adyacentes e intercambia si están desordenados. Incluye análisis IPO, pseudocódigo y código C++ comentado.",
+      "categoria": "resuelto",
+      "dificultad": "avanzado",
+      "tema": 4,
+      "orden": 76,
+      "activo": true,
+      "entrada": "v : vector<int> (vector de enteros a ordenar)",
+      "proceso": "Dos ciclos anidados: si v[j] > v[j+1] se intercambian",
+      "salida": "El vector ordenado de menor a mayor",
+      "pseudocodigo": "INICIO\n  PARA i DESDE 0 HASTA n-2 HACER\n    PARA j DESDE 0 HASTA n-2-i HACER\n      SI v[j] > v[j+1] ENTONCES\n        intercambiar(v[j], v[j+1])\n      FIN SI\n    FIN PARA\n  FIN PARA\n  ESCRIBIR v\nFIN",
+      "lenguaje": "cpp",
+      "codigo_cpp": "#include <iostream>\n#include <vector>\nusing namespace std;\n\nint main() {\n    vector<int> v = {5, 2, 9, 1, 7};\n    int n = v.size();\n\n    // PROCESO: ordenamiento burbuja (dos ciclos anidados)\n    for (int i = 0; i < n - 1; i++) {\n        for (int j = 0; j < n - 1 - i; j++) {\n            // Si el par adyacente esta desordenado, intercambiar\n            if (v[j] > v[j + 1]) {\n                int temp = v[j];\n                v[j] = v[j + 1];\n                v[j + 1] = temp;\n            }\n        }\n    }\n\n    // SALIDA\n    cout << \"Ordenado: \";\n    for (int x : v) cout << x << \" \";\n    cout << endl;\n    // Resultado: 1 2 5 7 9\n    return 0;\n}",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 55,
+    "fields": {
+      "titulo": "Recursividad: Torres de Hanói — Python",
+      "enunciado": "Resuelve el clásico problema de las Torres de Hanói con recursividad: mover N discos de una torre origen a una destino usando una auxiliar, sin colocar nunca un disco grande sobre uno más pequeño. Incluye análisis IPO, pseudocódigo y código Python comentado. Con N discos se requieren 2^N - 1 movimientos.",
+      "categoria": "resuelto",
+      "dificultad": "avanzado",
+      "tema": 2,
+      "orden": 77,
+      "activo": true,
+      "entrada": "n : int (número de discos)",
+      "proceso": "hanoi(n): mover n-1 a la auxiliar, mover el disco n al destino, mover n-1 de la auxiliar al destino",
+      "salida": "La secuencia de movimientos para resolver el rompecabezas",
+      "pseudocodigo": "FUNCION hanoi(n, origen, destino, aux)\n  SI n = 0 ENTONCES RETORNAR\n  hanoi(n-1, origen, aux, destino)\n  ESCRIBIR \"Mover disco\", n, \"de\", origen, \"a\", destino\n  hanoi(n-1, aux, destino, origen)\nFIN FUNCION",
+      "lenguaje": "python",
+      "codigo_cpp": "# Torres de Hanoi con recursividad\n\ndef hanoi(n, origen, destino, aux):\n    # Caso base: 0 discos -> nada que mover\n    if n == 0:\n        return\n\n    # 1) Mover n-1 discos de origen a la auxiliar\n    hanoi(n - 1, origen, aux, destino)\n\n    # 2) Mover el disco n de origen a destino\n    print(f\"Mover disco {n} de {origen} a {destino}\")\n\n    # 3) Mover n-1 discos de la auxiliar al destino\n    hanoi(n - 1, aux, destino, origen)\n\n\n# Resolver para 3 discos (origen=A, destino=C, auxiliar=B)\nhanoi(3, \"A\", \"C\", \"B\")\n\n# Con n discos se requieren 2^n - 1 movimientos (n=3 -> 7)",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 56,
+    "fields": {
+      "titulo": "Búsqueda binaria recursiva — Python",
+      "enunciado": "Busca un valor en una lista ORDENADA con búsqueda binaria recursiva: compara con el elemento central y descarta la mitad donde el valor no puede estar, repitiendo. Es mucho más eficiente que la búsqueda lineal. Incluye análisis IPO, pseudocódigo y código Python comentado.",
+      "categoria": "resuelto",
+      "dificultad": "avanzado",
+      "tema": 4,
+      "orden": 78,
+      "activo": true,
+      "entrada": "lista : list[int] (ordenada), objetivo : int (valor a buscar)",
+      "proceso": "Comparar con el elemento del medio; buscar recursivamente en la mitad izquierda o derecha",
+      "salida": "índice del valor encontrado, o -1 si no está en la lista",
+      "pseudocodigo": "FUNCION binaria(lista, objetivo, inicio, fin)\n  SI inicio > fin ENTONCES RETORNAR -1\n  medio <- (inicio + fin) / 2\n  SI lista[medio] = objetivo ENTONCES RETORNAR medio\n  SI objetivo < lista[medio] ENTONCES\n    RETORNAR binaria(lista, objetivo, inicio, medio-1)\n  SINO\n    RETORNAR binaria(lista, objetivo, medio+1, fin)\nFIN FUNCION",
+      "lenguaje": "python",
+      "codigo_cpp": "# Busqueda binaria recursiva (la lista DEBE estar ordenada)\n\ndef busqueda_binaria(lista, objetivo, inicio, fin):\n    # Caso base: rango vacio -> no esta\n    if inicio > fin:\n        return -1\n\n    medio = (inicio + fin) // 2\n\n    if lista[medio] == objetivo:\n        return medio                  # encontrado\n    elif objetivo < lista[medio]:\n        # buscar en la mitad izquierda\n        return busqueda_binaria(lista, objetivo, inicio, medio - 1)\n    else:\n        # buscar en la mitad derecha\n        return busqueda_binaria(lista, objetivo, medio + 1, fin)\n\n\nnumeros = [1, 3, 5, 7, 9, 11, 13]\nobjetivo = 9\npos = busqueda_binaria(numeros, objetivo, 0, len(numeros) - 1)\n\nif pos != -1:\n    print(f\"{objetivo} encontrado en el indice {pos}\")\nelse:\n    print(f\"{objetivo} no esta en la lista\")\n# 9 esta en el indice 4",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
   }
 ]
