@@ -93,7 +93,7 @@ img { max-width: 100%; }
   align-items: center;
   gap: 1rem;
 }
-.navbar-user a { color: var(--naranja); font-weight: 700; }
+.navbar-user a:not(.btn) { color: var(--naranja); font-weight: 700; }
 
 /* ── Contenedor principal ───────────────────────────────────── */
 .container {
