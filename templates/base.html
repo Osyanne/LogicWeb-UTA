@@ -4,6 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Anti-flash: aplica el tema antes de pintar (lee localStorage o el sistema) -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme');
+        if (t !== 'dark' && t !== 'light') {
+          t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) ? 'dark' : 'light';
+        }
+        document.documentElement.dataset.theme = t;
+      } catch (e) {}
+    })();
+  </script>
+
   <title>{% block titulo %}LogicWeb UTA{% endblock %} | LogicWeb UTA</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/codigo.css' %}">
@@ -32,6 +46,9 @@
     </ul>
 
     <div class="navbar-user">
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Cambiar a modo oscuro" aria-pressed="false">
+        <span class="theme-icon" aria-hidden="true">&#127769;</span>
+      </button>
       {% if user.is_authenticated %}
         👤 {{ user.get_full_name|default:user.username }}
         &nbsp;|&nbsp;
@@ -70,6 +87,7 @@
       });
     });
   </script>
+  <script src="{% static 'js/theme.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
   {% block scripts %}{% endblock %}
 </body>
