@@ -575,3 +575,35 @@ footer strong { color: var(--naranja); }
 .text-center { text-align: center; }
 .text-suave { color: var(--text-muted); }
 .flex-gap { display: flex; gap: .75rem; flex-wrap: wrap; align-items: center; }
+
+/* ── Overrides de componentes en modo oscuro ────────────────── */
+/* Chips: fondo translucido del color + texto en version clara */
+html[data-theme="dark"] .chip-resuelto    { background: rgba(59,130,246,.16); color: #7db3ff; }
+html[data-theme="dark"] .chip-interactivo { background: rgba(168,85,247,.16); color: #c89bf5; }
+html[data-theme="dark"] .chip-basico      { background: rgba(46,160,67,.16);  color: #6ee7a0; }
+html[data-theme="dark"] .chip-medio       { background: rgba(245,158,11,.16); color: #fbbf24; }
+html[data-theme="dark"] .chip-avanzado    { background: rgba(236,72,153,.16); color: #f49ac2; }
+html[data-theme="dark"] .chip-unidad      { background: rgba(244,137,31,.16); color: #ffb066; }
+
+/* Alerts */
+html[data-theme="dark"] .alert-info    { background: rgba(59,130,246,.16); color: #7db3ff; }
+html[data-theme="dark"] .alert-error   { background: rgba(239,68,68,.14);  color: #ff8a8a; }
+html[data-theme="dark"] .alert-success { background: rgba(46,160,67,.16);  color: #6ee7a0; }
+
+/* Retroalimentacion */
+html[data-theme="dark"] .feedback-ok    { background: rgba(46,160,67,.10); }
+html[data-theme="dark"] .feedback-err   { background: rgba(239,68,68,.10); }
+html[data-theme="dark"] .feedback-ok h2 { color: #6ee7a0; }
+html[data-theme="dark"] .feedback-err h2{ color: #ff8a8a; }
+
+/* Sidebar de teoria: hover/activo (hoy usa naranja-suave, una isla clara) */
+html[data-theme="dark"] .sidebar-item:hover,
+html[data-theme="dark"] .sidebar-item.active { background: rgba(244,137,31,.16); color: var(--accent); }
+
+/* Boton outline (azul sobre fondo oscuro = poco contraste) */
+html[data-theme="dark"] .btn-outline { border-color: var(--text-muted); color: var(--text); }
+html[data-theme="dark"] .btn-outline:hover { background: var(--accent); border-color: var(--accent); color: #1a1200; }
+
+/* Inputs: foco mas visible en oscuro */
+html[data-theme="dark"] .form-group input:focus,
+html[data-theme="dark"] .input-respuesta:focus { box-shadow: 0 0 0 3px rgba(255,154,51,.25); border-color: var(--accent); }
