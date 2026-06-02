@@ -52,7 +52,7 @@
   overflow: hidden;
 }
 .progress-bar-fill {
-  background: linear-gradient(90deg, var(--azul), var(--verde));
+  background: linear-gradient(90deg, var(--azul), var(--verde-ok));
   height: 100%;
   border-radius: 999px;
   transition: width .6s ease;
@@ -102,7 +102,7 @@
 .unidad-bar-fill {
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--azul), var(--verde));
+  background: linear-gradient(90deg, var(--azul), var(--verde-ok));
   transition: width .5s ease;
 }
 
