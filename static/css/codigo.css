@@ -7,9 +7,9 @@
 
 /* ── Contenedor del bloque C++ ──────────────────────────────── */
 .bloque-cpp {
-  background: var(--blanco);
+  background: var(--surface);
   border-radius: 10px;
-  box-shadow: var(--sombra);
+  box-shadow: var(--shadow);
   overflow: hidden;
 }
 
@@ -90,9 +90,9 @@
 
 /* ── Pseudocódigo (fondo diferente al C++) ──────────────────── */
 .bloque-pseudo {
-  background: var(--blanco);
+  background: var(--surface);
   border-radius: 10px;
-  box-shadow: var(--sombra);
+  box-shadow: var(--shadow);
   overflow: hidden;
   margin-bottom: 1.25rem;
 }
@@ -144,3 +144,8 @@
   }
   .language-cpp { font-size: .82rem; }
 }
+
+/* ── Modo oscuro: pseudocodigo (hoy fondo claro) y aviso ────── */
+html[data-theme="dark"] .bloque-pseudo pre      { background: var(--surface-2); }
+html[data-theme="dark"] .bloque-pseudo pre code { color: var(--text); }
+html[data-theme="dark"] .aviso-cpp { background: rgba(244,137,31,.12); color: #ffb066; }
