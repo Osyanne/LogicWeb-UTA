@@ -1143,5 +1143,173 @@
       "mensaje_error": "El ordenamiento burbuja deja el arreglo ordenado de menor a mayor: {1, 3, 5, 7, 9}. numeros[0] siempre será el menor.",
       "recomendacion": "Traza el burbuja manualmente con el arreglo dado. Repasa U4: Arreglos."
     }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 40,
+    "fields": {
+      "titulo": "Suma de los primeros N números naturales — Python",
+      "enunciado": "Calcula la suma de los primeros N números naturales (1 + 2 + ... + N) usando un ciclo for con un acumulador. Incluye análisis IPO, pseudocódigo y código Python comentado. Ejemplo: si N = 5, la suma es 15.",
+      "categoria": "resuelto",
+      "dificultad": "basico",
+      "tema": 1,
+      "orden": 60,
+      "activo": true,
+      "entrada": "N : int (cantidad de números a sumar, ingresado por el usuario)",
+      "proceso": "Recorrer i desde 1 hasta N acumulando: suma = suma + i",
+      "salida": "suma : int (resultado de 1 + 2 + ... + N)",
+      "pseudocodigo": "INICIO\n  LEER N\n  suma <- 0\n  PARA i DESDE 1 HASTA N HACER\n    suma <- suma + i\n  FIN PARA\n  ESCRIBIR suma\nFIN",
+      "lenguaje": "python",
+      "codigo_cpp": "# Suma de los primeros N números naturales (1 + 2 + ... + N)\n\n# ENTRADA: leer N desde el teclado\nn = int(input(\"Ingresa N: \"))\n\n# PROCESO: acumular la suma con un ciclo for\nsuma = 0\nfor i in range(1, n + 1):   # range(1, n+1) genera 1, 2, ..., n\n    suma = suma + i         # acumulador: va sumando cada i\n\n# SALIDA: mostrar el resultado\nprint(f\"La suma de 1 a {n} es: {suma}\")\n\n# Traza para N = 5:\n#   i=1 -> suma=1\n#   i=2 -> suma=3\n#   i=3 -> suma=6\n#   i=4 -> suma=10\n#   i=5 -> suma=15",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 41,
+    "fields": {
+      "titulo": "Conversión de Celsius a Fahrenheit — Python",
+      "enunciado": "Convierte una temperatura de grados Celsius a Fahrenheit aplicando la fórmula F = C * 9/5 + 32. Incluye análisis IPO, pseudocódigo y código Python comentado. Ejemplo: 25 °C equivalen a 77 °F.",
+      "categoria": "resuelto",
+      "dificultad": "basico",
+      "tema": 1,
+      "orden": 61,
+      "activo": true,
+      "entrada": "celsius : float (temperatura en grados Celsius)",
+      "proceso": "fahrenheit = celsius * 9 / 5 + 32",
+      "salida": "fahrenheit : float (temperatura convertida)",
+      "pseudocodigo": "INICIO\n  LEER celsius\n  fahrenheit <- celsius * 9 / 5 + 32\n  ESCRIBIR fahrenheit\nFIN",
+      "lenguaje": "python",
+      "codigo_cpp": "# Conversión de temperatura: grados Celsius -> Fahrenheit\n\n# ENTRADA: leer la temperatura en Celsius\ncelsius = float(input(\"Temperatura en C: \"))\n\n# PROCESO: aplicar la fórmula de conversión\nfahrenheit = celsius * 9 / 5 + 32\n\n# SALIDA: mostrar el resultado con 1 decimal\nprint(f\"{celsius} C = {fahrenheit:.1f} F\")\n\n# Comprobación: 25 C -> 25 * 9/5 + 32 = 45 + 32 = 77 F",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 42,
+    "fields": {
+      "titulo": "Pares e impares del 1 al N — Python",
+      "enunciado": "Recorre los números del 1 al N y clasifica cada uno como par o impar usando el operador módulo (%). Incluye análisis IPO, pseudocódigo y código Python comentado.",
+      "categoria": "resuelto",
+      "dificultad": "basico",
+      "tema": 2,
+      "orden": 60,
+      "activo": true,
+      "entrada": "N : int (límite superior del rango)",
+      "proceso": "Para cada i de 1 a N: si i % 2 == 0 es par, en caso contrario es impar",
+      "salida": "Cada número del 1 al N indicando si es par o impar",
+      "pseudocodigo": "INICIO\n  LEER N\n  PARA i DESDE 1 HASTA N HACER\n    SI i MOD 2 = 0 ENTONCES\n      ESCRIBIR i, \"es par\"\n    SINO\n      ESCRIBIR i, \"es impar\"\n    FIN SI\n  FIN PARA\nFIN",
+      "lenguaje": "python",
+      "codigo_cpp": "# Clasificar los números del 1 al N en pares e impares\n\n# ENTRADA\nn = int(input(\"Ingresa N: \"))\n\n# PROCESO + SALIDA: recorrer del 1 al N y usar el operador módulo (%)\nfor i in range(1, n + 1):\n    if i % 2 == 0:          # resto 0 al dividir entre 2 -> par\n        print(f\"{i} es par\")\n    else:                   # resto distinto de 0 -> impar\n        print(f\"{i} es impar\")\n\n# Recordatorio: el operador % devuelve el RESTO de la división.\n#   4 % 2 = 0 (par)   ·   7 % 2 = 1 (impar)",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 43,
+    "fields": {
+      "titulo": "Cálculo de sueldo con horas extra — Python",
+      "enunciado": "Calcula el sueldo de un trabajador: las horas normales (hasta 40) se pagan a la tarifa base y las horas extra se pagan a 1.5 veces la tarifa. Incluye análisis IPO, pseudocódigo y código Python comentado.",
+      "categoria": "resuelto",
+      "dificultad": "medio",
+      "tema": 2,
+      "orden": 61,
+      "activo": true,
+      "entrada": "horas : float, tarifa : float",
+      "proceso": "Si horas <= 40: sueldo = horas * tarifa; si no: 40*tarifa + (horas-40)*tarifa*1.5",
+      "salida": "sueldo : float (total a pagar)",
+      "pseudocodigo": "INICIO\n  LEER horas, tarifa\n  SI horas <= 40 ENTONCES\n    sueldo <- horas * tarifa\n  SINO\n    extra <- (horas - 40) * tarifa * 1.5\n    sueldo <- 40 * tarifa + extra\n  FIN SI\n  ESCRIBIR sueldo\nFIN",
+      "lenguaje": "python",
+      "codigo_cpp": "# Cálculo de sueldo con pago de horas extra (1.5x sobre 40 horas)\n\n# ENTRADA\nhoras  = float(input(\"Horas trabajadas: \"))\ntarifa = float(input(\"Tarifa por hora: \"))\n\n# PROCESO: las horas sobre 40 se pagan a 1.5 veces la tarifa\nif horas <= 40:\n    sueldo = horas * tarifa\nelse:\n    horas_extra = horas - 40\n    sueldo = 40 * tarifa + horas_extra * tarifa * 1.5\n\n# SALIDA\nprint(f\"Sueldo a pagar: ${sueldo:.2f}\")\n\n# Ejemplo: 45 horas a $10\n#   normales: 40 * 10        = 400\n#   extra:     5 * 10 * 1.5  =  75\n#   total:                     475",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 44,
+    "fields": {
+      "titulo": "Clase CuentaBancaria con encapsulación — Python",
+      "enunciado": "Define una clase CuentaBancaria con un saldo encapsulado y métodos para depositar y retirar dinero, validando que no se retire más del saldo disponible. Incluye análisis IPO, pseudocódigo y código Python comentado.",
+      "categoria": "resuelto",
+      "dificultad": "medio",
+      "tema": 3,
+      "orden": 60,
+      "activo": true,
+      "entrada": "Operaciones sobre la cuenta: depósitos y retiros (montos)",
+      "proceso": "depositar() suma al saldo; retirar() resta solo si hay fondos suficientes",
+      "salida": "Saldo actualizado tras cada operación",
+      "pseudocodigo": "CLASE CuentaBancaria\n  CONSTRUCTOR(titular, saldo_inicial)\n    saldo <- saldo_inicial\n  METODO depositar(monto)\n    saldo <- saldo + monto\n  METODO retirar(monto)\n    SI monto <= saldo ENTONCES\n      saldo <- saldo - monto\n    SINO\n      ESCRIBIR \"Fondos insuficientes\"\n    FIN SI\nFIN CLASE",
+      "lenguaje": "python",
+      "codigo_cpp": "# POO en Python: clase CuentaBancaria con encapsulación del saldo\n\nclass CuentaBancaria:\n    def __init__(self, titular, saldo_inicial=0):\n        self.titular = titular\n        self.__saldo = saldo_inicial   # atributo \"privado\" (encapsulado)\n\n    def depositar(self, monto):\n        self.__saldo += monto\n        print(f\"Depósito de ${monto}. Saldo: ${self.__saldo}\")\n\n    def retirar(self, monto):\n        # Validar que haya fondos suficientes antes de retirar\n        if monto <= self.__saldo:\n            self.__saldo -= monto\n            print(f\"Retiro de ${monto}. Saldo: ${self.__saldo}\")\n        else:\n            print(\"Fondos insuficientes\")\n\n    def consultar_saldo(self):\n        return self.__saldo\n\n\n# Uso de la clase: crear un objeto e invocar sus métodos\ncuenta = CuentaBancaria(\"Imanol\", 100)\ncuenta.depositar(50)    # Saldo: 150\ncuenta.retirar(70)      # Saldo: 80\ncuenta.retirar(200)     # Fondos insuficientes\nprint(\"Saldo final:\", cuenta.consultar_saldo())",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 45,
+    "fields": {
+      "titulo": "Herencia: Animal → Perro y polimorfismo — Python",
+      "enunciado": "Define una clase base Animal con un método hacer_sonido() y subclases (Perro, Gato) que lo sobrescriben. El mismo método se comporta distinto según el objeto: eso es polimorfismo. Incluye análisis IPO, pseudocódigo y código Python comentado.",
+      "categoria": "resuelto",
+      "dificultad": "medio",
+      "tema": 3,
+      "orden": 61,
+      "activo": true,
+      "entrada": "— (no hay entrada del usuario; el ejemplo demuestra los conceptos)",
+      "proceso": "Perro y Gato heredan de Animal y redefinen hacer_sonido()",
+      "salida": "El sonido correspondiente a cada objeto (polimorfismo)",
+      "pseudocodigo": "CLASE Animal\n  METODO hacer_sonido()\n    ESCRIBIR \"sonido genérico\"\nCLASE Perro HEREDA DE Animal\n  METODO hacer_sonido()   // sobrescribe\n    ESCRIBIR \"Guau\"\nCLASE Gato HEREDA DE Animal\n  METODO hacer_sonido()   // sobrescribe\n    ESCRIBIR \"Miau\"\nFIN",
+      "lenguaje": "python",
+      "codigo_cpp": "# Herencia y polimorfismo en Python\n\nclass Animal:\n    def __init__(self, nombre):\n        self.nombre = nombre\n\n    def hacer_sonido(self):\n        # Método genérico de la clase base\n        print(f\"{self.nombre} hace un sonido genérico\")\n\n\nclass Perro(Animal):          # Perro HEREDA de Animal\n    def hacer_sonido(self):   # POLIMORFISMO: sobrescribe el método\n        print(f\"{self.nombre} dice: ¡Guau!\")\n\n\nclass Gato(Animal):\n    def hacer_sonido(self):\n        print(f\"{self.nombre} dice: ¡Miau!\")\n\n\n# El mismo llamado hacer_sonido() se comporta distinto según el objeto\nanimales = [Animal(\"Animal\"), Perro(\"Firulais\"), Gato(\"Michi\")]\nfor a in animales:\n    a.hacer_sonido()\n\n# Salida:\n#   Animal hace un sonido genérico\n#   Firulais dice: ¡Guau!\n#   Michi dice: ¡Miau!",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 46,
+    "fields": {
+      "titulo": "Suma y promedio de una lista — Python",
+      "enunciado": "Dada una lista de números, calcula la suma total y el promedio recorriéndola con un ciclo. Incluye análisis IPO, pseudocódigo y código Python comentado.",
+      "categoria": "resuelto",
+      "dificultad": "basico",
+      "tema": 4,
+      "orden": 60,
+      "activo": true,
+      "entrada": "numeros : list[float] (lista de números)",
+      "proceso": "Acumular la suma recorriendo la lista; promedio = suma / cantidad de elementos",
+      "salida": "suma y promedio de la lista",
+      "pseudocodigo": "INICIO\n  numeros <- [ ... ]\n  suma <- 0\n  PARA CADA n EN numeros HACER\n    suma <- suma + n\n  FIN PARA\n  promedio <- suma / longitud(numeros)\n  ESCRIBIR suma, promedio\nFIN",
+      "lenguaje": "python",
+      "codigo_cpp": "# Suma y promedio de los elementos de una lista\n\n# ENTRADA: una lista de números\nnumeros = [8, 6, 7, 9, 10]\n\n# PROCESO: acumular la suma recorriendo la lista\nsuma = 0\nfor n in numeros:\n    suma += n\n\npromedio = suma / len(numeros)   # len() da la cantidad de elementos\n\n# SALIDA\nprint(\"Lista:\", numeros)\nprint(\"Suma:\", suma)\nprint(f\"Promedio: {promedio:.2f}\")\n\n# Nota: Python también ofrece sum(numeros) directamente:\n#   suma = sum(numeros)",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
+  },
+  {
+    "model": "ejercicios.ejercicio",
+    "pk": 47,
+    "fields": {
+      "titulo": "Frecuencia de palabras con diccionario — Python",
+      "enunciado": "Cuenta cuántas veces aparece cada palabra en una frase usando un diccionario (clave = palabra, valor = cantidad). Incluye análisis IPO, pseudocódigo y código Python comentado.",
+      "categoria": "resuelto",
+      "dificultad": "medio",
+      "tema": 4,
+      "orden": 61,
+      "activo": true,
+      "entrada": "frase : str (texto a analizar)",
+      "proceso": "Separar la frase en palabras y contar ocurrencias en un diccionario",
+      "salida": "Cada palabra con su frecuencia",
+      "pseudocodigo": "INICIO\n  LEER frase\n  palabras <- separar(frase)\n  frecuencia <- diccionario vacío\n  PARA CADA palabra EN palabras HACER\n    SI palabra EN frecuencia ENTONCES\n      frecuencia[palabra] <- frecuencia[palabra] + 1\n    SINO\n      frecuencia[palabra] <- 1\n    FIN SI\n  FIN PARA\n  ESCRIBIR frecuencia\nFIN",
+      "lenguaje": "python",
+      "codigo_cpp": "# Contar la frecuencia de cada palabra en una frase usando un diccionario\n\n# ENTRADA\nfrase = input(\"Escribe una frase: \").lower()\n\n# PROCESO: separar en palabras y contar con un diccionario\npalabras = frase.split()        # split() separa por espacios\nfrecuencia = {}\n\nfor palabra in palabras:\n    if palabra in frecuencia:\n        frecuencia[palabra] += 1   # ya existe -> incrementa\n    else:\n        frecuencia[palabra] = 1    # primera vez -> inicia en 1\n\n# SALIDA: recorrer el diccionario (clave, valor)\nfor palabra, veces in frecuencia.items():\n    print(f\"{palabra}: {veces}\")\n\n# Ejemplo con \"el perro y el gato\":\n#   el: 2, perro: 1, y: 1, gato: 1",
+      "solucion_esperada": "",
+      "tipo_respuesta": "texto"
+    }
   }
 ]
