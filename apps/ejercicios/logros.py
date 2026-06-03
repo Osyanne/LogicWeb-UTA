@@ -27,6 +27,7 @@ def otorgar_logros(usuario):
         Intento.objects
         .filter(usuario=usuario, resultado='correcto', ejercicio__categoria='interactivo')
         .values_list('ejercicio_id', flat=True)
+        .distinct()
     )
     if not correctos_ids:
         return
