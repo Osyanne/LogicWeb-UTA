@@ -13,3 +13,6 @@ python manage.py migrate
 
 # Sembrar/actualizar el contenido (temas, ejercicios, pistas). Idempotente por PK.
 python manage.py loaddata fixtures/datos_iniciales.json
+
+# Crear/actualizar la cuenta demo (idempotente).
+python manage.py crear_demo
