@@ -1,0 +1,91 @@
+/* ═══════════════════════════════════════════════════════
+   home.css — Portada de LogicWeb UTA
+   Usa las variables semanticas (claro + oscuro).
+   ═══════════════════════════════════════════════════════ */
+
+/* Chips de lenguaje en el hero (sobre el gradiente azul, en ambos temas) */
+.hero-langs { display: flex; gap: .5rem; justify-content: center; flex-wrap: wrap; margin-top: 1.5rem; }
+.hero-langs .lang-chip {
+  background: rgba(255,255,255,.14);
+  color: #fff;
+  padding: .35rem .9rem;
+  border-radius: 20px;
+  font-size: .85rem;
+  font-weight: 700;
+}
+
+/* Bloque de seccion */
+.home-section { padding: 2.25rem 0 .5rem; }
+.home-section-title { text-align: center; font-size: 1.5rem; font-weight: 800; color: var(--heading); margin-bottom: 1.5rem; }
+
+/* Encabezado de seccion con linea + enlace */
+.section-head { display: flex; align-items: center; gap: .75rem; margin: 1rem 0 1.1rem; }
+.section-head h2 { font-size: 1.35rem; font-weight: 800; color: var(--heading); }
+.section-head .linea { flex: 1; height: 2px; background: var(--border); }
+.section-head .ver-todos { color: var(--azul-claro); font-weight: 700; font-size: .9rem; white-space: nowrap; }
+
+/* Como funciona (3 pasos) */
+.pasos-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.paso-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radio);
+  padding: 1.5rem 1.25rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: var(--transicion);
+}
+.paso-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.paso-card .paso-icono { font-size: 2.2rem; line-height: 1; }
+.paso-card h3 { font-size: 1rem; font-weight: 800; color: var(--heading); margin: .55rem 0 .3rem; }
+.paso-card p { font-size: .88rem; color: var(--text-muted); }
+
+/* Ejercicios destacados */
+.destacados-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; }
+.card-destacado {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--azul-claro);
+  border-radius: var(--radio);
+  padding: 1.25rem;
+  box-shadow: var(--shadow);
+  transition: var(--transicion);
+  display: flex;
+  flex-direction: column;
+  gap: .5rem;
+  text-decoration: none;
+}
+.card-destacado:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.card-destacado.cpp    { border-left-color: #00599c; }
+.card-destacado.python { border-left-color: #3572a5; }
+.card-destacado.java   { border-left-color: #b07219; }
+.card-destacado .chips { display: flex; gap: .4rem; flex-wrap: wrap; }
+.card-destacado .titulo { font-weight: 800; color: var(--heading); font-size: 1rem; }
+.card-destacado .desc { font-size: .85rem; color: var(--text-muted); line-height: 1.5; }
+
+/* Chip de lenguaje (solido, color de marca; legible en ambos temas) */
+.chip-lang { color: #fff; font-size: .72rem; font-weight: 700; padding: .15rem .55rem; border-radius: 10px; letter-spacing: .3px; }
+.chip-lang.cpp    { background: #00599c; }
+.chip-lang.python { background: #3572a5; }
+.chip-lang.java   { background: #b07219; }
+
+/* Banner de stats */
+.stats-banner {
+  background: linear-gradient(135deg, var(--azul), var(--azul-medio));
+  border-radius: var(--radio);
+  padding: 1.75rem;
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  color: #fff;
+  margin: 1rem 0;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.stats-banner .num { font-size: 2rem; font-weight: 800; color: var(--naranja); line-height: 1; }
+.stats-banner .lbl { font-size: .85rem; opacity: .88; margin-top: .25rem; }
+
+/* Responsivo basico (el pulido movil completo es el sub-proyecto 3) */
+@media (max-width: 720px) {
+  .pasos-grid, .destacados-grid { grid-template-columns: 1fr; }
+}

@@ -1,9 +1,14 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block titulo %}Inicio{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 
 {% block contenido %}
 
-<!-- ── Hero ── -->
+<!-- Hero -->
 <section class="hero">
   <h1>Bienvenido a <span>LogicWeb UTA</span></h1>
   <p>Aprende lógica de programación analizando y practicando con ejercicios reales en C++, Python y Java</p>
@@ -15,66 +20,75 @@
   {% else %}
     <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-naranja">⚙️ Practicar ahora</a>
   {% endif %}
+  <div class="hero-langs">
+    <span class="lang-chip">⚡ C++</span>
+    <span class="lang-chip">🐍 Python</span>
+    <span class="lang-chip">☕ Java</span>
+  </div>
 </section>
 
-<!-- ── Unidades disponibles ── -->
-<div class="unidades-strip">
-  {% for u in unidades %}
-    <a href="{% url 'contenidos_lista' %}?unidad={{ u.unidad }}" class="badge-unidad">
-      U{{ u.unidad }}
-    </a>
-  {% endfor %}
-</div>
-
-<!-- ── Accesos rápidos ── -->
 <div class="container">
-  <h2 class="section-title">¿Qué quieres hacer hoy?</h2>
-  <div class="accesos-grid">
-    <a href="{% url 'contenidos_lista' %}" class="card-acceso">
-      <span class="icono">📚</span>
-      <h3>Teoría</h3>
-      <p>Estudia lógica, algoritmos, pseudocódigo, POO y estructuras de datos por unidad.</p>
-    </a>
-    <a href="{% url 'ejercicios_resueltos' %}" class="card-acceso">
-      <span class="icono">💡</span>
-      <h3>Ejercicios Resueltos</h3>
-      <p>Lee y analiza problemas resueltos paso a paso con código explicado en C++, Python o Java.</p>
-    </a>
-    <a href="{% url 'ejercicios_interactivos' %}" class="card-acceso">
-      <span class="icono">⚙️</span>
-      <h3>Práctica Interactiva</h3>
-      <p>Analiza código y responde ejercicios interactivos con retroalimentación inmediata.</p>
-    </a>
-    {% if user.is_authenticated %}
-    <a href="{% url 'mi_progreso' %}" class="card-acceso">
-      <span class="icono">📊</span>
-      <h3>Mi Progreso</h3>
-      <p>Revisa tus aciertos, errores y los ejercicios que has practicado.</p>
-    </a>
-    {% else %}
-    <a href="{% url 'registro' %}" class="card-acceso">
-      <span class="icono">📊</span>
-      <h3>Mi Progreso</h3>
-      <p>Regístrate para guardar tu historial de práctica y ver tu avance por unidad.</p>
-    </a>
-    {% endif %}
-  </div>
 
-  <!-- ── Resumen del sistema ── -->
-  <div class="flex-gap mt-4 mb-3" style="justify-content:center;text-align:center">
-    <div class="stat-card" style="min-width:160px">
-      <div class="numero">{{ total_ejercicios }}</div>
-      <div class="etiqueta">Ejercicios disponibles</div>
+  <!-- Cómo funciona -->
+  <section class="home-section">
+    <h2 class="home-section-title">¿Cómo funciona?</h2>
+    <div class="pasos-grid">
+      <div class="paso-card">
+        <div class="paso-icono">📚</div>
+        <h3>1 · Estudia la teoría</h3>
+        <p>Lógica, algoritmos, pseudocódigo y POO, organizados por unidad.</p>
+      </div>
+      <div class="paso-card">
+        <div class="paso-icono">⚙️</div>
+        <h3>2 · Practica</h3>
+        <p>Analiza código real y responde ejercicios interactivos, con pistas.</p>
+      </div>
+      <div class="paso-card">
+        <div class="paso-icono">📊</div>
+        <h3>3 · Mide tu avance</h3>
+        <p>Revisa tus aciertos, errores y tu progreso por unidad.</p>
+      </div>
     </div>
-    <div class="stat-card naranja" style="min-width:160px">
-      <div class="numero">4</div>
-      <div class="etiqueta">Unidades temáticas</div>
+  </section>
+
+  <!-- Ejercicios destacados -->
+  {% if destacados %}
+  <section class="home-section">
+    <div class="section-head">
+      <h2>Date una idea</h2>
+      <span class="linea"></span>
+      <a href="{% url 'ejercicios_resueltos' %}" class="ver-todos">Ver todos →</a>
     </div>
-    <div class="stat-card verde" style="min-width:160px">
-      <div class="numero">3</div>
-      <div class="etiqueta">Lenguajes: C++, Python y Java</div>
+    <div class="destacados-grid">
+      {% for ej in destacados %}
+        {% if ej.categoria == 'resuelto' %}
+        <a href="{% url 'resuelto_detalle' ej.pk %}" class="card-destacado {{ ej.lenguaje }}">
+        {% else %}
+        <a href="{% url 'interactivo_detalle' ej.pk %}" class="card-destacado {{ ej.lenguaje }}">
+        {% endif %}
+          <div class="chips">
+            {% if ej.lenguaje == 'python' %}<span class="chip-lang python">🐍 Python</span>
+            {% elif ej.lenguaje == 'java' %}<span class="chip-lang java">☕ Java</span>
+            {% else %}<span class="chip-lang cpp">C++</span>{% endif %}
+            <span class="chip chip-{{ ej.dificultad }}">{{ ej.get_dificultad_display }}</span>
+          </div>
+          <div class="titulo">{{ ej.titulo }}</div>
+          <div class="desc">{{ ej.enunciado|truncatechars:90 }}</div>
+        </a>
+      {% endfor %}
     </div>
-  </div>
+  </section>
+  {% endif %}
+
+  <!-- Banner de stats -->
+  <section class="home-section">
+    <div class="stats-banner">
+      <div><div class="num">{{ total_ejercicios }}</div><div class="lbl">Ejercicios</div></div>
+      <div><div class="num">{{ num_unidades }}</div><div class="lbl">Unidades</div></div>
+      <div><div class="num">3</div><div class="lbl">Lenguajes</div></div>
+    </div>
+  </section>
+
 </div>
 
 {% endblock %}
