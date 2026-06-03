@@ -18,3 +18,21 @@ class ContextProcessorTest(TestCase):
     def test_anonimo_no_rompe(self):
         resp = self.client.get(reverse('inicio'))
         self.assertEqual(resp.status_code, 200)
+
+
+class NotificacionesVistaTest(TestCase):
+    def setUp(self):
+        self.user = Usuario.objects.create_user(username='est', password='clave12345')
+
+    def test_requiere_login(self):
+        resp = self.client.get(reverse('notificaciones'))
+        self.assertEqual(resp.status_code, 302)
+
+    def test_pagina_carga_y_marca_leidas(self):
+        Notificacion.objects.create(usuario=self.user, tipo='volumen', clave='volumen_10',
+                                    titulo='¡10 ejercicios!', mensaje='y', icono='📈', leida=False)
+        self.client.force_login(self.user)
+        resp = self.client.get(reverse('notificaciones'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertContains(resp, '¡10 ejercicios!')
+        self.assertEqual(Notificacion.objects.filter(usuario=self.user, leida=False).count(), 0)

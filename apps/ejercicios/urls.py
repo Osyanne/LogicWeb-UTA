@@ -5,6 +5,7 @@ urlpatterns = [
     # ── Inicio ──────────────────────────────────────────
     path('', views.inicio, name='inicio'),
     path('comparar/', views.comparar, name='comparar'),
+    path('notificaciones/', views.notificaciones, name='notificaciones'),
 
     # ── Ejercicios resueltos ─────────────────────────────
     path('ejercicios/resueltos/', views.ejercicios_resueltos, name='ejercicios_resueltos'),

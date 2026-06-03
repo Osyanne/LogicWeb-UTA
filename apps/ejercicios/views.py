@@ -32,6 +32,13 @@ def comparar(request):
     return render(request, 'comparaciones/comparar.html', {'problemas': PROBLEMAS})
 
 
+@login_required
+def notificaciones(request):
+    notis = request.user.notificaciones.all()
+    request.user.notificaciones.filter(leida=False).update(leida=True)
+    return render(request, 'notificaciones/lista.html', {'notificaciones': notis})
+
+
 # ══════════════════════════════════════════════════════════════
 #  EJERCICIOS RESUELTOS
 # ══════════════════════════════════════════════════════════════
