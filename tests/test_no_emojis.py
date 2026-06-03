@@ -35,3 +35,6 @@ def test_no_emoji_resueltos():
 def test_no_emoji_interactivos():
     assert emojis_in("templates/ejercicios/interactivo.html") == []
     assert emojis_in("templates/ejercicios/lista_interactivos.html") == []
+
+def test_no_emoji_respuesta():
+    assert emojis_in("templates/retroalimentacion/respuesta.html") == []
