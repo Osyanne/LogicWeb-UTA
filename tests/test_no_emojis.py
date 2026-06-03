@@ -27,3 +27,7 @@ def test_no_emoji_contenidos():
 def test_no_emoji_comparar():
     assert emojis_in("templates/comparaciones/comparar.html") == []
     assert emojis_in("apps/ejercicios/comparaciones.py") == []
+
+def test_no_emoji_resueltos():
+    assert emojis_in("templates/ejercicios/resuelto.html") == []
+    assert emojis_in("templates/ejercicios/lista_resueltos.html") == []

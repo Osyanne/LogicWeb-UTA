@@ -7,7 +7,7 @@
   <!-- Encabezado -->
   <div class="ejercicio-header">
     <div class="flex-gap mb-2">
-      <span class="chip chip-resuelto">📘 Ejercicio Resuelto</span>
+      <span class="chip chip-resuelto">Ejercicio Resuelto</span>
       <span class="chip chip-{{ ejercicio.dificultad }}">{{ ejercicio.get_dificultad_display }}</span>
       <span class="chip chip-unidad">{{ ejercicio.tema }}</span>
     </div>
@@ -19,15 +19,15 @@
   {% if ejercicio.entrada or ejercicio.proceso or ejercicio.salida %}
   <div class="ipo-grid">
     <div class="ipo-box" style="border-color:#1565c0">
-      <h4>📥 Entrada</h4>
+      <h4>Entrada</h4>
       <p>{{ ejercicio.entrada|default:"—" }}</p>
     </div>
     <div class="ipo-box" style="border-color:#e65100">
-      <h4>⚙️ Proceso</h4>
+      <h4>Proceso</h4>
       <p>{{ ejercicio.proceso|default:"—" }}</p>
     </div>
     <div class="ipo-box" style="border-color:#2e7d32">
-      <h4>📤 Salida</h4>
+      <h4>Salida</h4>
       <p>{{ ejercicio.salida|default:"—" }}</p>
     </div>
   </div>
@@ -42,7 +42,7 @@
       <h3 class="section-title" style="font-size:1rem">Pseudocódigo</h3>
       <div class="bloque-pseudo">
         <div class="bloque-pseudo-header">
-          <span>📝 Pseudocódigo</span>
+          <span>Pseudocódigo</span>
         </div>
         <pre><code class="nohighlight">{{ ejercicio.pseudocodigo }}</code></pre>
       </div>
@@ -77,7 +77,7 @@
         <pre><code class="language-{% if ejercicio.lenguaje == 'python' %}python{% elif ejercicio.lenguaje == 'java' %}java{% else %}cpp{% endif %}">{{ codigo_cpp }}</code></pre>
       </div>
       <div class="aviso-cpp mt-1">
-        ⚠️ Este código es contenido educativo. Lee, analiza y comprende el algoritmo.
+        {% include "icons/alert-triangle.svg" with cls="ico ico-warn" %} Este código es contenido educativo. Lee, analiza y comprende el algoritmo.
       </div>
     </div>
 
@@ -86,7 +86,7 @@
   <!-- Navegación -->
   <div class="flex-gap mt-4">
     <a href="{% url 'ejercicios_resueltos' %}" class="btn btn-outline">← Volver a la lista</a>
-    <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-naranja">⚙️ Ir a práctica interactiva</a>
+    <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-naranja">Ir a práctica interactiva</a>
   </div>
 
 </div>
