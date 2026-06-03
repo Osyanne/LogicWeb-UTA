@@ -637,3 +637,14 @@ html[data-theme="dark"] main a:not(.btn):hover { color: var(--accent); }
     scroll-behavior: auto !important;
   }
 }
+
+/* ── Íconos SVG (reemplazan emojis) ─────────────────────────── */
+.ico{width:1.15em;height:1.15em;flex:0 0 auto;vertical-align:-.15em;display:inline-block}
+.ico-sm{width:1em;height:1em}
+.ico-lg{width:1.5em;height:1.5em;vertical-align:-.25em}
+.brand-ico{width:1.3em;height:1.3em;color:var(--naranja)}
+.ico-ok{color:var(--verde-ok)} .ico-err{color:var(--rojo-err)} .ico-warn{color:var(--naranja)}
+.lang-dot{display:inline-block;width:.62em;height:.62em;border-radius:50%;margin-right:.4em;vertical-align:.02em;flex:0 0 auto}
+.unidad-badge{display:inline-flex;align-items:center;justify-content:center;min-width:1.9em;height:1.9em;padding:0 .35em;border-radius:8px;font-weight:800;font-size:.85em;color:#fff;background:var(--azul-claro)}
+.unidad-badge.u1{background:#3a5998}.unidad-badge.u2{background:#f4891f}.unidad-badge.u3{background:#2e7d32}.unidad-badge.u4{background:#b5179e}
+.paso-num{font-size:1.6rem;font-weight:800;color:var(--accent);line-height:1}
