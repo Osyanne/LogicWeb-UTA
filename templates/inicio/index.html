@@ -14,16 +14,16 @@
   <p>Aprende lógica de programación analizando y practicando con ejercicios reales en C++, Python y Java</p>
   {% if not user.is_authenticated %}
     <div class="flex-gap" style="justify-content:center">
-      <a href="{% url 'registro' %}" class="btn btn-naranja">🚀 Crear mi cuenta</a>
+      <a href="{% url 'registro' %}" class="btn btn-naranja">Crear mi cuenta</a>
       <a href="{% url 'login' %}" class="btn btn-outline" style="border-color:#fff;color:#fff">Ingresar</a>
     </div>
   {% else %}
-    <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-naranja">⚙️ Practicar ahora</a>
+    <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-naranja">Practicar ahora</a>
   {% endif %}
   <div class="hero-langs">
-    <a href="{% url 'comparar' %}" class="lang-chip">⚡ C++</a>
-    <a href="{% url 'comparar' %}" class="lang-chip">🐍 Python</a>
-    <a href="{% url 'comparar' %}" class="lang-chip">☕ Java</a>
+    <a href="{% url 'comparar' %}" class="lang-chip"><span class="lang-dot" style="background:#00599c"></span>C++</a>
+    <a href="{% url 'comparar' %}" class="lang-chip"><span class="lang-dot" style="background:#3572A5"></span>Python</a>
+    <a href="{% url 'comparar' %}" class="lang-chip"><span class="lang-dot" style="background:#b07219"></span>Java</a>
   </div>
 </section>
 
@@ -34,17 +34,17 @@
     <h2 class="home-section-title">¿Cómo funciona?</h2>
     <div class="pasos-grid">
       <div class="paso-card">
-        <div class="paso-icono">📚</div>
+        <div class="paso-icono"><span class="paso-num">1</span></div>
         <h3>1 · Estudia la teoría</h3>
         <p>Lógica, algoritmos, pseudocódigo y POO, organizados por unidad.</p>
       </div>
       <div class="paso-card">
-        <div class="paso-icono">⚙️</div>
+        <div class="paso-icono"><span class="paso-num">2</span></div>
         <h3>2 · Practica</h3>
         <p>Analiza código real y responde ejercicios interactivos, con pistas.</p>
       </div>
       <div class="paso-card">
-        <div class="paso-icono">📊</div>
+        <div class="paso-icono"><span class="paso-num">3</span></div>
         <h3>3 · Mide tu avance</h3>
         <p>Revisa tus aciertos, errores y tu progreso por unidad.</p>
       </div>
@@ -67,8 +67,8 @@
         <a href="{% url 'interactivo_detalle' ej.pk %}" class="card-destacado {{ ej.lenguaje }}">
         {% endif %}
           <div class="chips">
-            {% if ej.lenguaje == 'python' %}<span class="chip-lang python">🐍 Python</span>
-            {% elif ej.lenguaje == 'java' %}<span class="chip-lang java">☕ Java</span>
+            {% if ej.lenguaje == 'python' %}<span class="chip-lang python">Python</span>
+            {% elif ej.lenguaje == 'java' %}<span class="chip-lang java">Java</span>
             {% else %}<span class="chip-lang cpp">C++</span>{% endif %}
             <span class="chip chip-{{ ej.dificultad }}">{{ ej.get_dificultad_display }}</span>
           </div>

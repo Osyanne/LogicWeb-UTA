@@ -33,7 +33,7 @@
   <!-- ── Barra de navegación ── -->
   <nav class="navbar">
     <a href="{% url 'inicio' %}" class="navbar-brand">
-      🎓 Logic<span>Web</span> UTA
+      {% include "icons/code.svg" with cls="ico brand-ico" %} Logic<span>Web</span> UTA
     </a>
 
     <ul class="navbar-links">
@@ -48,7 +48,7 @@
 
     <div class="navbar-user">
       <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Cambiar a modo oscuro" aria-pressed="false">
-        <span class="theme-icon" aria-hidden="true">&#127769;</span>
+        <span class="theme-icon" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A8 8 0 1 1 11.2 3 6 6 0 0 0 21 12.8z"/></svg></span>
       </button>
       {% if user.is_authenticated %}
         <div class="noti-wrap">
@@ -71,7 +71,7 @@
             <a href="{% url 'notificaciones' %}" class="noti-vertodas">Ver todas</a>
           </div>
         </div>
-        👤 {{ user.get_full_name|default:user.username }}
+        {{ user.get_full_name|default:user.username }}
         &nbsp;|&nbsp;
         <a href="{% url 'logout' %}">Salir</a>
       {% else %}

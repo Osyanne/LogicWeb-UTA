@@ -1,0 +1,1 @@
+<svg class="{{ cls|default:'ico' }}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9.2 16a1 1 0 0 1-.9 1.5H3.7a1 1 0 0 1-.9-1.5z"/><line x1="12" y1="9" x2="12" y2="14"/><line x1="12" y1="17.2" x2="12.01" y2="17.2"/></svg>

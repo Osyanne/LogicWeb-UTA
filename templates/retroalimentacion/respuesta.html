@@ -7,7 +7,7 @@
   {# ── Feedback principal: OK o ERROR ────────────────────────── #}
   {% if es_correcto %}
     <div class="feedback-box feedback-ok">
-      <h2>🎉 ¡Correcto!</h2>
+      <h2>{% include "icons/check-circle.svg" with cls="ico ico-lg ico-ok" %} ¡Correcto!</h2>
       <p>
         {% if retro %}{{ retro.mensaje_correcto }}
         {% else %}Excelente. Analizaste correctamente el código del ejercicio.{% endif %}
@@ -15,7 +15,7 @@
     </div>
   {% else %}
     <div class="feedback-box feedback-err">
-      <h2>✗ Incorrecto</h2>
+      <h2>{% include "icons/x-circle.svg" with cls="ico ico-lg ico-err" %} Incorrecto</h2>
       <p>
         {% if retro %}{{ retro.mensaje_error }}
         {% else %}Vuelve a leer el código del ejercicio y traza el flujo del algoritmo.{% endif %}
@@ -27,7 +27,7 @@
   {# ── Recomendación opcional ─────────────────────────────────── #}
   {% if retro and retro.recomendacion %}
     <div class="alert alert-info mt-2">
-      💡 <strong>Recomendación:</strong> {{ retro.recomendacion }}
+      <strong>Recomendación:</strong> {{ retro.recomendacion }}
     </div>
   {% endif %}
 
@@ -65,9 +65,9 @@
     {% if not es_correcto %}
       <a href="{% url 'interactivo_detalle' ejercicio.pk %}" class="btn btn-primary">↺ Intentar de nuevo</a>
     {% endif %}
-    <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-outline">📋 Ver todos los ejercicios</a>
+    <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-outline">Ver todos los ejercicios</a>
     {% if user.is_authenticated %}
-      <a href="{% url 'mi_progreso' %}" class="btn btn-naranja">📊 Ver mi progreso</a>
+      <a href="{% url 'mi_progreso' %}" class="btn btn-naranja">Ver mi progreso</a>
     {% endif %}
   </div>
 

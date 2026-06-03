@@ -9,17 +9,17 @@
 {% block contenido %}
 <div class="container" style="padding-top:2rem">
 
-  <h1 class="section-title">📊 Mi Progreso — LogicWeb UTA</h1>
+  <h1 class="section-title">{% include "icons/bar-chart.svg" %} Mi Progreso — LogicWeb UTA</h1>
 
   <!-- Tarjetas de estadísticas globales -->
   <div class="stats-grid">
     <div class="stat-card verde">
       <div class="numero">{{ correctos }}</div>
-      <div class="etiqueta">✅ Aciertos</div>
+      <div class="etiqueta">{% include "icons/check-circle.svg" with cls="ico ico-sm ico-ok" %} Aciertos</div>
     </div>
     <div class="stat-card rojo">
       <div class="numero">{{ incorrectos }}</div>
-      <div class="etiqueta">❌ Errores</div>
+      <div class="etiqueta">{% include "icons/x-circle.svg" with cls="ico ico-sm ico-err" %} Errores</div>
     </div>
     <div class="stat-card naranja">
       <div class="numero">{{ codigos_vistos }}</div>
@@ -45,7 +45,7 @@
   <!-- Progreso por unidad (RF09 — desglose por unidad) -->
   {% if progreso_unidades %}
   <div class="progreso-unidades">
-    <h2>📚 Progreso por Unidad</h2>
+    <h2>{% include "icons/layers.svg" %} Progreso por Unidad</h2>
     {% for u in progreso_unidades %}
     <div class="unidad-row">
       <span class="unidad-label" title="{{ u.nombre }}">{{ u.nombre }}</span>
@@ -90,13 +90,13 @@
             {% endif %}
           </td>
           <td>
-            {% if intento.ejercicio.codigo_cpp %}✅ Visto{% else %}—{% endif %}
+            {% if intento.ejercicio.codigo_cpp %}Visto{% else %}—{% endif %}
           </td>
           <td>
             {% if intento.resultado == 'correcto' %}
-              <span class="badge-correcto">✅ Correcto</span>
+              <span class="badge-correcto">{% include "icons/check-circle.svg" with cls="ico ico-sm ico-ok" %} Correcto</span>
             {% else %}
-              <span class="badge-incorrecto">❌ Incorrecto</span>
+              <span class="badge-incorrecto">{% include "icons/x-circle.svg" with cls="ico ico-sm ico-err" %} Incorrecto</span>
             {% endif %}
           </td>
           <td style="font-size:.85rem;color:var(--text-muted)">{{ intento.fecha|date:"d/m/Y H:i" }}</td>
@@ -113,8 +113,8 @@
   {% endif %}
 
   <div class="flex-gap mt-3">
-    <a href="{% url 'exportar_csv' %}" class="btn btn-outline">📥 Descargar historial CSV</a>
-    <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-primary">⚙️ Seguir practicando</a>
+    <a href="{% url 'exportar_csv' %}" class="btn btn-outline">Descargar historial CSV</a>
+    <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-primary">Seguir practicando</a>
   </div>
 
 </div>
