@@ -67,8 +67,8 @@
         <a href="{% url 'interactivo_detalle' ej.pk %}" class="card-destacado {{ ej.lenguaje }}">
         {% endif %}
           <div class="chips">
-            {% if ej.lenguaje == 'python' %}<span class="chip-lang python"><span class="lang-dot" style="background:#3572A5"></span>Python</span>
-            {% elif ej.lenguaje == 'java' %}<span class="chip-lang java"><span class="lang-dot" style="background:#b07219"></span>Java</span>
+            {% if ej.lenguaje == 'python' %}<span class="chip-lang python">Python</span>
+            {% elif ej.lenguaje == 'java' %}<span class="chip-lang java">Java</span>
             {% else %}<span class="chip-lang cpp">C++</span>{% endif %}
             <span class="chip chip-{{ ej.dificultad }}">{{ ej.get_dificultad_display }}</span>
           </div>
