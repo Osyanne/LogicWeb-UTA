@@ -10,7 +10,7 @@
 <div class="container">
 
   <div class="teoria-hero">
-    <h1>🛤️ Ruta de Aprendizaje</h1>
+    <h1>{% include "icons/route.svg" %} Ruta de Aprendizaje</h1>
     <p>Recorre las 4 unidades en orden. Cada una explica la teoría y enlaza sus ejercicios.</p>
   </div>
 
@@ -21,12 +21,12 @@
       <a href="{% url 'contenido_detalle' tema.pk %}" class="ruta-card">
         <div class="unidad-tag">Unidad {{ tema.unidad }}</div>
         <h3>
-          {% if tema.unidad == 1 %}🧠{% elif tema.unidad == 2 %}⚙️{% elif tema.unidad == 3 %}🧩{% else %}📦{% endif %}
+          <span class="unidad-badge u{{ tema.unidad }}">U{{ tema.unidad }}</span>
           {{ tema.nombre_tema }}
         </h3>
         <p class="resumen">{{ tema.descripcion|truncatechars:170 }}</p>
         <div class="pie">
-          <span class="conteo">📝 {{ tema.ejercicios.count }} ejercicio(s)</span>
+          <span class="conteo">{{ tema.ejercicios.count }} ejercicio(s)</span>
           <span class="cta">Ver unidad →</span>
         </div>
       </a>

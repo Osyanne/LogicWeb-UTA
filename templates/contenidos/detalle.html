@@ -15,13 +15,13 @@
     <div class="tema-encabezado">
       <span class="badge-unidad">Unidad {{ tema.unidad }}</span>
       <h1>
-        {% if tema.unidad == 1 %}🧠{% elif tema.unidad == 2 %}⚙️{% elif tema.unidad == 3 %}🧩{% else %}📦{% endif %}
+        <span class="unidad-badge u{{ tema.unidad }}">U{{ tema.unidad }}</span>
         {{ tema.nombre_tema }}
       </h1>
     </div>
 
     <div class="teoria-callout">
-      <div class="callout-titulo">📖 Teoría de la unidad</div>
+      <div class="callout-titulo">{% include "icons/book.svg" %} Teoría de la unidad</div>
       <p>{{ tema.descripcion }}</p>
     </div>
 

@@ -19,3 +19,7 @@ def test_no_emoji_auth():
 
 def test_no_emoji_progreso():
     assert emojis_in("templates/reportes/mi_progreso.html") == []
+
+def test_no_emoji_contenidos():
+    assert emojis_in("templates/contenidos/lista.html") == []
+    assert emojis_in("templates/contenidos/detalle.html") == []
