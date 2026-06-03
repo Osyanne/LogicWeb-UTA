@@ -11,7 +11,7 @@ PROBLEMAS = [
         "idea": "Un numero es par si el resto de dividirlo entre 2 es cero. El operador modulo (%) devuelve ese resto, y existe en los tres lenguajes.",
         "lenguajes": [
             {
-                "id": "cpp", "label": "⚡ C++", "color": "#00599c",
+                "id": "cpp", "label": "C++", "color": "#00599c",
                 "codigo": """#include <iostream>      // entrada/salida
 using namespace std;
 int main() {
@@ -24,7 +24,7 @@ int main() {
                 "como": "Declara el tipo (int), incluye <iostream> para cin/cout y resuelve con un operador ternario. Compila a binario nativo.",
             },
             {
-                "id": "python", "label": "\U0001f40d Python", "color": "#3572a5",
+                "id": "python", "label": "Python", "color": "#3572a5",
                 "codigo": """# input() lee texto; int() lo convierte
 n = int(input())
 # expresion condicional en una linea
@@ -32,7 +32,7 @@ print("Par" if n % 2 == 0 else "Impar")""",
                 "como": "No declara tipos: int(input()) lee y convierte. Lo resuelve en 2 lineas con una expresion condicional. Es interpretado.",
             },
             {
-                "id": "java", "label": "☕ Java", "color": "#b07219",
+                "id": "java", "label": "Java", "color": "#b07219",
                 "codigo": """import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
@@ -59,7 +59,7 @@ public class Main {
         "idea": "La formula es F = C * 9/5 + 32. Cuidado: si dividis 9/5 con numeros enteros el resultado se trunca a 1; hay que trabajar con decimales.",
         "lenguajes": [
             {
-                "id": "cpp", "label": "⚡ C++", "color": "#00599c",
+                "id": "cpp", "label": "C++", "color": "#00599c",
                 "codigo": """#include <iostream>
 using namespace std;
 int main() {
@@ -71,7 +71,7 @@ int main() {
                 "como": "Usa double para no truncar. Con 9.0/5 fuerza la division decimal: si fuera 9/5 con enteros daria 1.",
             },
             {
-                "id": "python", "label": "\U0001f40d Python", "color": "#3572a5",
+                "id": "python", "label": "Python", "color": "#3572a5",
                 "codigo": """c = float(input())   # float, no int
 # en Python 3, '/' siempre da decimal
 f = c * 9 / 5 + 32
@@ -79,7 +79,7 @@ print(f)""",
                 "como": "float(input()) lee un decimal. En Python 3 el operador / siempre devuelve decimal, asi que 9/5 ya es 1.8.",
             },
             {
-                "id": "java", "label": "☕ Java", "color": "#b07219",
+                "id": "java", "label": "Java", "color": "#b07219",
                 "codigo": """import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
@@ -105,7 +105,7 @@ public class Main {
         "idea": "Se multiplica un acumulador por cada numero de 1 a n con un bucle. El factorial crece muy rapido y puede desbordar los enteros de tamano fijo.",
         "lenguajes": [
             {
-                "id": "cpp", "label": "⚡ C++", "color": "#00599c",
+                "id": "cpp", "label": "C++", "color": "#00599c",
                 "codigo": """#include <iostream>
 using namespace std;
 int main() {
@@ -119,7 +119,7 @@ int main() {
                 "como": "for clasico (i de 1 a n) acumulando el producto. Usa long long porque el factorial desborda un int rapido.",
             },
             {
-                "id": "python", "label": "\U0001f40d Python", "color": "#3572a5",
+                "id": "python", "label": "Python", "color": "#3572a5",
                 "codigo": """n = int(input())
 fact = 1
 for i in range(1, n + 1):   # range(1, n+1) = 1..n
@@ -128,7 +128,7 @@ print(fact)""",
                 "como": "range(1, n+1) genera 1..n. Los enteros de Python no tienen limite de tamano, asi que nunca desbordan.",
             },
             {
-                "id": "java", "label": "☕ Java", "color": "#b07219",
+                "id": "java", "label": "Java", "color": "#b07219",
                 "codigo": """import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
@@ -156,7 +156,7 @@ public class Main {
         "idea": "Se recorre el arreglo varias veces; en cada pasada se comparan elementos vecinos y se intercambian si estan en desorden. Son dos bucles anidados.",
         "lenguajes": [
             {
-                "id": "cpp", "label": "⚡ C++", "color": "#00599c",
+                "id": "cpp", "label": "C++", "color": "#00599c",
                 "codigo": """#include <iostream>
 using namespace std;
 int main() {
@@ -171,7 +171,7 @@ int main() {
                 "como": "Arreglo de tamano fijo. swap() intercambia dos elementos. El for interno acorta con -i: los mayores ya quedaron al final.",
             },
             {
-                "id": "python", "label": "\U0001f40d Python", "color": "#3572a5",
+                "id": "python", "label": "Python", "color": "#3572a5",
                 "codigo": """a = [5, 2, 9, 1]
 n = len(a)
 for i in range(n - 1):
@@ -183,7 +183,7 @@ print(a)""",
                 "como": "Usa una lista (len(a)). El intercambio se hace en una sola linea, sin variable temporal: a[j], a[j+1] = a[j+1], a[j].",
             },
             {
-                "id": "java", "label": "☕ Java", "color": "#b07219",
+                "id": "java", "label": "Java", "color": "#b07219",
                 "codigo": """import java.util.Arrays;
 public class Main {
     public static void main(String[] args) {

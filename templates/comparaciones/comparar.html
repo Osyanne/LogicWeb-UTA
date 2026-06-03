@@ -24,13 +24,13 @@
 
   {% for p in problemas %}
   <section class="comparar-problema{% if forloop.first %} active{% endif %}" data-slug="{{ p.slug }}">
-    <div class="comparar-enunciado"><b>📝 Problema:</b> {{ p.enunciado }} <span class="chip chip-{{ p.nivel|lower }}">{{ p.nivel }}</span></div>
-    <div class="comparar-idea">💭 <b>Idea:</b> {{ p.idea }}</div>
+    <div class="comparar-enunciado"><b>Problema:</b> {{ p.enunciado }} <span class="chip chip-{{ p.nivel|lower }}">{{ p.nivel }}</span></div>
+    <div class="comparar-idea"><b>Idea:</b> {{ p.idea }}</div>
 
     <div class="comparar-grid">
       {% for l in p.lenguajes %}
       <div class="comparar-col">
-        <div class="comparar-lang" style="background:{{ l.color }}">{{ l.label }}</div>
+        <div class="comparar-lang" style="background:{{ l.color }}"><span class="lang-dot" style="background:{{ l.color }}"></span>{{ l.label }}</div>
         <pre><code class="language-{{ l.id }}">{{ l.codigo }}</code></pre>
         <div class="comparar-como"><b>Cómo lo hace:</b> {{ l.como }}</div>
       </div>
@@ -38,7 +38,7 @@
     </div>
 
     <div class="comparar-dif">
-      <div class="dif-titulo">🔍 ¿Qué cambia y por qué?</div>
+      <div class="dif-titulo">¿Qué cambia y por qué?</div>
       {% for d in p.diferencias %}
       <div class="dif-item">• <b>{{ d.titulo }}:</b> {{ d.detalle }}</div>
       {% endfor %}

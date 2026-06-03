@@ -23,3 +23,7 @@ def test_no_emoji_progreso():
 def test_no_emoji_contenidos():
     assert emojis_in("templates/contenidos/lista.html") == []
     assert emojis_in("templates/contenidos/detalle.html") == []
+
+def test_no_emoji_comparar():
+    assert emojis_in("templates/comparaciones/comparar.html") == []
+    assert emojis_in("apps/ejercicios/comparaciones.py") == []
