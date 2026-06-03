@@ -32,7 +32,7 @@
   <!-- ── Barra de navegación ── -->
   <nav class="navbar">
     <a href="{% url 'inicio' %}" class="navbar-brand">
-      🎓 Logic<span>Web</span> UTA
+      {% include "icons/code.svg" with cls="ico brand-ico" %} Logic<span>Web</span> UTA
     </a>
 
     <ul class="navbar-links">
@@ -50,7 +50,7 @@
         <span class="theme-icon" aria-hidden="true">&#127769;</span>
       </button>
       {% if user.is_authenticated %}
-        👤 {{ user.get_full_name|default:user.username }}
+        {{ user.get_full_name|default:user.username }}
         &nbsp;|&nbsp;
         <a href="{% url 'logout' %}">Salir</a>
       {% else %}
