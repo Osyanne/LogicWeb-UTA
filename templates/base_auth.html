@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{% block titulo %}Acceso{% endblock %} | LogicWeb UTA</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+  <link rel="stylesheet" href="{% static 'css/auth.css' %}">
+  {% block head_extra %}{% endblock %}
+</head>
+<body>
+  <div class="auth-wrap">
+
+    <!-- ── Panel de marca (izquierda) ── -->
+    <aside class="auth-panel">
+      <div class="auth-code-motif" aria-hidden="true">{ } &lt;/&gt; ( ) =&gt; [ ] ; // const for if</div>
+      <div class="auth-brand">
+        <img src="{% static 'img/uta-escudo.svg' %}" alt="Escudo LogicWeb UTA — Universidad Técnica de Ambato" class="auth-escudo">
+        <p class="auth-overline">Universidad Técnica de Ambato</p>
+        <p class="auth-logo">Logic<span>Web</span> UTA</p>
+        <p class="auth-tagline">Aprendé lógica programando soluciones reales.</p>
+        <ul class="auth-valueprops">
+          <li>C++ &middot; Python &middot; Java</li>
+          <li>Práctica interactiva con pistas</li>
+          <li>Seguí tu progreso por unidad</li>
+        </ul>
+      </div>
+    </aside>
+
+    <!-- ── Lado del formulario (derecha) ── -->
+    <main class="auth-form-side">
+      {% if messages %}
+        <div class="auth-messages">
+          {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+          {% endfor %}
+        </div>
+      {% endif %}
+      {% block auth_content %}{% endblock %}
+    </main>
+
+  </div>
+  {% block auth_scripts %}{% endblock %}
+</body>
+</html>
