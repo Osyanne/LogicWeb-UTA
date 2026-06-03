@@ -30,7 +30,7 @@
     <div class="comparar-grid">
       {% for l in p.lenguajes %}
       <div class="comparar-col">
-        <div class="comparar-lang" style="background:{{ l.color }}"><span class="lang-dot" style="background:{{ l.color }}"></span>{{ l.label }}</div>
+        <div class="comparar-lang" style="background:{{ l.color }}">{{ l.label }}</div>
         <pre><code class="language-{{ l.id }}">{{ l.codigo }}</code></pre>
         <div class="comparar-como"><b>Cómo lo hace:</b> {{ l.como }}</div>
       </div>
