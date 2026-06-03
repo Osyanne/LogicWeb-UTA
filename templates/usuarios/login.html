@@ -1,26 +1,42 @@
-{% extends 'base.html' %}
+{% extends 'base_auth.html' %}
 {% block titulo %}Iniciar Sesión{% endblock %}
 
-{% block contenido %}
-<div class="container">
-  <div class="form-card">
-    <h2>🔑 Iniciar Sesión</h2>
-    <form method="post">
-      {% csrf_token %}
-      {% if form.errors %}
-        <div class="alert alert-error">Correo o contraseña incorrectos.</div>
-      {% endif %}
-      {% for field in form %}
-        <div class="form-group">
-          <label>{{ field.label }}</label>
-          {{ field }}
-        </div>
-      {% endfor %}
-      <button type="submit" class="btn btn-primary btn-full mt-2">Ingresar al sistema</button>
-    </form>
-    <p class="text-center mt-3 text-suave" style="font-size:.9rem">
-      ¿No tienes cuenta? <a href="{% url 'registro' %}">Regístrate aquí</a>
-    </p>
+{% block auth_content %}
+<div class="auth-card">
+  <h1 class="auth-title">Iniciar Sesión</h1>
+  <p class="auth-sub">Ingresá con tu cuenta para continuar.</p>
+
+  <form method="post">
+    {% csrf_token %}
+    {% if form.errors %}
+      <div class="alert alert-error">Usuario o contraseña incorrectos.</div>
+    {% endif %}
+    {% for field in form %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+      </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary btn-full mt-2">Ingresar al sistema</button>
+  </form>
+
+  <div class="auth-demo">
+    <p class="auth-demo-title">Cuenta de demostración</p>
+    <p class="auth-demo-creds">Usuario: <strong>demo</strong> &middot; Contraseña: <strong>Demo123*</strong></p>
+    <button type="button" class="auth-demo-fill" id="demo-fill">Usar credenciales demo &rarr;</button>
   </div>
+
+  <p class="auth-foot">¿No tienes cuenta? <a href="{% url 'registro' %}">Regístrate aquí</a></p>
 </div>
+{% endblock %}
+
+{% block auth_scripts %}
+<script>
+  document.getElementById('demo-fill').addEventListener('click', function () {
+    var u = document.getElementById('id_username');
+    var p = document.getElementById('id_password');
+    if (u) { u.value = 'demo'; u.focus(); }
+    if (p) { p.value = 'Demo123*'; }
+  });
+</script>
 {% endblock %}
