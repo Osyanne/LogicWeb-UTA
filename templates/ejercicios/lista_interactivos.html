@@ -3,12 +3,12 @@
 
 {% block contenido %}
 <div class="container" style="padding-top:2rem">
-  <h1 class="section-title">⚙️ Práctica Interactiva — Analiza código y Responde</h1>
+  <h1 class="section-title">{% include "icons/terminal.svg" %} Práctica Interactiva — Analiza código y Responde</h1>
   <p class="text-suave mb-3">Estudia el código de cada ejercicio, responde la pregunta y recibe retroalimentación inmediata.</p>
 
   {% if not user.is_authenticated %}
     <div class="alert alert-info">
-      💡 <a href="{% url 'registro' %}">Regístrate</a> o <a href="{% url 'login' %}">inicia sesión</a> para guardar tu progreso.
+      <a href="{% url 'registro' %}">Regístrate</a> o <a href="{% url 'login' %}">inicia sesión</a> para guardar tu progreso.
     </div>
   {% endif %}
 
@@ -23,10 +23,10 @@
          style="border-color:#00599C;{% if lenguaje_filtro == 'cpp' %}background:#00599C;color:#fff;{% endif %}">C++</a>
       <a href="?lenguaje=python{% if unidad_filtro %}&unidad={{ unidad_filtro }}{% endif %}"
          class="btn btn-sm {% if lenguaje_filtro == 'python' %}btn-primary{% else %}btn-outline{% endif %}"
-         style="border-color:#3572A5;{% if lenguaje_filtro == 'python' %}background:#3572A5;color:#fff;{% endif %}">🐍 Python</a>
+         style="border-color:#3572A5;{% if lenguaje_filtro == 'python' %}background:#3572A5;color:#fff;{% endif %}">Python</a>
       <a href="?lenguaje=java{% if unidad_filtro %}&unidad={{ unidad_filtro }}{% endif %}"
          class="btn btn-sm {% if lenguaje_filtro == 'java' %}btn-primary{% else %}btn-outline{% endif %}"
-         style="border-color:#b07219;{% if lenguaje_filtro == 'java' %}background:#b07219;color:#fff;{% endif %}">☕ Java</a>
+         style="border-color:#b07219;{% if lenguaje_filtro == 'java' %}background:#b07219;color:#fff;{% endif %}">Java</a>
     </div>
 
     <span style="color:var(--text-muted);font-size:.85rem;padding:0 .25rem">|</span>
@@ -39,7 +39,7 @@
       {% endfor %}
       {% if unidad_filtro %}
         <a href="?{% if lenguaje_filtro %}lenguaje={{ lenguaje_filtro }}{% endif %}"
-           class="btn btn-sm btn-outline">✕ Unidad</a>
+           class="btn btn-sm btn-outline">{% include "icons/x.svg" with cls="ico ico-sm" %} Unidad</a>
       {% endif %}
     </div>
   </div>
@@ -50,13 +50,13 @@
         <a href="{% url 'interactivo_detalle' ej.pk %}" class="card-ejercicio" style="text-decoration:none">
           <div class="titulo-ej">{{ ej.titulo }}</div>
           <div class="meta">
-            <span class="chip chip-interactivo">⚙️ Interactivo</span>
+            <span class="chip chip-interactivo">Interactivo</span>
             <span class="chip chip-{{ ej.dificultad }}">{{ ej.get_dificultad_display }}</span>
             <span class="chip chip-unidad">U{{ ej.tema.unidad }}</span>
             {% if ej.lenguaje == 'python' %}
-              <span class="chip" style="background:#3572A5;color:#fff">🐍 Python</span>
+              <span class="chip" style="background:#3572A5;color:#fff">Python</span>
             {% elif ej.lenguaje == 'java' %}
-              <span class="chip" style="background:#b07219;color:#fff">☕ Java</span>
+              <span class="chip" style="background:#b07219;color:#fff">Java</span>
             {% else %}
               <span class="chip" style="background:#00599C;color:#fff">C++</span>
             {% endif %}

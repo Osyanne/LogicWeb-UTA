@@ -22,7 +22,7 @@
   <!-- Encabezado -->
   <div class="ejercicio-header">
     <div class="flex-gap mb-2">
-      <span class="chip chip-interactivo">⚙️ Ejercicio Interactivo</span>
+      <span class="chip chip-interactivo">Ejercicio Interactivo</span>
       <span class="chip chip-{{ ejercicio.dificultad }}">{{ ejercicio.get_dificultad_display }}</span>
       <span class="chip chip-unidad">{{ ejercicio.tema }}</span>
     </div>
@@ -36,11 +36,11 @@
     <!-- Código de referencia -->
     <div>
       {% if ejercicio.lenguaje == 'python' %}
-        <h3 class="section-title" style="font-size:1rem">★ Código Python — Estúdialo antes de responder</h3>
+        <h3 class="section-title" style="font-size:1rem">Código Python — Estúdialo antes de responder</h3>
       {% elif ejercicio.lenguaje == 'java' %}
-        <h3 class="section-title" style="font-size:1rem">★ Código Java — Estúdialo antes de responder</h3>
+        <h3 class="section-title" style="font-size:1rem">Código Java — Estúdialo antes de responder</h3>
       {% else %}
-        <h3 class="section-title" style="font-size:1rem">★ Código C++ — Estúdialo antes de responder</h3>
+        <h3 class="section-title" style="font-size:1rem">Código C++ — Estúdialo antes de responder</h3>
       {% endif %}
       <div class="bloque-cpp">
         <div class="bloque-cpp-header">
@@ -63,7 +63,7 @@
         <pre><code class="language-{% if ejercicio.lenguaje == 'python' %}python{% elif ejercicio.lenguaje == 'java' %}java{% else %}cpp{% endif %}">{{ codigo_cpp }}</code></pre>
       </div>
       <div class="aviso-cpp mt-1">
-        💡 Lee y traza el algoritmo antes de responder.
+        Lee y traza el algoritmo antes de responder.
       </div>
     </div>
 
@@ -94,14 +94,14 @@
 
           <div class="flex-gap mt-3">
             <button type="submit" class="btn btn-primary btn-full">
-              ✅ Verificar respuesta
+              Verificar respuesta
             </button>
           </div>
         </form>
 
         {% if pistas %}
         <div class="pistas-box">
-          <div class="pistas-titulo">¿Atascado? Pide una pista 👇</div>
+          <div class="pistas-titulo">¿Atascado? Pide una pista</div>
           <div id="pistas-cont">
             {% for p in pistas %}
             <div class="pista" hidden>
@@ -110,7 +110,7 @@
             </div>
             {% endfor %}
           </div>
-          <button type="button" id="btn-pista" class="btn btn-naranja btn-sm">💡 Pedir una pista</button>
+          <button type="button" id="btn-pista" class="btn btn-naranja btn-sm">Pedir una pista</button>
         </div>
         {% endif %}
 
@@ -148,7 +148,7 @@
       }
       if (reveladas >= pistas.length) {
         btnPista.disabled = true;
-        btnPista.textContent = '✓ No hay más pistas';
+        btnPista.textContent = 'No hay más pistas';
       }
     });
   }
