@@ -9,3 +9,6 @@ def emojis_in(rel):
 def test_no_emoji_base_and_theme():
     assert emojis_in("templates/base.html") == []
     assert emojis_in("static/js/theme.js") == []
+
+def test_no_emoji_inicio():
+    assert emojis_in("templates/inicio/index.html") == []
