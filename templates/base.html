@@ -21,6 +21,7 @@
   <title>{% block titulo %}LogicWeb UTA{% endblock %} | LogicWeb UTA</title>
   <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <link rel="stylesheet" href="{% static 'css/codigo.css' %}">
+  <link rel="stylesheet" href="{% static 'css/notificaciones.css' %}?v=1">
   <!-- Highlight.js para coloreado de sintaxis C++ -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/vs2015.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
@@ -50,6 +51,26 @@
         <span class="theme-icon" aria-hidden="true">&#127769;</span>
       </button>
       {% if user.is_authenticated %}
+        <div class="noti-wrap">
+          <button id="noti-toggle" class="noti-btn" type="button" aria-label="Notificaciones" aria-expanded="false">
+            🔔{% if noti_no_leidas %}<span class="noti-badge">{{ noti_no_leidas }}</span>{% endif %}
+          </button>
+          <div id="noti-dropdown" class="noti-dropdown" hidden>
+            <div class="noti-dropdown-head">Notificaciones</div>
+            {% for n in noti_recientes %}
+              <div class="noti-item {% if not n.leida %}noti-item--nueva{% endif %}">
+                <span class="noti-item-ico">{{ n.icono }}</span>
+                <div class="noti-item-body">
+                  <strong>{{ n.titulo }}</strong>
+                  <span class="noti-item-time">hace {{ n.fecha|timesince }}</span>
+                </div>
+              </div>
+            {% empty %}
+              <div class="noti-empty">Todavía no tienes notificaciones.</div>
+            {% endfor %}
+            <a href="{% url 'notificaciones' %}" class="noti-vertodas">Ver todas</a>
+          </div>
+        </div>
         👤 {{ user.get_full_name|default:user.username }}
         &nbsp;|&nbsp;
         <a href="{% url 'logout' %}">Salir</a>
@@ -89,6 +110,7 @@
   </script>
   <script src="{% static 'js/theme.js' %}"></script>
   <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/notificaciones.js' %}"></script>
   {% block scripts %}{% endblock %}
 </body>
 </html>
