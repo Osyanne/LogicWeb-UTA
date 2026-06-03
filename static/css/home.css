@@ -12,7 +12,13 @@
   border-radius: 20px;
   font-size: .85rem;
   font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  transition: var(--transicion);
 }
+.hero-langs .lang-chip:hover { background: rgba(244,137,31,.28); }
+/* Son <a> dentro de <main>: blindar su color en oscuro (gana a main a:not(.btn)) */
+html[data-theme="dark"] .hero-langs .lang-chip { color: #fff; }
 
 /* Bloque de seccion */
 .home-section { padding: 2.25rem 0 .5rem; }
