@@ -33,3 +33,12 @@ def actualizar_progreso_estudiante(sender, instance, created, **kwargs):
             'correctos': stats['correctos'] or 0,
         },
     )
+
+
+@receiver(post_save, sender='ejercicios.Intento')
+def generar_notificaciones_logros(sender, instance, created, **kwargs):
+    """Otorga logros (notificaciones) cuando se registra un intento CORRECTO."""
+    if not created or instance.resultado != 'correcto':
+        return
+    from .logros import otorgar_logros
+    otorgar_logros(instance.usuario)
