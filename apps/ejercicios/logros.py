@@ -33,6 +33,7 @@ def otorgar_logros(usuario):
         return
 
     _primeros_pasos(usuario, correctos_ids)
+    _volumen(usuario, len(correctos_ids))
 
 
 def _primeros_pasos(usuario, correctos_ids):
@@ -47,3 +48,11 @@ def _primeros_pasos(usuario, correctos_ids):
         _crear(usuario, 'primer_paso', f'primer_{lang}',
                f'¡Tu primer ejercicio en {nombre}!',
                f'Resolviste tu primer ejercicio de práctica en {nombre}.', '🌱')
+
+
+def _volumen(usuario, total_distintos):
+    for umbral in UMBRALES_VOLUMEN:
+        if total_distintos >= umbral:
+            _crear(usuario, 'volumen', f'volumen_{umbral}',
+                   f'¡{umbral} ejercicios resueltos!',
+                   f'Ya llevas {umbral} ejercicios de práctica resueltos correctamente.', '📈')

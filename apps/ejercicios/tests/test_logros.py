@@ -43,3 +43,35 @@ class PrimerosPasosTest(TestCase):
         self._resolver(crear_ejercicio(self.tema, categoria='resuelto'))
         otorgar_logros(self.user)
         self.assertFalse(Notificacion.objects.filter(usuario=self.user, clave='primer_correcto').exists())
+
+
+class VolumenTest(TestCase):
+    def setUp(self):
+        self.user = Usuario.objects.create_user(username='est', password='clave12345')
+        self.tema = Tema.objects.create(nombre_tema='Lógica', descripcion='t', unidad=1)
+
+    def _resolver_n_distintos(self, n):
+        ejercicios = [crear_ejercicio(self.tema, titulo=f'Ej{i}') for i in range(n)]
+        Intento.objects.bulk_create([
+            Intento(usuario=self.user, ejercicio=ej, respuesta_usuario='1', resultado='correcto')
+            for ej in ejercicios
+        ])
+
+    def test_volumen_10_se_otorga_con_10(self):
+        self._resolver_n_distintos(10)
+        otorgar_logros(self.user)
+        self.assertTrue(Notificacion.objects.filter(usuario=self.user, clave='volumen_10').exists())
+
+    def test_volumen_10_no_con_9(self):
+        self._resolver_n_distintos(9)
+        otorgar_logros(self.user)
+        self.assertFalse(Notificacion.objects.filter(usuario=self.user, clave='volumen_10').exists())
+
+    def test_volumen_cuenta_distintos_no_reintentos(self):
+        ej = crear_ejercicio(self.tema)
+        Intento.objects.bulk_create([
+            Intento(usuario=self.user, ejercicio=ej, respuesta_usuario='1', resultado='correcto')
+            for _ in range(10)
+        ])
+        otorgar_logros(self.user)
+        self.assertFalse(Notificacion.objects.filter(usuario=self.user, clave='volumen_10').exists())
