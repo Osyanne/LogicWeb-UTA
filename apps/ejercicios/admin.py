@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import Usuario, Tema, Ejercicio, Retroalimentacion, Intento
+from .models import Usuario, Tema, Ejercicio, Retroalimentacion, Intento, Notificacion
 
 
 # ── Usuario ──────────────────────────────────────────────────
@@ -63,3 +63,11 @@ class IntentoAdmin(admin.ModelAdmin):
     list_filter   = ('resultado', 'ejercicio__tema__unidad')
     search_fields = ('usuario__username',)
     readonly_fields = ('usuario', 'ejercicio', 'respuesta_usuario', 'resultado', 'fecha')
+
+
+# ── Notificacion ─────────────────────────────────────────────
+@admin.register(Notificacion)
+class NotificacionAdmin(admin.ModelAdmin):
+    list_display  = ('usuario', 'tipo', 'clave', 'titulo', 'leida', 'fecha')
+    list_filter   = ('tipo', 'leida')
+    search_fields = ('usuario__username', 'clave', 'titulo')
