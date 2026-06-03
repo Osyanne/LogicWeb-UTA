@@ -12,3 +12,7 @@ def test_no_emoji_base_and_theme():
 
 def test_no_emoji_inicio():
     assert emojis_in("templates/inicio/index.html") == []
+
+def test_no_emoji_auth():
+    assert emojis_in("templates/usuarios/login.html") == []
+    assert emojis_in("templates/usuarios/registro.html") == []
