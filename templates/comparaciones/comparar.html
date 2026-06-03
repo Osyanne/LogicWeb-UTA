@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}Comparar lenguajes{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/comparar.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+{% endblock %}
+
+{% block contenido %}
+<section class="hero">
+  <h1>Un problema, <span>tres lenguajes</span></h1>
+  <p>Mira cómo el mismo algoritmo se resuelve en C++, Python y Java, y qué cambia en cada uno.</p>
+</section>
+
+<div class="container" style="padding-top:1.5rem">
+
+  <div class="comparar-tabs">
+    {% for p in problemas %}
+    <button type="button" class="comparar-tab{% if forloop.first %} active{% endif %}" data-slug="{{ p.slug }}">{{ p.titulo }}</button>
+    {% endfor %}
+  </div>
+
+  {% for p in problemas %}
+  <section class="comparar-problema{% if forloop.first %} active{% endif %}" data-slug="{{ p.slug }}">
+    <div class="comparar-enunciado"><b>📝 Problema:</b> {{ p.enunciado }} <span class="chip chip-{{ p.nivel|lower }}">{{ p.nivel }}</span></div>
+    <div class="comparar-idea">💭 <b>Idea:</b> {{ p.idea }}</div>
+
+    <div class="comparar-grid">
+      {% for l in p.lenguajes %}
+      <div class="comparar-col">
+        <div class="comparar-lang" style="background:{{ l.color }}">{{ l.label }}</div>
+        <pre><code class="language-{{ l.id }}">{{ l.codigo }}</code></pre>
+        <div class="comparar-como"><b>Cómo lo hace:</b> {{ l.como }}</div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="comparar-dif">
+      <div class="dif-titulo">🔍 ¿Qué cambia y por qué?</div>
+      {% for d in p.diferencias %}
+      <div class="dif-item">• <b>{{ d.titulo }}:</b> {{ d.detalle }}</div>
+      {% endfor %}
+    </div>
+  </section>
+  {% endfor %}
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  document.querySelectorAll('.comparar-tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      var slug = tab.dataset.slug;
+      document.querySelectorAll('.comparar-tab').forEach(function (t) { t.classList.toggle('active', t === tab); });
+      document.querySelectorAll('.comparar-problema').forEach(function (s) { s.classList.toggle('active', s.dataset.slug === slug); });
+    });
+  });
+</script>
+{% endblock %}
