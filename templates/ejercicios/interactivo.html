@@ -3,15 +3,16 @@
 
 {% block head_extra %}
 <style>
-  .pistas-box { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px dashed var(--borde); }
-  .pistas-titulo { font-size: .85rem; color: var(--texto-suave); font-weight: 700; margin-bottom: .6rem; }
+  .pistas-box { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px dashed var(--border); }
+  .pistas-titulo { font-size: .85rem; color: var(--text-muted); font-weight: 700; margin-bottom: .6rem; }
   .pista { background: #fff8e1; border-left: 4px solid var(--naranja); border-radius: 8px;
            padding: .65rem .9rem; margin-bottom: .55rem; animation: pista-in .25s ease; }
   .pista-num { font-size: .7rem; font-weight: 800; color: var(--naranja);
                text-transform: uppercase; letter-spacing: .04em; }
-  .pista p { margin: .25rem 0 0; font-size: .9rem; color: var(--texto); line-height: 1.5; }
+  .pista p { margin: .25rem 0 0; font-size: .9rem; color: var(--text); line-height: 1.5; }
   #btn-pista:disabled { opacity: .55; cursor: default; }
   @keyframes pista-in { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: translateY(0); } }
+  html[data-theme="dark"] .pista { background: rgba(245,158,11,.12); }
 </style>
 {% endblock %}
 
@@ -72,9 +73,9 @@
       <div class="form-card" style="max-width:100%;margin:0">
         <form method="post" id="form-respuesta">
           {% csrf_token %}
-          <p style="font-weight:700;color:var(--azul);margin-bottom:1rem;font-size:1rem">
+          <p style="font-weight:700;color:var(--heading);margin-bottom:1rem;font-size:1rem">
             Basándote en el código {% if ejercicio.lenguaje == 'python' %}Python{% elif ejercicio.lenguaje == 'java' %}Java{% else %}C++{% endif %}:<br>
-            <span style="color:var(--texto);font-weight:600">{{ ejercicio.enunciado }}</span>
+            <span style="color:var(--text);font-weight:600">{{ ejercicio.enunciado }}</span>
           </p>
 
           {% if form.errors %}

@@ -35,7 +35,7 @@
             <span class="chip chip-{{ ej.categoria }}">{{ ej.get_categoria_display }}</span>
             <span class="chip chip-{{ ej.dificultad }}">{{ ej.get_dificultad_display }}</span>
           </div>
-          <p style="font-size:.88rem;color:var(--texto-suave)">{{ ej.enunciado|truncatechars:100 }}</p>
+          <p style="font-size:.88rem;color:var(--text-muted)">{{ ej.enunciado|truncatechars:100 }}</p>
           {% if ej.categoria == 'resuelto' %}
             <a href="{% url 'resuelto_detalle' ej.pk %}" class="btn btn-primary btn-sm">Ver solución</a>
           {% else %}

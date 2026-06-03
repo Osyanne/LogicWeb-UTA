@@ -29,7 +29,7 @@
          style="border-color:#b07219;{% if lenguaje_filtro == 'java' %}background:#b07219;color:#fff;{% endif %}">☕ Java</a>
     </div>
 
-    <span style="color:var(--texto-suave);font-size:.85rem;padding:0 .25rem">|</span>
+    <span style="color:var(--text-muted);font-size:.85rem;padding:0 .25rem">|</span>
 
     <!-- Filtro por unidad -->
     <div class="flex-gap" style="gap:.4rem">
@@ -61,7 +61,7 @@
               <span class="chip" style="background:#00599C;color:#fff">C++</span>
             {% endif %}
           </div>
-          <p style="font-size:.88rem;color:var(--texto-suave)">{{ ej.enunciado|truncatechars:110 }}</p>
+          <p style="font-size:.88rem;color:var(--text-muted)">{{ ej.enunciado|truncatechars:110 }}</p>
           <span class="btn btn-naranja btn-sm" style="margin-top:.25rem">Practicar ahora →</span>
         </a>
       {% endfor %}
