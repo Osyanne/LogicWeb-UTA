@@ -608,9 +608,10 @@ html[data-theme="dark"] .btn-outline:hover { background: var(--accent); border-c
 html[data-theme="dark"] .form-group input:focus,
 html[data-theme="dark"] .input-respuesta:focus { box-shadow: 0 0 0 3px rgba(255,154,51,.25); border-color: var(--accent); }
 
-/* Links de cuerpo: el azul-claro de marca queda bajo de contraste sobre oscuro (AA) */
-html[data-theme="dark"] a { color: #7da0d4; }
-html[data-theme="dark"] a:hover { color: var(--accent); }
+/* Links de cuerpo (dentro de <main>): el azul-claro de marca queda bajo de contraste
+   sobre oscuro (AA). Acotado a `main a:not(.btn)` para NO pisar navbar ni botones. */
+html[data-theme="dark"] main a:not(.btn) { color: #7da0d4; }
+html[data-theme="dark"] main a:not(.btn):hover { color: var(--accent); }
 
 /* ── Boton de cambio de tema (en la navbar) ─────────────────── */
 .theme-toggle {
