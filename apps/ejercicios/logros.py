@@ -34,6 +34,7 @@ def otorgar_logros(usuario):
 
     _primeros_pasos(usuario, correctos_ids)
     _volumen(usuario, len(correctos_ids))
+    _unidades(usuario, correctos_ids)
 
 
 def _primeros_pasos(usuario, correctos_ids):
@@ -56,3 +57,21 @@ def _volumen(usuario, total_distintos):
             _crear(usuario, 'volumen', f'volumen_{umbral}',
                    f'¡{umbral} ejercicios resueltos!',
                    f'Ya llevas {umbral} ejercicios de práctica resueltos correctamente.', '📈')
+
+
+def _unidades(usuario, correctos_ids):
+    nombres_unidad = dict(Tema.UNIDADES)
+    unidades = set(
+        Ejercicio.objects.filter(id__in=correctos_ids).values_list('tema__unidad', flat=True)
+    )
+    for unidad in unidades:
+        interactivos_u = set(
+            Ejercicio.objects
+            .filter(tema__unidad=unidad, categoria='interactivo', activo=True)
+            .values_list('id', flat=True)
+        )
+        if interactivos_u and interactivos_u.issubset(correctos_ids):
+            nombre = nombres_unidad.get(unidad, f'U{unidad}')
+            _crear(usuario, 'unidad', f'unidad_{unidad}',
+                   f'¡Dominaste la U{unidad}!',
+                   f'Completaste todos los ejercicios de práctica de «{nombre}».', '🏆')

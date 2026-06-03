@@ -75,3 +75,36 @@ class VolumenTest(TestCase):
         ])
         otorgar_logros(self.user)
         self.assertFalse(Notificacion.objects.filter(usuario=self.user, clave='volumen_10').exists())
+
+
+class UnidadesTest(TestCase):
+    def setUp(self):
+        self.user = Usuario.objects.create_user(username='est', password='clave12345')
+        self.tema = Tema.objects.create(nombre_tema='Lógica', descripcion='t', unidad=1)
+
+    def _resolver(self, ej):
+        Intento.objects.bulk_create([
+            Intento(usuario=self.user, ejercicio=ej, respuesta_usuario='1', resultado='correcto')
+        ])
+
+    def test_unidad_completa_se_otorga(self):
+        e1 = crear_ejercicio(self.tema, titulo='A')
+        e2 = crear_ejercicio(self.tema, titulo='B')
+        self._resolver(e1)
+        self._resolver(e2)
+        otorgar_logros(self.user)
+        self.assertTrue(Notificacion.objects.filter(usuario=self.user, clave='unidad_1').exists())
+
+    def test_unidad_incompleta_no_se_otorga(self):
+        e1 = crear_ejercicio(self.tema, titulo='A')
+        crear_ejercicio(self.tema, titulo='B')  # existe pero no se resuelve
+        self._resolver(e1)
+        otorgar_logros(self.user)
+        self.assertFalse(Notificacion.objects.filter(usuario=self.user, clave='unidad_1').exists())
+
+    def test_resueltos_no_inflan_el_total(self):
+        inter = crear_ejercicio(self.tema, titulo='Inter', categoria='interactivo')
+        crear_ejercicio(self.tema, titulo='Resu', categoria='resuelto')  # no cuenta para el total
+        self._resolver(inter)
+        otorgar_logros(self.user)
+        self.assertTrue(Notificacion.objects.filter(usuario=self.user, clave='unidad_1').exists())
