@@ -626,3 +626,13 @@ html[data-theme="dark"] a:hover { color: var(--accent); }
   transition: var(--transicion);
 }
 .theme-toggle:hover { background: rgba(244,137,31,.28); border-color: var(--naranja); transform: translateY(-1px); }
+
+/* ── Respeta prefers-reduced-motion: sin animaciones ni transiciones ── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
