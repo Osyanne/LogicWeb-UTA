@@ -33,3 +33,18 @@ class CrearDemoCommandTest(TestCase):
         self.assertTrue(
             ProgresoEstudiante.objects.filter(usuario=demo, unidad=1, correctos__gte=1).exists()
         )
+
+    def test_resetea_contrasena_si_cambio(self):
+        self._crear_ejercicio()
+        call_command('crear_demo')
+        demo = Usuario.objects.get(username='demo')
+        demo.set_password('otra-cosa')
+        demo.save(update_fields=['password'])
+        call_command('crear_demo')  # debe re-sincronizar el password anunciado
+        demo.refresh_from_db()
+        self.assertTrue(demo.check_password('Demo123*'))
+
+    def test_sin_ejercicios_no_falla(self):
+        call_command('crear_demo')  # sin ejercicios en la BD
+        self.assertEqual(Intento.objects.count(), 0)
+        self.assertTrue(Usuario.objects.filter(username='demo').exists())

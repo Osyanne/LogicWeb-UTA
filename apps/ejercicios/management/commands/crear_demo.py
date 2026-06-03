@@ -24,11 +24,15 @@ class Command(BaseCommand):
             usuario.save(update_fields=['password'])
             self.stdout.write(self.style.SUCCESS(f'Cuenta demo creada: {DEMO_USERNAME}'))
         else:
+            if not usuario.check_password(DEMO_PASSWORD):
+                usuario.set_password(DEMO_PASSWORD)
+                usuario.save(update_fields=['password'])
+                self.stdout.write(self.style.WARNING('Contraseña demo re-sincronizada.'))
             self.stdout.write(f'Cuenta demo ya existe: {DEMO_USERNAME}')
 
         # Siembra de progreso: solo si el demo aún no tiene intentos (idempotente).
-        if usuario.intentos.exists():
-            self.stdout.write('El demo ya tiene intentos; no se siembra de nuevo.')
+        if usuario.intentos.filter(resultado='correcto').exists():
+            self.stdout.write('El demo ya tiene intentos correctos; no se siembra de nuevo.')
             return
 
         ejercicios = list(Ejercicio.objects.filter(activo=True)[:5])
