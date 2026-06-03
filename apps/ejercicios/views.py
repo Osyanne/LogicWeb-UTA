@@ -9,11 +9,21 @@ from .forms import RespuestaForm
 #  INICIO
 # ══════════════════════════════════════════════════════════════
 def inicio(request):
-    unidades = Tema.objects.values('unidad').distinct().order_by('unidad')
     total_ejercicios = Ejercicio.objects.filter(activo=True).count()
+    num_unidades = Tema.objects.values('unidad').distinct().count()
+    # Ejercicios destacados: uno por lenguaje, prefiriendo resueltos (mejor vitrina)
+    destacados = []
+    for lang in ('cpp', 'python', 'java'):
+        ej = (Ejercicio.objects.filter(activo=True, lenguaje=lang, categoria='resuelto')
+              .select_related('tema').first()
+              or Ejercicio.objects.filter(activo=True, lenguaje=lang)
+              .select_related('tema').first())
+        if ej:
+            destacados.append(ej)
     return render(request, 'inicio/index.html', {
-        'unidades': unidades,
         'total_ejercicios': total_ejercicios,
+        'num_unidades': num_unidades,
+        'destacados': destacados,
     })
 
 
