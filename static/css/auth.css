@@ -19,6 +19,7 @@
   justify-content: center;
   padding: 2.5rem;
   color: #fff;
+  /* #131d33 y #2c4470 = sombras oscura/clara de --azul, propias del panel; locales a propósito (no tocamos el style.css compartido) */
   background: linear-gradient(150deg, #131d33 0%, var(--azul) 48%, #2c4470 100%);
 }
 .auth-code-motif {
@@ -74,6 +75,7 @@
   max-width: 400px;
   background: var(--surface);
   border-radius: 16px;
+  /* rgba(26,39,68,...) = RGB de --azul; opacidad .16 a medida (entre --shadow y --shadow-hover) */
   box-shadow: 0 14px 40px rgba(26, 39, 68, .16);
   padding: 2.25rem 2rem;
 }
@@ -93,7 +95,7 @@
   font-weight: 800;
   text-transform: uppercase;
   letter-spacing: .6px;
-  color: #b5610a;
+  color: #bf360c;
   margin-bottom: .25rem;
 }
 .auth-demo-creds { font-size: .85rem; color: var(--text); }
@@ -110,7 +112,7 @@
   cursor: pointer;
   transition: var(--transicion);
 }
-.auth-demo-fill:hover { background: #e07d18; }
+.auth-demo-fill:hover { background: #e07d18; /* = .btn-naranja:hover de style.css */ }
 
 .auth-foot { text-align: center; font-size: .88rem; color: var(--text-muted); margin-top: 1.3rem; }
 .auth-foot a { color: var(--azul-claro); font-weight: 700; }
