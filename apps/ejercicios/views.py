@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Tema, Ejercicio, Intento, Retroalimentacion
 from .forms import RespuestaForm
+from .comparaciones import PROBLEMAS
 
 
 # ══════════════════════════════════════════════════════════════
@@ -25,6 +26,10 @@ def inicio(request):
         'num_unidades': num_unidades,
         'destacados': destacados,
     })
+
+
+def comparar(request):
+    return render(request, 'comparaciones/comparar.html', {'problemas': PROBLEMAS})
 
 
 # ══════════════════════════════════════════════════════════════
