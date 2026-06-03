@@ -21,7 +21,7 @@ Acceso vía **campanita 🔔 en el navbar** (con badge de no-leídas + dropdown 
 - Generación automática enganchada al signal de `Intento` existente.
 - Campanita + badge + dropdown en el navbar (solo autenticados).
 - Página `/notificaciones/` con el feed completo; al abrirla marca todo como leído.
-- Tests pytest (ataca de paso el `tests.py` vacío pendiente).
+- Tests con el runner nativo de Django (`manage.py test`) — ataca de paso el `tests.py` vacío pendiente.
 
 **Fuera (YAGNI):** rachas · galería de insignias coleccionables (los datos quedan listos para
 hacerla después) · borrar notificaciones · marcar una sola como leída · email · tiempo real /
@@ -75,7 +75,11 @@ ejercicio ya logrado no crea duplicados.
 
 ## 5. Catálogo de logros — `apps/ejercicios/logros.py`
 
-`otorgar_logros(usuario, intento)` evalúa las 3 familias y hace `get_or_create` de lo que falte.
+**Alcance — solo práctica interactiva:** los 3 tipos de logro cuentan únicamente intentos en
+ejercicios `categoria='interactivo'`. Ver un ejercicio `resuelto` también crea un `Intento` correcto
+(la vista lo registra al verse), pero NO debe otorgar logros — premiamos práctica, no lectura.
+
+`otorgar_logros(usuario)` evalúa las 3 familias y hace `get_or_create` de lo que falte.
 Se llama **solo en intentos correctos** (un intento incorrecto no puede desbloquear nada → guard en
 el signal, eficiente).
 
@@ -96,8 +100,8 @@ el signal, eficiente).
 
 ### 📈 Volumen acumulado — `volumen_<umbral>` (umbral ∈ {10, 25, 50})
 - **Métrica:** cantidad de **ejercicios distintos** resueltos correctamente:
-  `Intento.objects.filter(usuario=u, resultado='correcto').values('ejercicio').distinct().count()`.
-  (Ejercicios distintos, no reintentos — para que el logro sea honesto.)
+  `Intento.objects.filter(usuario=u, resultado='correcto', ejercicio__categoria='interactivo').values('ejercicio').distinct().count()`.
+  (Ejercicios interactivos distintos, no reintentos — para que el logro sea honesto.)
 - Al cruzar cada umbral se otorga el correspondiente. Cada umbral una sola vez (vía clave). Si el
   conteo salta varios de golpe, se otorgan todos los cruzados.
 - Título "Llegaste a {umbral} ejercicios correctos", icono 📈.
@@ -136,15 +140,15 @@ implementado.
 Entrar a `/notificaciones/` marca todas como leídas → el badge baja a 0. Suficiente para v1; sin
 endpoints de "marcar una sola". El dropdown refleja el estado actual sin mutarlo.
 
-## 8. Testing (pytest)
+## 8. Testing (runner nativo de Django — `manage.py test`, sin pytest)
 
 - **`test_logros.py`**: cada familia se otorga cuando corresponde; **no se duplica** (llamar
   `otorgar_logros` dos veces ⇒ una sola `Notificacion`); unidad NO se otorga si falta 1 interactivo;
   volumen cuenta ejercicios distintos, no reintentos del mismo.
-- **`test_signal_notificaciones.py`**: crear `Intento` correcto dispara las notificaciones esperadas;
+- **`test_signals.py`**: crear `Intento` correcto dispara las notificaciones esperadas;
   `Intento` incorrecto no crea ninguna.
-- **`test_vista_notificaciones.py`**: la página marca leídas; el context processor devuelve el conteo
-  correcto para un usuario autenticado y nada para anónimo.
+- **`test_vistas.py`**: la página marca leídas; el context processor devuelve el conteo
+  correcto para un usuario autenticado y no rompe para anónimo.
 
 ## 9. Consideraciones operativas
 
@@ -162,6 +166,6 @@ endpoints de "marcar una sola". El dropdown refleja el estado actual sin mutarlo
 `apps/ejercicios/migrations/0006_notificacion.py` · `templates/notificaciones/lista.html` ·
 `static/css/notificaciones.css` · `static/js/notificaciones.js` · tests.
 
-**Modificados:** `apps/ejercicios/models.py` (modelo) · `apps/ejercicios/signals.py` (receiver) ·
-`apps/ejercicios/views.py` (view) · `apps/ejercicios/urls.py` (ruta) · `templates/base.html` (campanita
-+ script) · `config/settings.py` (context processor).
+**Modificados:** `apps/ejercicios/models.py` (modelo) · `apps/ejercicios/admin.py` (registro) ·
+`apps/ejercicios/signals.py` (receiver) · `apps/ejercicios/views.py` (view) · `apps/ejercicios/urls.py`
+(ruta) · `templates/base.html` (campanita + script) · `config/settings.py` (context processor).
