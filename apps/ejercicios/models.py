@@ -208,6 +208,7 @@ class Notificacion(models.Model):
     ]
     usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE, related_name='notificaciones')
     tipo    = models.CharField(max_length=20, choices=TIPOS)
+    # clave: identificador estable del logro, p. ej. 'unidad_1', 'primer_correcto', 'primer_cpp', 'volumen_10'
     clave   = models.CharField(max_length=50, help_text='Identificador único del logro por usuario.')
     titulo  = models.CharField(max_length=150)
     mensaje = models.TextField()

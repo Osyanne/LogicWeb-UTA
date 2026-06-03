@@ -71,3 +71,4 @@ class NotificacionAdmin(admin.ModelAdmin):
     list_display  = ('usuario', 'tipo', 'clave', 'titulo', 'leida', 'fecha')
     list_filter   = ('tipo', 'leida')
     search_fields = ('usuario__username', 'clave', 'titulo')
+    readonly_fields = ('fecha', 'clave')   # 'clave' es la llave de dedup — no editar a mano
