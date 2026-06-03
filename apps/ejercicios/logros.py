@@ -40,7 +40,7 @@ def otorgar_logros(usuario):
 def _primeros_pasos(usuario, correctos_ids):
     _crear(usuario, 'primer_paso', 'primer_correcto',
            '¡Tu primer ejercicio correcto!',
-           'Resolviste tu primer ejercicio de práctica. ¡Así se empieza!', '🌱')
+           'Resolviste tu primer ejercicio de práctica. ¡Así se empieza!', 'sprout')
 
     nombres = dict(Ejercicio.LENGUAJES)
     langs = set(Ejercicio.objects.filter(id__in=correctos_ids).values_list('lenguaje', flat=True))
@@ -48,7 +48,7 @@ def _primeros_pasos(usuario, correctos_ids):
         nombre = nombres.get(lang, lang)
         _crear(usuario, 'primer_paso', f'primer_{lang}',
                f'¡Tu primer ejercicio en {nombre}!',
-               f'Resolviste tu primer ejercicio de práctica en {nombre}.', '🌱')
+               f'Resolviste tu primer ejercicio de práctica en {nombre}.', 'sprout')
 
 
 def _volumen(usuario, total_distintos):
@@ -56,7 +56,7 @@ def _volumen(usuario, total_distintos):
         if total_distintos >= umbral:
             _crear(usuario, 'volumen', f'volumen_{umbral}',
                    f'¡{umbral} ejercicios resueltos!',
-                   f'Ya llevas {umbral} ejercicios de práctica resueltos correctamente.', '📈')
+                   f'Ya llevas {umbral} ejercicios de práctica resueltos correctamente.', 'trending-up')
 
 
 def _unidades(usuario, correctos_ids):
@@ -74,4 +74,4 @@ def _unidades(usuario, correctos_ids):
             nombre = nombres_unidad.get(unidad, f'U{unidad}')
             _crear(usuario, 'unidad', f'unidad_{unidad}',
                    f'¡Dominaste la U{unidad}!',
-                   f'Completaste todos los ejercicios de práctica de «{nombre}».', '🏆')
+                   f'Completaste todos los ejercicios de práctica de «{nombre}».', 'trophy')

@@ -53,13 +53,13 @@
       {% if user.is_authenticated %}
         <div class="noti-wrap">
           <button id="noti-toggle" class="noti-btn" type="button" aria-label="Notificaciones" aria-expanded="false">
-            🔔{% if noti_no_leidas %}<span class="noti-badge">{{ noti_no_leidas }}</span>{% endif %}
+            {% include "icons/bell.svg" with cls="noti-ico" %}{% if noti_no_leidas %}<span class="noti-badge">{{ noti_no_leidas }}</span>{% endif %}
           </button>
           <div id="noti-dropdown" class="noti-dropdown" hidden>
             <div class="noti-dropdown-head">Notificaciones</div>
             {% for n in noti_recientes %}
               <div class="noti-item {% if not n.leida %}noti-item--nueva{% endif %}">
-                <span class="noti-item-ico">{{ n.icono }}</span>
+                <span class="noti-item-ico">{% include "icons/"|add:n.icono|add:".svg" with cls="noti-ico" %}</span>
                 <div class="noti-item-body">
                   <strong>{{ n.titulo }}</strong>
                   <span class="noti-item-time">hace {{ n.fecha|timesince }}</span>

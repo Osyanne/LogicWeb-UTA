@@ -3,11 +3,11 @@
 
 {% block contenido %}
 <section class="container noti-page">
-  <h1 class="noti-page-title">🔔 Tus notificaciones</h1>
+  <h1 class="noti-page-title">{% include "icons/bell.svg" with cls="noti-ico-lg" %} Tus notificaciones</h1>
 
   {% for n in notificaciones %}
     <article class="noti-card">
-      <span class="noti-card-ico">{{ n.icono }}</span>
+      <span class="noti-card-ico">{% include "icons/"|add:n.icono|add:".svg" with cls="noti-ico-lg" %}</span>
       <div class="noti-card-body">
         <strong class="noti-card-titulo">{{ n.titulo }}</strong>
         <p class="noti-card-msg">{{ n.mensaje }}</p>
@@ -17,7 +17,7 @@
   {% empty %}
     <div class="noti-vacio">
       <p>Todavía no tienes notificaciones.</p>
-      <p>Resuelve ejercicios de práctica para desbloquear logros. 🌱</p>
+      <p>Resuelve ejercicios de práctica para desbloquear logros.</p>
     </div>
   {% endfor %}
 </section>

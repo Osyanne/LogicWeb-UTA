@@ -212,7 +212,7 @@ class Notificacion(models.Model):
     clave   = models.CharField(max_length=50, help_text='Identificador único del logro por usuario.')
     titulo  = models.CharField(max_length=150)
     mensaje = models.TextField()
-    icono   = models.CharField(max_length=8, default='🔔')
+    icono   = models.CharField(max_length=20, default='bell', help_text='Nombre del ícono SVG (templates/icons/<nombre>.svg).')
     leida   = models.BooleanField(default=False)
     fecha   = models.DateTimeField(auto_now_add=True)
 
