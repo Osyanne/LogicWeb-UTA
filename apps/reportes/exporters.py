@@ -96,7 +96,7 @@ def _estilo_tabla():
         ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
         ('FONTSIZE', (0, 0), (-1, -1), 9),
         ('ALIGN', (1, 0), (-1, -1), 'CENTER'),
-        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+        ('VALIGN', (0, 0), (-1, -1), 'TOP'),
         ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#eef3fb')]),
         ('GRID', (0, 0), (-1, -1), 0.4, colors.HexColor('#cccccc')),
         ('TOPPADDING', (0, 0), (-1, -1), 5),
@@ -127,6 +127,7 @@ def reporte_estudiante_pdf(data: dict, user) -> bytes:
                                 fontSize=10, textColor=colors.HexColor('#555555'))
     estilo_h2 = ParagraphStyle('H2UTA', parent=estilos['Heading2'],
                                fontSize=12, textColor=AZUL_UTA, spaceBefore=14, spaceAfter=6)
+    estilo_celda = ParagraphStyle('Celda', parent=estilos['Normal'], fontSize=9, leading=11)
 
     el = []
     el.append(Paragraph('UNIVERSIDAD TÉCNICA DE AMBATO', estilo_titulo))
@@ -151,7 +152,8 @@ def reporte_estudiante_pdf(data: dict, user) -> bytes:
         el.append(Paragraph('Progreso por unidad', estilo_h2))
         filas = [['Unidad', 'Total', 'Correctos', '%']]
         for u in data['progreso_unidades']:
-            filas.append([u['nombre'], str(u['total']), str(u['correctos']), f"{u['porcentaje']}%"])
+            filas.append([Paragraph(u['nombre'], estilo_celda), str(u['total']),
+                          str(u['correctos']), f"{u['porcentaje']}%"])
         t = Table(filas, hAlign='LEFT', colWidths=[9 * cm, 2.5 * cm, 2.5 * cm, 2 * cm])
         t.setStyle(_estilo_tabla())
         el.append(t)
@@ -162,14 +164,14 @@ def reporte_estudiante_pdf(data: dict, user) -> bytes:
         filas = [['Ejercicio', 'Unidad / Tema', 'Tipo', 'Resultado', 'Fecha']]
         for i in data['intentos']:
             filas.append([
-                i['titulo'],
-                f"U{i['unidad']} · {i['tema']}",
+                Paragraph(i['titulo'], estilo_celda),
+                Paragraph(f"U{i['unidad']} · {i['tema']}", estilo_celda),
                 i['categoria_display'],
                 i['resultado'],
                 i['fecha'].strftime('%d/%m/%Y %H:%M'),
             ])
         t = Table(filas, hAlign='LEFT', repeatRows=1,
-                  colWidths=[4.5 * cm, 4.5 * cm, 2.8 * cm, 2.4 * cm, 3 * cm])
+                  colWidths=[4.8 * cm, 4.5 * cm, 2.5 * cm, 2.2 * cm, 2.8 * cm])
         t.setStyle(_estilo_tabla())
         el.append(t)
     else:

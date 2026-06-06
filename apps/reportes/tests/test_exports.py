@@ -55,6 +55,17 @@ class PdfExporterTest(TestCase):
         contenido = exporters.reporte_estudiante_pdf(_data(vacio), vacio)
         self.assertTrue(contenido.startswith(b'%PDF'))
 
+    def test_pdf_titulo_largo_no_rompe(self):
+        tema = Tema.objects.create(nombre_tema='T' * 100, descripcion='x', unidad=2, orden=1)
+        ej = Ejercicio.objects.create(
+            titulo='X' * 200, enunciado='e', categoria='resuelto', tema=tema,
+            codigo_cpp='x', solucion_esperada='1', tipo_respuesta='entero',
+        )
+        Intento.objects.create(usuario=self.user, ejercicio=ej, respuesta_usuario='1', resultado='correcto')
+        contenido = exporters.reporte_estudiante_pdf(_data(self.user), self.user)
+        self.assertTrue(contenido.startswith(b'%PDF'))
+        self.assertGreater(len(contenido), 1000)
+
 
 class ExcelContenidoTest(TestCase):
     def setUp(self):
