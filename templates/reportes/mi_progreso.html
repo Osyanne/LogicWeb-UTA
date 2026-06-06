@@ -42,6 +42,21 @@
     </div>
   </div>
 
+  <!-- Gráficos (Chart.js) -->
+  {% if total %}
+  <div class="reportes-charts">
+    <div class="chart-card">
+      <h2>Avance por unidad</h2>
+      <div class="chart-canvas-wrap"><canvas id="grafico-unidades"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <h2>Aciertos vs. errores</h2>
+      <div class="chart-canvas-wrap"><canvas id="grafico-aciertos"></canvas></div>
+    </div>
+  </div>
+  {% endif %}
+  {{ datos_grafico|json_script:"datos-progreso" }}
+
   <!-- Progreso por unidad (RF09 — desglose por unidad) -->
   {% if progreso_unidades %}
   <div class="progreso-unidades">
@@ -113,7 +128,9 @@
   {% endif %}
 
   <div class="flex-gap mt-3">
-    <a href="{% url 'exportar_csv' %}" class="btn btn-outline">Descargar historial CSV</a>
+    <a href="{% url 'exportar_pdf' %}" class="btn btn-primary">Descargar PDF</a>
+    <a href="{% url 'exportar_excel' %}" class="btn btn-outline">Descargar Excel</a>
+    <a href="{% url 'exportar_csv' %}" class="btn btn-outline">Descargar CSV</a>
     <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-primary">Seguir practicando</a>
   </div>
 
@@ -121,6 +138,8 @@
 {% endblock %}
 
 {% block scripts %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4"></script>
+<script src="{% static 'js/reportes_charts.js' %}"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.progress-bar-fill, .unidad-bar-fill').forEach(function (bar) {

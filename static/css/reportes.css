@@ -162,3 +162,28 @@ html[data-theme="dark"] .unidad-pct,
 html[data-theme="dark"] .progreso-unidades h2 { color: #7da0d4; }
 html[data-theme="dark"] .badge-correcto   { background: rgba(46,160,67,.16); color: #6ee7a0; }
 html[data-theme="dark"] .badge-incorrecto { background: rgba(239,68,68,.16); color: #ff8a8a; }
+
+/* ── Gráficos (Chart.js) ─────────────────────────────── */
+.reportes-charts {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 720px) {
+  .reportes-charts { grid-template-columns: 1fr; }
+}
+.chart-card {
+  background: var(--surface);
+  border-radius: var(--radio);
+  box-shadow: var(--shadow);
+  padding: 1.25rem 1.5rem;
+}
+.chart-card h2 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--azul);
+  margin-bottom: 1rem;
+}
+.chart-canvas-wrap { position: relative; height: 240px; }
+html[data-theme="dark"] .chart-card h2 { color: #7da0d4; }

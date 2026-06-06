@@ -28,3 +28,23 @@ class MiProgresoViewTest(TestCase):
         resp = self.client.get(reverse('mi_progreso'))
         self.assertContains(resp, 'Suma')
         self.assertContains(resp, '<svg')   # iconos SVG, no emojis
+
+    def test_muestra_botones_export_y_datos_grafico(self):
+        self.client.force_login(self.user)
+        resp = self.client.get(reverse('mi_progreso'))
+        self.assertContains(resp, reverse('exportar_pdf'))
+        self.assertContains(resp, reverse('exportar_excel'))
+        self.assertContains(resp, 'id="datos-progreso"')        # json_script de Chart.js
+
+    def test_canvas_aparece_con_intentos(self):
+        tema = Tema.objects.create(nombre_tema='Algoritmos', descripcion='x', unidad=1, orden=1)
+        ej = Ejercicio.objects.create(
+            titulo='Suma', enunciado='e', categoria='interactivo', tema=tema,
+            codigo_cpp='x', solucion_esperada='5', tipo_respuesta='entero',
+        )
+        Intento.objects.create(usuario=self.user, ejercicio=ej, respuesta_usuario='5', resultado='correcto')
+        self.client.force_login(self.user)
+        resp = self.client.get(reverse('mi_progreso'))
+        self.assertContains(resp, 'id="grafico-unidades"')
+        self.assertContains(resp, 'id="grafico-aciertos"')
+        self.assertContains(resp, 'reportes_charts.js')
