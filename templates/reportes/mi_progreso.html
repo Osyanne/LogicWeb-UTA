@@ -128,9 +128,9 @@
   {% endif %}
 
   <div class="flex-gap mt-3">
-    <a href="{% url 'exportar_pdf' %}" class="btn btn-primary">Descargar PDF</a>
-    <a href="{% url 'exportar_excel' %}" class="btn btn-outline">Descargar Excel</a>
-    <a href="{% url 'exportar_csv' %}" class="btn btn-outline">Descargar CSV</a>
+    <a href="{% url 'exportar_pdf' %}" download="mi_progreso_logicweb.pdf" class="btn btn-primary">Descargar PDF</a>
+    <a href="{% url 'exportar_excel' %}" download="mi_progreso_logicweb.xlsx" class="btn btn-outline">Descargar Excel</a>
+    <a href="{% url 'exportar_csv' %}" download="mi_progreso_logicweb.csv" class="btn btn-outline">Descargar CSV</a>
     <a href="{% url 'ejercicios_interactivos' %}" class="btn btn-primary">Seguir practicando</a>
   </div>
 
