@@ -94,3 +94,51 @@ class ExcelContenidoTest(TestCase):
         self.assertEqual(hist.cell(row=2, column=1).value, 'Suma')
         self.assertEqual(hist.cell(row=2, column=2).value, 'U1')
         self.assertEqual(hist.cell(row=2, column=6).value, 'correcto')
+
+
+from django.urls import reverse
+
+
+class ExportEndpointTest(TestCase):
+    def setUp(self):
+        self.user = Usuario.objects.create_user(username='est', password='clave12345')
+
+    def test_pdf_requiere_login(self):
+        self.assertEqual(self.client.get(reverse('exportar_pdf')).status_code, 302)
+
+    def test_excel_requiere_login(self):
+        self.assertEqual(self.client.get(reverse('exportar_excel')).status_code, 302)
+
+    def test_pdf_descarga(self):
+        self.client.force_login(self.user)
+        resp = self.client.get(reverse('exportar_pdf'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp['Content-Type'], 'application/pdf')
+        self.assertIn('attachment', resp['Content-Disposition'])
+        self.assertIn('.pdf', resp['Content-Disposition'])
+        self.assertTrue(resp.content.startswith(b'%PDF'))
+
+    def test_excel_descarga(self):
+        self.client.force_login(self.user)
+        resp = self.client.get(reverse('exportar_excel'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(
+            resp['Content-Type'],
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+        )
+        self.assertIn('attachment', resp['Content-Disposition'])
+        self.assertTrue(resp.content.startswith(b'PK'))
+
+    def test_csv_descarga(self):
+        tema = Tema.objects.create(nombre_tema='Algoritmos', descripcion='x', unidad=1, orden=1)
+        ej = Ejercicio.objects.create(
+            titulo='SumaCSV', enunciado='e', categoria='interactivo', tema=tema,
+            codigo_cpp='x', solucion_esperada='5', tipo_respuesta='entero',
+        )
+        Intento.objects.create(usuario=self.user, ejercicio=ej, respuesta_usuario='5', resultado='correcto')
+        self.client.force_login(self.user)
+        resp = self.client.get(reverse('exportar_csv'))
+        self.assertEqual(resp.status_code, 200)
+        self.assertEqual(resp['Content-Type'], 'text/csv')
+        self.assertIn('attachment', resp['Content-Disposition'])
+        self.assertContains(resp, 'SumaCSV')   # la fila del intento aparece en el CSV

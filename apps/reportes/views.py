@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 import csv
 
-from . import services
+from . import services, exporters
 
 
 @login_required
@@ -45,3 +45,24 @@ def exportar_csv(request):
             i['fecha'].strftime('%d/%m/%Y %H:%M'),
         ])
     return response
+
+
+@login_required
+def exportar_pdf(request):
+    data = services.progreso_estudiante(request.user)
+    contenido = exporters.reporte_estudiante_pdf(data, request.user)
+    resp = HttpResponse(contenido, content_type='application/pdf')
+    resp['Content-Disposition'] = 'attachment; filename="mi_progreso_logicweb.pdf"'
+    return resp
+
+
+@login_required
+def exportar_excel(request):
+    data = services.progreso_estudiante(request.user)
+    contenido = exporters.reporte_estudiante_excel(data, request.user)
+    resp = HttpResponse(
+        contenido,
+        content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
+    )
+    resp['Content-Disposition'] = 'attachment; filename="mi_progreso_logicweb.xlsx"'
+    return resp
