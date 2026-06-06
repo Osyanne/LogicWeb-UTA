@@ -1,79 +1,47 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.db.models import Count, Q
 from django.http import HttpResponse
 import csv
 
-from apps.ejercicios.models import Intento, ProgresoEstudiante, Tema
+from . import services
 
-
-# ══════════════════════════════════════════════════════════════
-#  REPORTES — Progreso del estudiante con desglose por unidad
-# ══════════════════════════════════════════════════════════════
 
 @login_required
 def mi_progreso(request):
-    intentos = Intento.objects.filter(usuario=request.user).select_related('ejercicio__tema')
-
-    total       = intentos.count()
-    correctos   = intentos.filter(resultado='correcto').count()
-    incorrectos = intentos.filter(resultado='incorrecto').count()
-    porcentaje  = round((correctos / total * 100) if total > 0 else 0)
-
-    codigos_vistos = (
-        intentos
-        .filter(ejercicio__codigo_cpp__isnull=False)
-        .exclude(ejercicio__codigo_cpp='')
-        .values('ejercicio')
-        .distinct()
-        .count()
-    )
-
-    # ── Progreso por unidad (desde caché de ProgresoEstudiante) ──
-    progreso_unidades = ProgresoEstudiante.objects.filter(
-        usuario=request.user
-    ).order_by('unidad')
-
-    # Enriquecer con el nombre de la unidad
-    nombres_unidad = dict(Tema.UNIDADES)
-    progreso_con_nombre = [
-        {
-            'unidad': p.unidad,
-            'nombre': nombres_unidad.get(p.unidad, f'U{p.unidad}'),
-            'total': p.total,
-            'correctos': p.correctos,
-            'porcentaje': p.porcentaje(),
-        }
-        for p in progreso_unidades
-    ]
-
+    data = services.progreso_estudiante(request.user)
     return render(request, 'reportes/mi_progreso.html', {
-        'intentos': intentos[:20],
-        'total': total,
-        'correctos': correctos,
-        'incorrectos': incorrectos,
-        'porcentaje': porcentaje,
-        'codigos_vistos': codigos_vistos,
-        'progreso_unidades': progreso_con_nombre,
+        'total': data['total'],
+        'correctos': data['correctos'],
+        'incorrectos': data['incorrectos'],
+        'porcentaje': data['porcentaje'],
+        'codigos_vistos': data['codigos_vistos'],
+        'progreso_unidades': data['progreso_unidades'],
+        'intentos': data['intentos'][:20],
+        'datos_grafico': {
+            'unidades': [u['nombre'] for u in data['progreso_unidades']],
+            'porcentajes': [u['porcentaje'] for u in data['progreso_unidades']],
+            'correctos': data['correctos'],
+            'incorrectos': data['incorrectos'],
+        },
     })
 
 
 @login_required
 def exportar_csv(request):
-    intentos = Intento.objects.filter(usuario=request.user).select_related('ejercicio__tema')
+    data = services.progreso_estudiante(request.user)
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="mi_progreso_logicweb.csv"'
 
     writer = csv.writer(response)
     writer.writerow(['Ejercicio', 'Unidad', 'Tema', 'Categoría', 'Tu respuesta', 'Resultado', 'Fecha'])
-    for i in intentos:
+    for i in data['intentos']:
         writer.writerow([
-            i.ejercicio.titulo,
-            f"U{i.ejercicio.tema.unidad}",
-            i.ejercicio.tema.nombre_tema,
-            i.ejercicio.get_categoria_display(),
-            i.respuesta_usuario,
-            i.resultado,
-            i.fecha.strftime('%d/%m/%Y %H:%M'),
+            i['titulo'],
+            f"U{i['unidad']}",
+            i['tema'],
+            i['categoria_display'],
+            i['respuesta'],
+            i['resultado'],
+            i['fecha'].strftime('%d/%m/%Y %H:%M'),
         ])
     return response

@@ -77,20 +77,20 @@
       <tbody>
         {% for intento in intentos %}
         <tr>
-          <td><strong>{{ intento.ejercicio.titulo }}</strong></td>
+          <td><strong>{{ intento.titulo }}</strong></td>
           <td>
-            <span class="chip chip-unidad">U{{ intento.ejercicio.tema.unidad }}</span>
-            {{ intento.ejercicio.tema.nombre_tema }}
+            <span class="chip chip-unidad">U{{ intento.unidad }}</span>
+            {{ intento.tema }}
           </td>
           <td>
-            {% if intento.ejercicio.categoria == 'resuelto' %}
+            {% if intento.categoria == 'resuelto' %}
               <span class="chip chip-resuelto">Resuelto</span>
             {% else %}
               <span class="chip chip-interactivo">Interactivo</span>
             {% endif %}
           </td>
           <td>
-            {% if intento.ejercicio.codigo_cpp %}Visto{% else %}—{% endif %}
+            {% if intento.codigo_visto %}Visto{% else %}—{% endif %}
           </td>
           <td>
             {% if intento.resultado == 'correcto' %}
