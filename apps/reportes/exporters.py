@@ -5,9 +5,20 @@ No tocan HTTP: la vista envuelve los bytes en HttpResponse.
 """
 import io
 
+from django.utils import timezone
+
 from openpyxl import Workbook
 from openpyxl.styles import Font, PatternFill, Alignment
 from openpyxl.utils import get_column_letter
+
+from reportlab.lib import colors
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+from reportlab.lib.units import cm
+from reportlab.platypus import SimpleDocTemplate, Table, TableStyle, Paragraph, Spacer
+
+
+AZUL_UTA = colors.HexColor('#4a90e2')
 
 
 def _nombre(user):
@@ -75,4 +86,94 @@ def reporte_estudiante_excel(data: dict, user) -> bytes:
 
     buffer = io.BytesIO()
     wb.save(buffer)
+    return buffer.getvalue()
+
+
+def _estilo_tabla():
+    return TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), AZUL_UTA),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.white),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('FONTSIZE', (0, 0), (-1, -1), 9),
+        ('ALIGN', (1, 0), (-1, -1), 'CENTER'),
+        ('VALIGN', (0, 0), (-1, -1), 'MIDDLE'),
+        ('ROWBACKGROUNDS', (0, 1), (-1, -1), [colors.white, colors.HexColor('#eef3fb')]),
+        ('GRID', (0, 0), (-1, -1), 0.4, colors.HexColor('#cccccc')),
+        ('TOPPADDING', (0, 0), (-1, -1), 5),
+        ('BOTTOMPADDING', (0, 0), (-1, -1), 5),
+    ])
+
+
+def _pie(canvas, doc):
+    canvas.saveState()
+    canvas.setFont('Helvetica', 8)
+    canvas.setFillColor(colors.HexColor('#888888'))
+    canvas.drawString(2 * cm, 1.2 * cm, 'LogicWeb UTA — Reporte generado automáticamente')
+    canvas.drawRightString(19 * cm, 1.2 * cm, f'Página {doc.page}')
+    canvas.restoreState()
+
+
+def reporte_estudiante_pdf(data: dict, user) -> bytes:
+    buffer = io.BytesIO()
+    doc = SimpleDocTemplate(
+        buffer, pagesize=A4,
+        topMargin=2 * cm, bottomMargin=2 * cm, leftMargin=2 * cm, rightMargin=2 * cm,
+        title='Reporte de progreso — LogicWeb UTA',
+    )
+    estilos = getSampleStyleSheet()
+    estilo_titulo = ParagraphStyle('TituloUTA', parent=estilos['Title'],
+                                   fontSize=16, textColor=AZUL_UTA, spaceAfter=4)
+    estilo_sub = ParagraphStyle('Sub', parent=estilos['Normal'],
+                                fontSize=10, textColor=colors.HexColor('#555555'))
+    estilo_h2 = ParagraphStyle('H2UTA', parent=estilos['Heading2'],
+                               fontSize=12, textColor=AZUL_UTA, spaceBefore=14, spaceAfter=6)
+
+    el = []
+    el.append(Paragraph('UNIVERSIDAD TÉCNICA DE AMBATO', estilo_titulo))
+    el.append(Paragraph('LogicWeb UTA — Reporte de progreso', estilo_sub))
+    el.append(Paragraph(f'Estudiante: {_nombre(user)}', estilo_sub))
+    el.append(Paragraph(f'Generado: {timezone.localtime():%d/%m/%Y %H:%M}', estilo_sub))
+    el.append(Spacer(1, 0.4 * cm))
+
+    # KPIs
+    el.append(Paragraph('Resumen', estilo_h2))
+    kpis = [
+        ['Aciertos', 'Errores', 'Total', '% Éxito', 'Estudiados'],
+        [str(data['correctos']), str(data['incorrectos']), str(data['total']),
+         f"{data['porcentaje']}%", str(data['codigos_vistos'])],
+    ]
+    t_kpis = Table(kpis, hAlign='LEFT')
+    t_kpis.setStyle(_estilo_tabla())
+    el.append(t_kpis)
+
+    # Progreso por unidad
+    if data['progreso_unidades']:
+        el.append(Paragraph('Progreso por unidad', estilo_h2))
+        filas = [['Unidad', 'Total', 'Correctos', '%']]
+        for u in data['progreso_unidades']:
+            filas.append([u['nombre'], str(u['total']), str(u['correctos']), f"{u['porcentaje']}%"])
+        t = Table(filas, hAlign='LEFT', colWidths=[9 * cm, 2.5 * cm, 2.5 * cm, 2 * cm])
+        t.setStyle(_estilo_tabla())
+        el.append(t)
+
+    # Historial
+    el.append(Paragraph('Historial de ejercicios', estilo_h2))
+    if data['intentos']:
+        filas = [['Ejercicio', 'Unidad / Tema', 'Tipo', 'Resultado', 'Fecha']]
+        for i in data['intentos']:
+            filas.append([
+                i['titulo'],
+                f"U{i['unidad']} · {i['tema']}",
+                i['categoria_display'],
+                i['resultado'],
+                i['fecha'].strftime('%d/%m/%Y %H:%M'),
+            ])
+        t = Table(filas, hAlign='LEFT', repeatRows=1,
+                  colWidths=[4.5 * cm, 4.5 * cm, 2.8 * cm, 2.4 * cm, 3 * cm])
+        t.setStyle(_estilo_tabla())
+        el.append(t)
+    else:
+        el.append(Paragraph('Aún no has practicado ningún ejercicio.', estilo_sub))
+
+    doc.build(el, onFirstPage=_pie, onLaterPages=_pie)
     return buffer.getvalue()
