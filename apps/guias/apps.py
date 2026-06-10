@@ -1,0 +1,6 @@
+from django.apps import AppConfig
+
+
+class GuiasConfig(AppConfig):
+    name = 'apps.guias'
+    verbose_name = 'Guías APE'
