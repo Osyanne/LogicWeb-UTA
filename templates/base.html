@@ -41,6 +41,7 @@
       <li><a href="{% url 'contenidos_lista' %}" {% if 'contenido' in request.resolver_match.url_name %}class="active"{% endif %}>Teoría</a></li>
       <li><a href="{% url 'ejercicios_resueltos' %}" {% if 'resuelto' in request.resolver_match.url_name %}class="active"{% endif %}>Ejercicios Resueltos</a></li>
       <li><a href="{% url 'ejercicios_interactivos' %}" {% if 'interactivo' in request.resolver_match.url_name %}class="active"{% endif %}>Práctica Interactiva</a></li>
+      <li><a href="{% url 'guias_lista' %}" {% if 'guia' in request.resolver_match.url_name %}class="active"{% endif %}>Guías APE</a></li>
       {% if user.is_authenticated %}
         <li><a href="{% url 'mi_progreso' %}" {% if 'progreso' in request.resolver_match.url_name %}class="active"{% endif %}>Mi Progreso</a></li>
       {% endif %}

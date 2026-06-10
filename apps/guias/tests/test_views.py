@@ -52,3 +52,10 @@ class GuiaDetailViewTest(TestCase):
     def test_404_si_no_existe(self):
         resp = self.client.get(reverse('guias_detalle', args=['no-hay']))
         self.assertEqual(resp.status_code, 404)
+
+
+class NavLinkTest(TestCase):
+    def test_enlace_guias_en_nav(self):
+        resp = self.client.get(reverse('inicio'))
+        self.assertContains(resp, reverse('guias_lista'))
+        self.assertContains(resp, 'Guías APE')
