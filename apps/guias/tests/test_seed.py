@@ -11,3 +11,10 @@ class SeedAPE04Test(TestCase):
         self.assertEqual(g.pdf, 'guias/ape-04.pdf')
         self.assertTrue(g.publicada)
         self.assertIn('Estudiante', g.contenido)
+
+    def test_ape04_es_companion(self):
+        """La guía no es solo el enunciado: es un acompañante de estudio + desarrollo."""
+        g = Guia.objects.get(slug='ape-04-clases-objetos-metodos')
+        for seccion in ['Qué vas a practicar', 'Cómo desarrollarla',
+                        'Errores comunes', 'Checklist']:
+            self.assertIn(seccion, g.contenido)
