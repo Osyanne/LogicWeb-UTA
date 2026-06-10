@@ -31,3 +31,9 @@ class GuiaModelTest(TestCase):
             Guia.objects.filter(slug__in=['a', 'b']).values_list('orden', flat=True)
         )
         self.assertEqual(ordenes, [1, 2])
+
+
+class GuiaAdminTest(TestCase):
+    def test_registrado_en_admin(self):
+        from django.contrib import admin
+        self.assertTrue(admin.site.is_registered(Guia))
