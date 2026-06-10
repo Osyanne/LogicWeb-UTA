@@ -17,6 +17,12 @@ class Guia(models.Model):
                                    help_text='Ruta dentro de static/, ej.: guias/ape-04.pdf')
     orden       = models.PositiveIntegerField('Orden', default=0)
     publicada   = models.BooleanField('Publicada', default=True)
+    pasos       = models.JSONField('Pasos de desarrollo', default=list, blank=True,
+                                   help_text='Lista de pasos (textos) que el estudiante puede marcar.')
+    checklist   = models.JSONField('Checklist de entrega', default=list, blank=True,
+                                   help_text='Lista de entregables (textos) marcables.')
+    quiz        = models.JSONField('Autoevaluación', default=list, blank=True,
+                                   help_text='Lista de preguntas: {pregunta, opciones[], correcta, explicacion}.')
     creada      = models.DateTimeField(auto_now_add=True)
     actualizada = models.DateTimeField(auto_now=True)
 

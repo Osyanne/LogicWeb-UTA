@@ -31,6 +31,57 @@
     <div class="guia-contenido">
       {{ guia.contenido|markdownify }}
     </div>
+
+    {% if guia.pasos %}
+    <section class="guia-interactivo" data-check-group="pasos" data-guia="{{ guia.slug }}">
+      <h2>Pasos para desarrollarla</h2>
+      <div class="progreso-wrap">
+        <div class="progreso-pista"><div class="progreso-barra"></div></div>
+        <span class="progreso-texto"></span>
+      </div>
+      <ul class="check-list">
+        {% for paso in guia.pasos %}
+        <li><label><input type="checkbox" class="check-item" data-index="{{ forloop.counter0 }}"><span>{{ paso }}</span></label></li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% if guia.quiz %}
+    <section class="guia-quiz" data-guia="{{ guia.slug }}">
+      <h2>Autoevaluación</h2>
+      {% for q in guia.quiz %}
+      <div class="quiz-pregunta" data-correcta="{{ q.correcta }}">
+        <p class="quiz-enunciado">{{ forloop.counter }}. {{ q.pregunta }}</p>
+        <div class="quiz-opciones">
+          {% for op in q.opciones %}
+          <button type="button" class="quiz-opcion" data-index="{{ forloop.counter0 }}">{{ op }}</button>
+          {% endfor %}
+        </div>
+        {% if q.explicacion %}<p class="quiz-explicacion" hidden>{{ q.explicacion }}</p>{% endif %}
+      </div>
+      {% endfor %}
+    </section>
+    {% endif %}
+
+    {% if guia.checklist %}
+    <section class="guia-interactivo" data-check-group="checklist" data-guia="{{ guia.slug }}">
+      <h2>Checklist de entrega</h2>
+      <div class="progreso-wrap">
+        <div class="progreso-pista"><div class="progreso-barra"></div></div>
+        <span class="progreso-texto"></span>
+      </div>
+      <ul class="check-list">
+        {% for item in guia.checklist %}
+        <li><label><input type="checkbox" class="check-item" data-index="{{ forloop.counter0 }}"><span>{{ item }}</span></label></li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
   </article>
 </div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{% static 'js/guias.js' %}"></script>
 {% endblock %}

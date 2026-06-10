@@ -59,3 +59,44 @@ class NavLinkTest(TestCase):
         resp = self.client.get(reverse('inicio'))
         self.assertContains(resp, reverse('guias_lista'))
         self.assertContains(resp, 'Guías APE')
+
+
+class GuiaInteractivaTest(TestCase):
+    def setUp(self):
+        self.guia = Guia.objects.create(
+            codigo='X', titulo='T', slug='inter', contenido='x', publicada=True,
+            pasos=['Paso uno', 'Paso dos'],
+            checklist=['Entregable uno'],
+            quiz=[{'pregunta': '¿2+2?', 'opciones': ['3', '4'],
+                   'correcta': 1, 'explicacion': 'Es 4.'}],
+        )
+
+    def test_renderiza_pasos(self):
+        resp = self.client.get(reverse('guias_detalle', args=['inter']))
+        self.assertContains(resp, 'Pasos para desarrollarla')
+        self.assertContains(resp, 'Paso uno')
+        self.assertContains(resp, 'data-check-group="pasos"')
+
+    def test_renderiza_checklist(self):
+        resp = self.client.get(reverse('guias_detalle', args=['inter']))
+        self.assertContains(resp, 'Entregable uno')
+        self.assertContains(resp, 'data-check-group="checklist"')
+
+    def test_renderiza_quiz(self):
+        resp = self.client.get(reverse('guias_detalle', args=['inter']))
+        self.assertContains(resp, 'Autoevaluación')
+        self.assertContains(resp, '¿2+2?')
+        self.assertContains(resp, 'Es 4.')
+        self.assertContains(resp, 'data-correcta="1"')
+
+    def test_carga_guias_js(self):
+        resp = self.client.get(reverse('guias_detalle', args=['inter']))
+        self.assertContains(resp, 'js/guias.js')
+
+    def test_guia_sin_interactivos_no_crashea(self):
+        Guia.objects.create(codigo='Y', titulo='Simple', slug='simple',
+                            contenido='solo texto', publicada=True)
+        resp = self.client.get(reverse('guias_detalle', args=['simple']))
+        self.assertEqual(resp.status_code, 200)
+        self.assertNotContains(resp, 'Pasos para desarrollarla')
+        self.assertNotContains(resp, 'Autoevaluación')

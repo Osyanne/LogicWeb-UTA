@@ -32,6 +32,12 @@ class GuiaModelTest(TestCase):
         )
         self.assertEqual(ordenes, [1, 2])
 
+    def test_campos_interactivos_por_defecto_vacios(self):
+        g = self._crear()
+        self.assertEqual(g.pasos, [])
+        self.assertEqual(g.checklist, [])
+        self.assertEqual(g.quiz, [])
+
 
 class GuiaAdminTest(TestCase):
     def test_registrado_en_admin(self):
