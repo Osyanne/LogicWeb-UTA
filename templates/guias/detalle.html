@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load guias_extras %}
+{% block titulo %}{{ guia.titulo }}{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/guias.css' %}">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/python.min.js"></script>
+{% endblock %}
+
+{% block contenido %}
+<div class="container" style="padding-top:1.5rem">
+  <article class="guia-detalle">
+    <a href="{% url 'guias_lista' %}" class="volver-ruta">← Volver a las guías</a>
+
+    <div class="guia-encabezado">
+      <span class="guia-codigo">{{ guia.codigo }}</span>
+      <h1>{{ guia.titulo }}</h1>
+    </div>
+
+    <div class="guia-acciones">
+      {% if guia.pdf %}
+        <a href="{% static guia.pdf %}" class="btn btn-primary" download>Descargar PDF oficial</a>
+      {% endif %}
+      {% if guia.repo_url %}
+        <a href="{{ guia.repo_url }}" class="btn btn-naranja" target="_blank" rel="noopener">Ver repo en GitHub</a>
+      {% endif %}
+    </div>
+
+    <div class="guia-contenido">
+      {{ guia.contenido|markdownify }}
+    </div>
+  </article>
+</div>
+{% endblock %}

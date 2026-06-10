@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block titulo %}Guías APE{% endblock %}
+
+{% block head_extra %}
+<link rel="stylesheet" href="{% static 'css/guias.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<div class="container">
+  <div class="guias-hero">
+    <h1>{% include "icons/book.svg" %} Guías APE</h1>
+    <p>Guías prácticas de Aplicación y Experimentación (APE) de Algoritmos y Lógica de Programación.</p>
+  </div>
+
+  <div class="guias-grid">
+    {% for guia in guias %}
+    <a href="{% url 'guias_detalle' guia.slug %}" class="guia-card">
+      <div class="guia-codigo">{{ guia.codigo }}</div>
+      <h3>{{ guia.titulo }}</h3>
+      {% if guia.resumen %}<p class="resumen">{{ guia.resumen }}</p>{% endif %}
+      <div class="guia-pie">
+        {% if guia.pdf %}<span class="tag tag-pdf">PDF</span>{% endif %}
+        {% if guia.repo_url %}<span class="tag tag-repo">GitHub</span>{% endif %}
+        <span class="cta">Ver guía →</span>
+      </div>
+    </a>
+    {% empty %}
+    <div class="alert alert-info">Aún no hay guías publicadas.</div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

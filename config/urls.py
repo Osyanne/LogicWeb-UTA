@@ -7,4 +7,5 @@ urlpatterns = [
     path('', include('apps.contenidos.urls')),
     path('', include('apps.usuarios.urls')),
     path('', include('apps.reportes.urls')),
+    path('', include('apps.guias.urls')),
 ]

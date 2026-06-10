@@ -1,0 +1,51 @@
+/* Guías APE — usa las variables semánticas del sitio (claro + oscuro automático) */
+
+.guias-hero { text-align: center; margin: 2rem 0 1.5rem; }
+.guias-hero h1 { color: var(--heading); display: flex; align-items: center;
+                 justify-content: center; gap: .5rem; }
+.guias-hero p { color: var(--text-muted); max-width: 46rem; margin: .5rem auto 0; }
+
+.guias-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+              gap: 1.2rem; margin-bottom: 3rem; }
+
+.guia-card { display: block; background: var(--surface); border: 1px solid var(--border);
+             border-radius: 14px; padding: 1.2rem; text-decoration: none; color: var(--text);
+             box-shadow: var(--shadow); transition: transform .15s ease, box-shadow .15s ease; }
+.guia-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+
+.guia-codigo { font-family: 'Fira Code', monospace; font-size: .78rem;
+               color: var(--accent); font-weight: 600; letter-spacing: .02em; }
+.guia-card h3 { color: var(--heading); margin: .35rem 0 .5rem; font-size: 1.1rem; }
+.guia-card .resumen { color: var(--text-muted); font-size: .9rem; margin: 0 0 1rem; }
+.guia-pie { display: flex; align-items: center; gap: .5rem; }
+.guia-pie .cta { margin-left: auto; color: var(--accent); font-weight: 600; font-size: .85rem; }
+
+.tag { font-size: .72rem; font-weight: 600; padding: .15rem .5rem; border-radius: 999px;
+       border: 1px solid var(--border); color: var(--text-muted); }
+.tag-pdf { color: #c0392b; border-color: rgba(192, 57, 43, .35); }
+.tag-repo { color: var(--accent); border-color: rgba(74, 144, 226, .35); }
+
+/* Detalle */
+.guia-detalle { max-width: 48rem; margin: 0 auto; }
+.volver-ruta { display: inline-block; color: var(--text-muted); text-decoration: none;
+               margin-bottom: 1rem; font-size: .9rem; }
+.volver-ruta:hover { color: var(--accent); }
+.guia-encabezado .guia-codigo { display: block; margin-bottom: .25rem; }
+.guia-encabezado h1 { color: var(--heading); margin: 0 0 1rem; }
+.guia-acciones { display: flex; flex-wrap: wrap; gap: .6rem; margin-bottom: 1.8rem; }
+
+.guia-contenido { color: var(--text); line-height: 1.7; }
+.guia-contenido h2 { color: var(--heading); margin: 1.6rem 0 .6rem; font-size: 1.25rem;
+                     border-bottom: 1px solid var(--border); padding-bottom: .3rem; }
+.guia-contenido h3 { color: var(--heading); margin: 1.2rem 0 .5rem; font-size: 1.05rem; }
+.guia-contenido ul, .guia-contenido ol { padding-left: 1.4rem; }
+.guia-contenido li { margin: .3rem 0; }
+.guia-contenido pre { background: var(--surface-2); border: 1px solid var(--border);
+                      border-radius: 10px; padding: 1rem; overflow-x: auto; }
+.guia-contenido code { font-family: 'Fira Code', monospace; font-size: .88rem; }
+.guia-contenido p code { background: var(--surface-2); padding: .1rem .35rem; border-radius: 5px; }
+.guia-contenido table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+.guia-contenido th, .guia-contenido td { border: 1px solid var(--border);
+                                         padding: .5rem .7rem; text-align: left; }
+
+@media (max-width: 600px) { .guias-grid { grid-template-columns: 1fr; } }
